@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Baskin_Kiosk"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1040" Width="1920">
-	<Grid>
-	</Grid>
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        
+    </Grid>
 </Window>
