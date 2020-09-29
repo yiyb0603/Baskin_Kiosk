@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Baskin_Kiosk"
         mc:Ignorable="d"
         Title="MainWindow" Height="1040" Width="1920">
-	<Grid>
-	</Grid>
+    <Grid>
+        <Frame Source="View/Order/Order.xaml"></Frame>
+    </Grid>
 </Window>
