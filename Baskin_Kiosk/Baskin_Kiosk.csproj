@@ -61,6 +61,12 @@
     <Compile Include="View\Payment\Payment.xaml.cs">
       <DependentUpon>Payment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\Category.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\Food.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
