@@ -1,0 +1,45 @@
+﻿<Page x:Class="Baskin_Kiosk.View.Payment.Payment"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Baskin_Kiosk.View.Payment"
+      mc:Ignorable="d" 
+      d:DesignHeight="1040" d:DesignWidth="1920"
+      Title="Payment">
+
+    <Grid>
+        <StackPanel Grid.ColumnSpan="3">
+            <StackPanel Background ="gray" Height ="50">
+                <Label
+                    x:Name="CurrentTime"
+					Foreground ="white"
+					HorizontalAlignment ="Right"
+					Content="2020년 9월 25일 금요일 오전 09:20:10"
+				 />
+            </StackPanel>
+
+            <StackPanel Margin ="20px" Orientation="Horizontal">
+                <StackPanel Margin="50px 0 0 0 ">
+                    <Label>결제 방식을 선택하세요</Label>
+                    <ListView Name="itemList">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn  Header="주문 음식이름" Width="200"/>
+                                <GridViewColumn Header="수량" Width="150"/>
+                                <GridViewColumn Header="가격" Width="150"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    
+                    
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="200 100 0 0">
+                    <Button Width="200" Height="200" Margin="0 0 100 0" Content="현금"/>
+                    <Button Width="200" Height="200" Content="카드"/>
+                    <Label>총 금액: </Label>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
