@@ -46,13 +46,8 @@ namespace Baskin_Kiosk.View.Order
         public Order()
         {
             InitializeComponent();
-            DispatcherTimer timer = new DispatcherTimer();
             categoryList.SelectedIndex = 0;
             this.prevButton.Visibility = Visibility.Hidden;
-
-            timer.Interval = TimeSpan.FromMilliseconds(1000);
-            timer.Tick += new EventHandler(timerTick);
-            timer.Start();
         }
 
         public List<Food> getFoodList(int pageCount)
@@ -101,11 +96,6 @@ namespace Baskin_Kiosk.View.Order
             Category category = (Category)categoryList.SelectedIndex;
             currentCategory = category;
             menuList.ItemsSource = getFoodList(this.pageCount);
-        }
-
-        private void timerTick(object sender, EventArgs e)
-        {
-            CurrentTime.Content = DateTime.Now.ToString("yyyy년 MM월 dd일 HH시 mm분 ss초");
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Baskin_Kiosk
 {
@@ -23,6 +24,16 @@ namespace Baskin_Kiosk
         public MainWindow()
         {
             InitializeComponent();
+            DispatcherTimer timer = new DispatcherTimer();
+
+            timer.Interval = TimeSpan.FromMilliseconds(1000);
+            timer.Tick += new EventHandler(timerTick);
+            timer.Start();
+        }
+
+        private void timerTick(object sender, EventArgs e)
+        {
+            CurrentTime.Content = DateTime.Now.ToString("yyyy년 MM월 dd일 HH시 mm분 ss초");
         }
     }
 }
