@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\kirrard\Documents\GitHub\Baskin_Kiosk\Baskin_Kiosk\Baskin_Kiosk\obj\Debug\
+C:\Users\user\Documents\GitHub\Baskin_Kiosk\Baskin_Kiosk\obj\Debug\
 Baskin_Kiosk
 none
 false
 DEBUG;TRACE
-C:\Users\kirrard\Documents\GitHub\Baskin_Kiosk\Baskin_Kiosk\Baskin_Kiosk\App.xaml
-2833670231
+C:\Users\user\Documents\GitHub\Baskin_Kiosk\Baskin_Kiosk\App.xaml
+3-984048713
 
-91614483
+10-1382248126
 13-1505183044
-MainWindow.xaml;View\Order\Order.xaml;
+MainWindow.xaml;View\Order\Order.xaml;View\Payment\Payment.xaml;
 
 True
 

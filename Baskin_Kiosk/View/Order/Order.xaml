@@ -9,32 +9,28 @@
       Title="Order">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="701 *"/>
-            <ColumnDefinition Width="1211*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.ColumnSpan="2">
+        <StackPanel>
             <StackPanel Background ="gray" Height ="50">
                 <Label
                     x:Name="CurrentTime"
 					Foreground ="white"
 					HorizontalAlignment ="Right"
-					Content="2020년 9월 25일 금요일 오전 09:20:10"
 				 />
             </StackPanel>
 
-            <StackPanel Margin ="20px" HorizontalAlignment="Left">
-                <ListBox x:Name="categoryList" Height="30" VerticalAlignment="Top" SelectionChanged="categoryChange">
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                    <ListBoxItem>아이스크림</ListBoxItem>
-                    <ListBoxItem>케이크</ListBoxItem>
-                    <ListBoxItem>디저트</ListBoxItem>
-                </ListBox>
-                <ListBox
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin ="20px" HorizontalAlignment="Left">
+                    <ListBox x:Name="categoryList" Height="30" VerticalAlignment="Top" SelectionChanged="categoryChange">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBoxItem>아이스크림</ListBoxItem>
+                        <ListBoxItem>케이크</ListBoxItem>
+                        <ListBoxItem>디저트</ListBoxItem>
+                    </ListBox>
+                    <ListBox
                          x:Name="menuList"
                          Width="500"
                          Height="600"
@@ -44,26 +40,34 @@
                          ScrollViewer.VerticalScrollBarVisibility="Auto"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      >
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel />
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Width="100" Height="100" Margin="10px">
-                                <Image Source="{Binding imageSrc}" Width="50" Height="50" />
-                                <TextBlock Text="{Binding foodName}" HorizontalAlignment="Center" FontSize="15" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Width="100" Height="100" Margin="10px">
+                                    <Image Source="{Binding imageSrc}" Width="50" Height="50" />
+                                    <TextBlock Text="{Binding foodName}" HorizontalAlignment="Center" FontSize="15" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
 
-                <StackPanel Orientation="Horizontal">
-                    <Button Content="이전" Width="200" Padding="0 10px"></Button>
-                    <Button Content="다음" Width="200" Margin="100px 0 0 0" Padding="0 10px"></Button>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name ="prevButton" Content="이전" Width="200" Padding="0 10px" Click="clickPrev" />
+                        <Button x:Name="nextButton" Content="다음" Width="200" Margin="100px 0 0 0" Padding="0 10px" Click="clickNext" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel>
+                    <Button Content="asdfasdfasdfasdf"></Button>
                 </StackPanel>
             </StackPanel>
+
+
+
         </StackPanel>
     </Grid>
 </Page>
