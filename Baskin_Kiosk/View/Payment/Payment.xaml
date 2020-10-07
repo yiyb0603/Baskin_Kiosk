@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Baskin_Kiosk.View.Payment"
       mc:Ignorable="d"
       d:DesignHeight="990" d:DesignWidth="1920"
-      Title="Payment">
+      Title="PaymentPage">
 
     <Grid>
         <StackPanel>
@@ -28,13 +28,13 @@
                 
                 <StackPanel Orientation="Horizontal" Margin="200 100 0 0">
                     <Button Width="200" Height="200" Margin="0 0 100 0" Content="현금"/>
-                    <Button Width="200" Height="200" Content="카드"/>
+                    <Button Width="200" Height="200" Content="카드" Click="CardButton_Click"/>
                 </StackPanel>
                 
             </StackPanel>
             
             <Label Content="총 금액:" HorizontalAlignment="Right" Margin="0 0 700 0"/>
-            <Button Content="이전" Width="150" HorizontalAlignment="Left" Margin="70 300 0 0"/>
+            <Button Content="이전" Width="150" HorizontalAlignment="Left" Margin="70 300 0 0" Click="BackButton_Click"/>
             
         </StackPanel>
     </Grid>
