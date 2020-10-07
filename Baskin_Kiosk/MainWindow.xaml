@@ -7,6 +7,22 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="1040" Width="1920">
     <Grid>
-        <Frame Source="View/Order/Order.xaml"></Frame>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="Gray">
+            <Label
+                x:Name="CurrentTime"
+				Foreground ="white"
+				HorizontalAlignment ="Right"
+				Content="2020년 9월 25일 금요일 오전 09:20:10"/>
+        </Grid>
+
+        <Frame Name="frame"
+               Grid.Row="1"
+               NavigationUIVisibility="Hidden"
+               Source="/View/Payment/Payment.xaml"/>
     </Grid>
 </Window>

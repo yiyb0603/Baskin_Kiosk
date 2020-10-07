@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Baskin_Kiosk.View.Order
+namespace Baskin_Kiosk.View.Payment
 {
     /// <summary>
-    /// Interaction logic for OrderScreen.xaml
+    /// Interaction logic for Payment.xaml
     /// </summary>
-    public partial class OrderScreen : Window
+    public partial class Payment : Page
     {
-        public OrderScreen()
+        public Payment()
         {
             InitializeComponent();
         }
