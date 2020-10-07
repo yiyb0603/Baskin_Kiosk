@@ -9,20 +9,7 @@
       Title="Order">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="701 *"/>
-            <ColumnDefinition Width="1211*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.ColumnSpan="2">
-            <StackPanel Background ="gray" Height ="50">
-                <Label
-                    x:Name="CurrentTime"
-					Foreground ="white"
-					HorizontalAlignment ="Right"
-					Content="2020년 9월 25일 금요일 오전 09:20:10"
-				 />
-            </StackPanel>
-
+        <StackPanel Orientation="Horizontal">
             <StackPanel Margin ="20px" HorizontalAlignment="Left">
                 <ListBox x:Name="categoryList" Height="30" VerticalAlignment="Top" SelectionChanged="categoryChange">
                     <ListBox.ItemsPanel>
@@ -60,9 +47,13 @@
                 </ListBox>
 
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="이전" Width="200" Padding="0 10px"></Button>
-                    <Button Content="다음" Width="200" Margin="100px 0 0 0" Padding="0 10px"></Button>
+                    <Button x:Name ="prevButton" Content="이전" Width="200" Padding="0 10px" Click="clickPrev" />
+                    <Button x:Name="nextButton" Content="다음" Width="200" Margin="100px 0 0 0" Padding="0 10px" Click="clickNext" />
                 </StackPanel>
+            </StackPanel>
+
+            <StackPanel>
+                <Button Content="asdfasdfasdfasdf"></Button>
             </StackPanel>
         </StackPanel>
     </Grid>
