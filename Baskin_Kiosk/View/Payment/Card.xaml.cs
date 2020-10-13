@@ -2,12 +2,14 @@
 using OpenCvSharp.CPlusPlus;
 using OpenCvSharp.Extensions;
 using System;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Threading;
+using ZXing;
 
 namespace Baskin_Kiosk.View.Payment
 {
@@ -89,12 +91,30 @@ namespace Baskin_Kiosk.View.Payment
             timer.Start();
         }
 
+        public string decoded;
+
         void TimerClock_Tick(object sender, EventArgs e)
         {
             using (src = cap.QueryFrame())
             {
                 WriteableBitmapConverter.ToWriteableBitmap(src, wb);
+
+
+                BarcodeReader reader = new BarcodeReader();
+                Result result = reader.Decode(BitmapConverter.ToBitmap(src));
+                if (result != null)
+                {
+                    decoded = "Decode : " + result.ToString();
+
+                    if (decoded != "")
+                    {
+                        resultLabel.Content = decoded;
+                    }
+                }
+                else
+                    resultLabel.Content="바코드를 비춰주세요";
             }
+
         }
     }
 }

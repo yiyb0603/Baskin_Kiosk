@@ -13,7 +13,9 @@
         <StackPanel>
             <Label>카드 결제 페이지</Label>
             <Image x:Name="image" Width="640" Height="480" VerticalAlignment="Top"/>
+            <Label x:Name="resultLabel" Width='500' Margin="0 50 0 0" Content="테스트"></Label>
             <Button Content="이전" Width="150" HorizontalAlignment="Left" Margin="70 0 0 0" Click="Button_Click"/>
+            
         </StackPanel>
     </Grid>
 </Page>
