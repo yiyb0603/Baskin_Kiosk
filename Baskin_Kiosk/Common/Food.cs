@@ -12,5 +12,7 @@ namespace Baskin_Kiosk.Common
         public String imageSrc { get; set; }
         public String foodName { get; set; }
         public int page { get; set; }
+        public int price { get; set; }
+        public int count { get; set; }
     }
 }
