@@ -88,13 +88,16 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="수량: " VerticalAlignment="Center" />
-                                            <TextBlock Text="4" VerticalAlignment="Center" FontSize="18" />
+                                            <TextBlock Text="수량: "  VerticalAlignment="Center" />
+                                            <TextBlock Text="{Binding count}" 
+                                                       VerticalAlignment="Center" FontSize="18" />
 
                                             <StackPanel Margin="5px 0 0 0">
-                                                <Button Width="30px">↑</Button>
-                                                <Button Width="30px">↓</Button>
+                                                <Button Click="Button_UpClick" Width="30px">↑</Button>
+                                                <Button Click="Button_DownClick" Width="30px">↓</Button>
                                             </StackPanel>
+
+                                            <Button Click="selectMenuDelete" Margin="5px 0 0 0">제거</Button>
                                         </StackPanel>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -102,6 +105,11 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="총 금액: " VerticalAlignment="Center" FontSize="30" />
+                    <TextBlock x:Name="tbl_totalPrice" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="30" /> 
+                </StackPanel>
             </StackPanel>
         </StackPanel>
     </Grid>
