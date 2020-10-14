@@ -123,7 +123,7 @@ namespace Baskin_Kiosk.View.Order
 
         private void Button_UpClick(object sender, RoutedEventArgs e)
         {
-            Food selectedFood = (Food)selectListView.SelectedItem;
+            Food selectedFood = (sender as Button).DataContext as Food;
 
             if (selectedFood != null)
             {
@@ -140,7 +140,7 @@ namespace Baskin_Kiosk.View.Order
 
         private void Button_DownClick(object sender, RoutedEventArgs e)
         {
-            Food selectedFood = (Food)selectListView.SelectedItem;
+            Food selectedFood = (sender as Button).DataContext as Food;
 
             if (selectedFood != null)
             {
@@ -162,7 +162,7 @@ namespace Baskin_Kiosk.View.Order
 
         private void selectMenuDelete(object sender, RoutedEventArgs e)
         {
-            Food selectedFood = (Food)selectListView.SelectedItem;
+            Food selectedFood = (sender as Button).DataContext as Food;
 
             if (selectedFood != null)
             {
@@ -175,9 +175,10 @@ namespace Baskin_Kiosk.View.Order
             }
         }
 
-        private void selectListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void clearSelectMenu(object sender, RoutedEventArgs e)
         {
-
+            this.selectMenuList.Clear();
+            this.tbl_totalPrice.Text = "0";
         }
     }
 }
