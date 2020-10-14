@@ -99,6 +99,12 @@
     <Compile Include="Common\Food.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="View\SelectPlace\Seat.xaml.cs">
+      <DependentUpon>Seat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SelectPlace\SelectPlace.xaml.cs">
+      <DependentUpon>SelectPlace.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -120,6 +126,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Payment\Payment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SelectPlace\Seat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SelectPlace\SelectPlace.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,5 +176,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Resource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

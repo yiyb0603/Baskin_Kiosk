@@ -99,7 +99,6 @@ namespace Baskin_Kiosk.View.Payment
             {
                 WriteableBitmapConverter.ToWriteableBitmap(src, wb);
 
-
                 BarcodeReader reader = new BarcodeReader();
                 Result result = reader.Decode(BitmapConverter.ToBitmap(src));
                 if (result != null)
