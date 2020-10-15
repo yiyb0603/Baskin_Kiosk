@@ -107,9 +107,16 @@
                 </ListView>
 
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="총 금액: " VerticalAlignment="Center" FontSize="30" />
-                    <TextBlock x:Name="tbl_totalPrice" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="30" />
-                    <Button Click="clearSelectMenu" Margin="5 0 0 0">모두 삭제</Button>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="총 금액: " VerticalAlignment="Center" FontSize="30" />
+                        <TextBlock x:Name="tbl_totalPrice" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="30" />
+                        <Button Click="clearSelectMenu" Margin="5 0 0 0">모두 삭제</Button>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button>이전</Button>
+                        <Button>주문하기</Button>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

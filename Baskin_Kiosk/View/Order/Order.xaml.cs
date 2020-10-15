@@ -114,8 +114,17 @@ namespace Baskin_Kiosk.View.Order
 
             if (selectedFood != null)
             {
+                Food existFood = this.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
+
                 this.totalAmountPrice += selectedFood.price;
                 tbl_totalPrice.Text = this.totalAmountPrice.ToString();
+
+                if (existFood != null)
+                {
+                    existFood.count++;
+                    return;
+                }
+
                 this.selectMenuList.Add(new Food() { category = selectedFood.category, foodName = selectedFood.foodName, imageSrc = selectedFood.imageSrc, price = selectedFood.price });
                 selectListView.ItemsSource = this.selectMenuList;
             }
@@ -177,8 +186,11 @@ namespace Baskin_Kiosk.View.Order
 
         private void clearSelectMenu(object sender, RoutedEventArgs e)
         {
-            this.selectMenuList.Clear();
-            this.tbl_totalPrice.Text = "0";
+            if (this.selectMenuList.Count > 0)
+            {
+                this.selectMenuList.Clear();
+                this.tbl_totalPrice.Text = "0";
+            }
         }
     }
 }
