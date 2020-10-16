@@ -61,10 +61,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="View\Order\Order.xaml.cs">
+    <Compile Include="View\OrderPage\Order.xaml.cs">
       <DependentUpon>Order.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Payment\Payment.xaml.cs">
+    <Compile Include="View\PaymentPage\Payment.xaml.cs">
       <DependentUpon>Payment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Category.cs">
@@ -85,11 +85,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\Order\Order.xaml">
+    <Page Include="View\OrderPage\Order.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Payment\Payment.xaml">
+    <Page Include="View\PaymentPage\Payment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -117,15 +117,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="View\keep.text" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Model\keep.txt">
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ViewModel\keep.txt">

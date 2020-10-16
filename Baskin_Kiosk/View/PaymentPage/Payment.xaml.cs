@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Baskin_Kiosk.View.OrderPage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Baskin_Kiosk.View.Payment
+namespace Baskin_Kiosk.View.PaymentPage
 {
     /// <summary>
     /// Interaction logic for Payment.xaml

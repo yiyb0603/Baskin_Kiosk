@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\user\Documents\GitHub\Baskin_Kiosk\Baskin_Kiosk\App.xaml
-3-984048713
+31096423527
 
-101792262281
+101966871337
 15-115572765
-MainWindow.xaml;View\Order\Order.xaml;View\Payment\Payment.xaml;
+MainWindow.xaml;View\OrderPage\Order.xaml;View\PaymentPage\Payment.xaml;
 
 False
 

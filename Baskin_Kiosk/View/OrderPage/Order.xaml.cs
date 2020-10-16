@@ -2,22 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
+using Baskin_Kiosk.View.PaymentPage;
 
-namespace Baskin_Kiosk.View.Order
+namespace Baskin_Kiosk.View.OrderPage
 {
     public partial class Order : Page
     {
@@ -160,6 +150,7 @@ namespace Baskin_Kiosk.View.Order
                     foodItem.count--;
                     this.totalAmountPrice -= selectedFood.price;
                     tbl_totalPrice.Text = this.totalAmountPrice.ToString();
+
                     if (foodItem.count <= 0)
                     {
                         Food deleteItem = this.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
@@ -170,6 +161,7 @@ namespace Baskin_Kiosk.View.Order
         }
 
         private void selectMenuDelete(object sender, RoutedEventArgs e)
+
         {
             Food selectedFood = (sender as Button).DataContext as Food;
 
@@ -191,6 +183,17 @@ namespace Baskin_Kiosk.View.Order
                 this.selectMenuList.Clear();
                 this.tbl_totalPrice.Text = "0";
             }
+        }
+
+        private void prevPage(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
+
+        private void nextPage(object sender, RoutedEventArgs e)
+        {
+            Payment payment = new Payment();
+            this.NavigationService.Navigate(payment);
         }
     }
 }

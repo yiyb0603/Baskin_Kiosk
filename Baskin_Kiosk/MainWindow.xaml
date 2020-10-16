@@ -23,6 +23,6 @@
         <Frame Name="frame"
                Grid.Row="1"
                NavigationUIVisibility="Hidden"
-               Source="/View/Order/Order.xaml"/>
+               Source="/View/OrderPage/Order.xaml"/>
     </Grid>
 </Window>
