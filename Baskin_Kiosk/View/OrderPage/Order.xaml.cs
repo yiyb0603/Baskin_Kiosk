@@ -6,36 +6,13 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Baskin_Kiosk.View.PaymentPage;
+using Baskin_Kiosk.ViewModel;
 
 namespace Baskin_Kiosk.View.OrderPage
 {
     public partial class Order : Page
     {
-        private int pageCount = 1;
-        private Category currentCategory = 0;
-        private int totalAmountPrice { get; set; }
-
-        private ObservableCollection<Food> selectMenuList = new ObservableCollection<Food>();
-
-        private ObservableCollection<Food> foodList = new ObservableCollection<Food>()
-        {
-            new Food() { page =  1, category = Category.ICECREAM, foodName = "아이스크림1", imageSrc = "https://vo.la/1GbRW", price = 2000},
-            new Food() { page =  1, category = Category.CAKE, foodName = "케이크2", imageSrc = "https://vo.la/1GbRW", price = 3000},
-            new Food() { page =  1, category = Category.JUICE, foodName = "디저트3", imageSrc ="https://vo.la/ubbG0", price = 2000},
-            new Food() { page =  1, category = Category.JUICE, foodName = "디저트4", imageSrc ="https://vo.la/ubbG0", price = 4000},
-            new Food() { page =  1, category = Category.JUICE, foodName = "디저트5", imageSrc ="https://vo.la/ubbG0", price = 3000},
-            new Food() { page =  1, category = Category.JUICE, foodName = "디저트6", imageSrc ="https://vo.la/ubbG0", price = 2000},
-            new Food() { page =  1, category = Category.JUICE, foodName = "디저트7", imageSrc ="https://vo.la/ubbG0", price = 12000},
-            new Food() { page =  1, category = Category.JUICE, foodName = "디저트8", imageSrc ="https://vo.la/ubbG0", price = 22000},
-            new Food() { page =  1, category = Category.JUICE, foodName = "디저트9", imageSrc ="https://vo.la/ubbG0", price = 4000},
-            new Food() { page =  1, category = Category.JUICE, foodName = "디저트10", imageSrc ="https://vo.la/ubbG0", price = 6000},
-            new Food() { page =  1,  category = Category.JUICE, foodName = "디저트11", imageSrc ="https://vo.la/ubbG0", price = 8000},
-            new Food() { page =  1, category = Category.JUICE, foodName = "디저트12", imageSrc ="https://vo.la/ubbG0", price = 4000},
-            new Food() { page =  2, category = Category.JUICE, foodName = "디저트13", imageSrc ="https://vo.la/ubbG0", price = 6000},
-            new Food() { page =  2, category = Category.JUICE, foodName = "디저트14", imageSrc ="https://vo.la/ubbG0", price = 2000},
-            new Food() { page =  2,  category = Category.JUICE, foodName = "디저트15", imageSrc ="https://vo.la/ubbG0", price = 1000},
-            new Food() { page =  2, category = Category.JUICE, foodName = "디저트16", imageSrc ="https://vo.la/ubbG0", price = 21000},
-        };
+        private OrderViewModel viewModel = new OrderViewModel();
 
         public Order()
         {
@@ -53,16 +30,16 @@ namespace Baskin_Kiosk.View.OrderPage
 
         private List<Food> getFoodList(int pageCount)
         {
-            return this.foodList.Where(food => food.page == pageCount && food.category == this.currentCategory).ToList();
+            return this.viewModel.foodList.Where(food => food.page == pageCount && food.category == this.viewModel.currentCategory).ToList();
         }
 
         private void clickPrev(object sender, EventArgs e)
         {
-            --this.pageCount;
-            menuList.ItemsSource = getFoodList(this.pageCount);
+            --this.viewModel.pageCount;
+            menuList.ItemsSource = getFoodList(this.viewModel.pageCount);
             this.nextButton.Visibility = Visibility.Visible;
 
-            if (getFoodList(this.pageCount - 1).Count == 0)
+            if (getFoodList(this.viewModel.pageCount - 1).Count == 0)
             {
                 this.prevButton.Visibility = Visibility.Hidden;
                 return;
@@ -71,11 +48,11 @@ namespace Baskin_Kiosk.View.OrderPage
 
         private void clickNext(object sender, EventArgs e)
         {
-            ++this.pageCount;
-            this.menuList.ItemsSource = getFoodList(this.pageCount);
+            ++this.viewModel.pageCount;
+            this.menuList.ItemsSource = getFoodList(this.viewModel.pageCount);
             this.prevButton.Visibility = Visibility.Visible;
 
-            if (getFoodList(this.pageCount + 1).Count == 0)
+            if (getFoodList(this.viewModel.pageCount + 1).Count == 0)
             {
                 this.nextButton.Visibility = Visibility.Hidden;
                 return;
@@ -84,7 +61,7 @@ namespace Baskin_Kiosk.View.OrderPage
 
         private void categoryChange(object sender, SelectionChangedEventArgs e)
         {
-            this.pageCount = 1;
+            this.viewModel.pageCount = 1;
             this.nextButton.Visibility = Visibility.Visible;
             this.prevButton.Visibility = Visibility.Hidden;
 
@@ -94,8 +71,8 @@ namespace Baskin_Kiosk.View.OrderPage
             }
 
             Category category = (Category)categoryList.SelectedIndex;
-            this.currentCategory = category;
-            this.menuList.ItemsSource = getFoodList(this.pageCount);
+            this.viewModel.currentCategory = category;
+            this.menuList.ItemsSource = getFoodList(this.viewModel.pageCount);
         }
 
         private void menuList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -104,10 +81,10 @@ namespace Baskin_Kiosk.View.OrderPage
 
             if (selectedFood != null)
             {
-                Food existFood = this.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
+                Food existFood = this.viewModel.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
 
-                this.totalAmountPrice += selectedFood.price;
-                tbl_totalPrice.Text = this.totalAmountPrice.ToString();
+                this.viewModel.totalAmountPrice += selectedFood.price;
+                tbl_totalPrice.Text = this.viewModel.totalAmountPrice.ToString();
 
                 if (existFood != null)
                 {
@@ -115,8 +92,8 @@ namespace Baskin_Kiosk.View.OrderPage
                     return;
                 }
 
-                this.selectMenuList.Add(new Food() { category = selectedFood.category, foodName = selectedFood.foodName, imageSrc = selectedFood.imageSrc, price = selectedFood.price });
-                selectListView.ItemsSource = this.selectMenuList;
+                this.viewModel.selectMenuList.Add(new Food() { category = selectedFood.category, foodName = selectedFood.foodName, imageSrc = selectedFood.imageSrc, price = selectedFood.price });
+                selectListView.ItemsSource = this.viewModel.selectMenuList;
             }
         }
 
@@ -126,13 +103,13 @@ namespace Baskin_Kiosk.View.OrderPage
 
             if (selectedFood != null)
             {
-                Food foodItem = this.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
+                Food foodItem = this.viewModel.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
 
                 if (foodItem != null)
                 {
                     foodItem.count++;
-                    this.totalAmountPrice += selectedFood.price;
-                    tbl_totalPrice.Text = this.totalAmountPrice.ToString();
+                    this.viewModel.totalAmountPrice += selectedFood.price;
+                    tbl_totalPrice.Text = this.viewModel.totalAmountPrice.ToString();
                 }
             }
         }
@@ -143,18 +120,18 @@ namespace Baskin_Kiosk.View.OrderPage
 
             if (selectedFood != null)
             {
-                Food foodItem = this.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
+                Food foodItem = this.viewModel.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
 
                 if (foodItem != null)
                 {
                     foodItem.count--;
-                    this.totalAmountPrice -= selectedFood.price;
-                    tbl_totalPrice.Text = this.totalAmountPrice.ToString();
+                    this.viewModel.totalAmountPrice -= selectedFood.price;
+                    tbl_totalPrice.Text = this.viewModel.totalAmountPrice.ToString();
 
                     if (foodItem.count <= 0)
                     {
-                        Food deleteItem = this.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
-                        this.selectMenuList.Remove(deleteItem);
+                        Food deleteItem = this.viewModel.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
+                        this.viewModel.selectMenuList.Remove(deleteItem);
                     }
                 }
             }
@@ -167,20 +144,20 @@ namespace Baskin_Kiosk.View.OrderPage
 
             if (selectedFood != null)
             {
-                Food deleteItem = this.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
+                Food deleteItem = this.viewModel.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
                 
-                this.totalAmountPrice -= deleteItem.price * deleteItem.count;
-                this.tbl_totalPrice.Text = this.totalAmountPrice.ToString();
+                this.viewModel.totalAmountPrice -= deleteItem.price * deleteItem.count;
+                this.tbl_totalPrice.Text = this.viewModel.totalAmountPrice.ToString();
                 
-                this.selectMenuList.Remove(deleteItem);
+                this.viewModel.selectMenuList.Remove(deleteItem);
             }
         }
 
         private void clearSelectMenu(object sender, RoutedEventArgs e)
         {
-            if (this.selectMenuList.Count > 0)
+            if (this.viewModel.selectMenuList.Count > 0)
             {
-                this.selectMenuList.Clear();
+                this.viewModel.selectMenuList.Clear();
                 this.tbl_totalPrice.Text = "0";
             }
         }
