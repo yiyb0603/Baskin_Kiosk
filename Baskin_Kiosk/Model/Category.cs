@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Baskin_Kiosk.Common
 {
-        public enum Category
-        {
-            ICECREAM,
-            CAKE,
-            JUICE,
-        };
+    public enum Category
+    {
+        ICECREAM,
+        CAKE,
+        JUICE,
+    };
 }

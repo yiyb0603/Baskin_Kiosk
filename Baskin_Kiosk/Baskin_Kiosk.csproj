@@ -92,13 +92,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="View\Order\Order.xaml.cs">
+    <Compile Include="View\OrderPage\Order.xaml.cs">
       <DependentUpon>Order.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Payment\Card.xaml.cs">
+    <Compile Include="View\PaymentPage\Card.xaml.cs">
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Payment\Payment.xaml.cs">
+    <Compile Include="View\PaymentPage\Payment.xaml.cs">
       <DependentUpon>Payment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Category.cs">
@@ -125,15 +125,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\Order\Order.xaml">
+    <Compile Include="ViewModel\OrderViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="View\OrderPage\Order.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Payment\Card.xaml">
+    <Page Include="View\PaymentPage\Card.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Payment\Payment.xaml">
+    <Page Include="View\PaymentPage\Payment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
