@@ -25,5 +25,25 @@ namespace Baskin_Kiosk.View.PaymentPage
         {
             InitializeComponent();
         }
+
+        private void CardButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoForward)
+            { 
+                NavigationService.GoForward();
+            }
+            else
+            {
+                Card card = new Card(); NavigationService.Navigate(card);
+            }
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+        }
     }
 }
