@@ -1,29 +1,31 @@
-﻿using Baskin_Kiosk.View.OrderPage;
-using System;
-using System.Collections.Generic;
+﻿using Baskin_Kiosk.Common;
+using Baskin_Kiosk.Model;
+using Baskin_Kiosk.View.Payment;
+using Baskin_Kiosk.ViewModel;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Baskin_Kiosk.View.PaymentPage
 {
-    /// <summary>
-    /// Interaction logic for Payment.xaml
-    /// </summary>
     public partial class Payment : Page
     {
+        private OrderViewModel orderViewModel = App.orderViewModel;
+
         public Payment()
         {
             InitializeComponent();
+            Loaded += Payment_Loaded;
+        }
+
+        private void Payment_Loaded(object sender, RoutedEventArgs e)
+        {
+            DataContext = this.orderViewModel;
+            this.itemList.ItemsSource = this.orderViewModel.selectMenuList;
+            this.totalPrice.Text = "총금액: " + this.orderViewModel.totalAmountPrice + "원";
         }
 
         private void CardButton_Click(object sender, RoutedEventArgs e)
@@ -34,7 +36,8 @@ namespace Baskin_Kiosk.View.PaymentPage
             }
             else
             {
-                Card card = new Card(); NavigationService.Navigate(card);
+                Card card = new Card();
+                NavigationService.Navigate(card);
             }
         }
 

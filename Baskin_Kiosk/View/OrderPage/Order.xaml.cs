@@ -7,12 +7,14 @@ using System.Windows;
 using System.Windows.Controls;
 using Baskin_Kiosk.View.PaymentPage;
 using Baskin_Kiosk.ViewModel;
+using Baskin_Kiosk.Model;
 
 namespace Baskin_Kiosk.View.OrderPage
 {
     public partial class Order : Page
     {
-        private OrderViewModel viewModel = new OrderViewModel();
+        private OrderViewModel viewModel = App.orderViewModel;
+        OrderModel orderModel = new OrderModel();
 
         public Order()
         {
@@ -22,10 +24,16 @@ namespace Baskin_Kiosk.View.OrderPage
 
         private void Order_Loaded(object sender, RoutedEventArgs e)
         {
-            DataContext = this;
+            DataContext = App.orderViewModel;
             categoryList.SelectedIndex = 0;
             this.prevButton.Visibility = Visibility.Hidden;
-            this.tbl_totalPrice.Text = "0";
+            
+            if (this.viewModel.totalAmountPrice == 0)
+            {
+                this.tbl_totalPrice.Text = "0";
+                return;
+            }
+            
         }
 
         private List<Food> getFoodList(int pageCount)
@@ -169,7 +177,7 @@ namespace Baskin_Kiosk.View.OrderPage
 
         private void nextPage(object sender, RoutedEventArgs e)
         {
-            Payment payment = new Payment();
+            PaymentPage.Payment payment = new PaymentPage.Payment();
             this.NavigationService.Navigate(payment);
         }
     }
