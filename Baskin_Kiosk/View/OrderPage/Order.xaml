@@ -32,6 +32,7 @@
                     ScrollViewer.VerticalScrollBarVisibility="Auto"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     SelectionChanged="menuList_SelectionChanged"
+                    
                  >
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>

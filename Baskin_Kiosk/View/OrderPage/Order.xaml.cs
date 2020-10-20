@@ -27,13 +27,8 @@ namespace Baskin_Kiosk.View.OrderPage
             DataContext = App.orderViewModel;
             categoryList.SelectedIndex = 0;
             this.prevButton.Visibility = Visibility.Hidden;
-            
-            if (this.viewModel.totalAmountPrice == 0)
-            {
-                this.tbl_totalPrice.Text = "0";
-                return;
-            }
-            
+
+            this.tbl_totalPrice.Text = this.viewModel.totalAmountPrice.ToString();
         }
 
         private List<Food> getFoodList(int pageCount)
@@ -97,11 +92,23 @@ namespace Baskin_Kiosk.View.OrderPage
                 if (existFood != null)
                 {
                     existFood.count++;
-                    return;
                 }
 
-                this.viewModel.selectMenuList.Add(new Food() { category = selectedFood.category, foodName = selectedFood.foodName, imageSrc = selectedFood.imageSrc, price = selectedFood.price });
-                selectListView.ItemsSource = this.viewModel.selectMenuList;
+                else
+                {
+                    this.viewModel.selectMenuList.Add(
+                    new Food()
+                    {
+                        category = selectedFood.category,
+                        foodName = selectedFood.foodName,
+                        imageSrc = selectedFood.imageSrc,
+                        price = selectedFood.price
+                    });
+
+                    selectListView.ItemsSource = this.viewModel.selectMenuList;
+                }
+
+                menuList.UnselectAll();
             }
         }
 
@@ -146,7 +153,6 @@ namespace Baskin_Kiosk.View.OrderPage
         }
 
         private void selectMenuDelete(object sender, RoutedEventArgs e)
-
         {
             Food selectedFood = (sender as Button).DataContext as Food;
 
