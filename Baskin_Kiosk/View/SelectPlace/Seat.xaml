@@ -5,10 +5,34 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Baskin_Kiosk.View.SelectPlace"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="1040" d:DesignWidth="1920"
       Title="Seat">
 
     <Grid>
-        
+        <StackPanel HorizontalAlignment="Center" Margin="0 50 0 0">
+            
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{DynamicResource seatSelectButton}" Content="1"/>
+                <Button Style="{DynamicResource seatSelectButton}" Content="2"/>
+                <Button Style="{DynamicResource seatSelectButton}" Content="3"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{DynamicResource seatSelectButton}" Content="4"/>
+                <Button Style="{DynamicResource seatSelectButton}" Content="5"/>
+                <Button Style="{DynamicResource seatSelectButton}" Content="6"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{DynamicResource seatSelectButton}" Content="7"/>
+                <Button Style="{DynamicResource seatSelectButton}" Content="8"/>
+                <Button Style="{DynamicResource seatSelectButton}" Content="9"/>
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button Width="150" Height="30" Content="이전" Margin="0 100 500 0"/>
+                <Button Width="150" Height="30" Content="다음" Margin="0 100 0 0"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>
