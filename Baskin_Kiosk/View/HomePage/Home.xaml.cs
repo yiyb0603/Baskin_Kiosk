@@ -22,6 +22,7 @@ namespace Baskin_Kiosk.View.HomePage
     {
         public Home()
         {
+
             InitializeComponent();
         }
     }
