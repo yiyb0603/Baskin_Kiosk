@@ -4,15 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Baskin_Kiosk.View.Payment"
+      xmlns:qrcode="clr-namespace:KQRCode;assembly=KQRCode"
       mc:Ignorable="d" 
       d:DesignHeight="990" d:DesignWidth="1920"
-      Title="Card"
-      Unloaded="Card_Unloaded">
+      Title="Card">
 
     <Grid>
         <StackPanel>
             <Label>카드 결제 페이지</Label>
-            <Image x:Name="image" Width="640" Height="480" VerticalAlignment="Top"/>
+            <qrcode:KQRWebCam x:Name="webcam" Margin="12" QrDecoded="webcam_QrDecoded" Width="640" Height="480"/>
             <Label x:Name="resultLabel" Width='500' Margin="0 50 0 0" Content="테스트"></Label>
             <Button Content="이전" Width="150" HorizontalAlignment="Left" Margin="70 0 0 0" Click="Button_Click"/>
             
