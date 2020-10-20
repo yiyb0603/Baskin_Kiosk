@@ -16,7 +16,13 @@
                 <StackPanel Margin="50px 0 0 0 ">
                     <Label>결제 방식을 선택하세요</Label>
 
-                    <ListView x:Name="itemList" ItemsSource="{Binding selectMenuList}">
+                    <ListView
+                        x:Name="itemList"
+                        Width="800"
+                        Height="800"
+                        ItemsSource="{Binding selectMenuList}"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -36,7 +42,7 @@
                                 </GridViewColumn>
                                 <GridViewColumn Header="주문 음식이름" Width="200" DisplayMemberBinding="{Binding foodName}" />
                                 <GridViewColumn Header="수량" Width="150" DisplayMemberBinding="{Binding count}" />
-                                <GridViewColumn Header="가격" Width="150" DisplayMemberBinding="{Binding price}" />
+                                <GridViewColumn Header="메뉴 총 가격" Width="150" DisplayMemberBinding="{Binding price}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -50,7 +56,7 @@
             </StackPanel>
 
             <TextBlock x:Name="totalPrice" HorizontalAlignment="Right" Margin="0 0 700 0"/>
-            <Button Content="이전" Width="150" HorizontalAlignment="Left" Margin="70 300 0 0" Click="BackButton_Click"/>
+            <Button Content="이전" Width="150" HorizontalAlignment="Left" Margin="70 0 0 0" Click="BackButton_Click"/>
 
         </StackPanel>
     </Grid>

@@ -44,6 +44,7 @@
                             <StackPanel Width="100" Height="100" Margin="10px">
                                 <Image Source="{Binding imageSrc}" Width="50" Height="50" />
                                 <TextBlock Text="{Binding foodName}" HorizontalAlignment="Center" FontSize="15" />
+                                <TextBlock Text="{Binding price}" HorizontalAlignment="Center" FontSize="12" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -83,7 +84,7 @@
                             </GridViewColumn>
                             <GridViewColumn Header="카테고리" Width="250" DisplayMemberBinding="{Binding category}" />
                             <GridViewColumn Header="메뉴 이름" Width="250" DisplayMemberBinding="{Binding foodName}" />
-                            <GridViewColumn Header ="메뉴 가격" Width="250" DisplayMemberBinding ="{Binding price}" />
+                            <GridViewColumn Header ="메뉴 총 가격" Width="250" DisplayMemberBinding ="{Binding price}" />
 
                             <GridViewColumn Width="250" Header="메뉴 수량">
                                 <GridViewColumn.CellTemplate>
