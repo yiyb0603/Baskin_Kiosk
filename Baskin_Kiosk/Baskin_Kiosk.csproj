@@ -73,6 +73,9 @@
     <Compile Include="View\PaymentPage\Card.xaml.cs">
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PaymentPage\Cash.xaml.cs">
+      <DependentUpon>Cash.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PaymentPage\Payment.xaml.cs">
       <DependentUpon>Payment.xaml</DependentUpon>
     </Compile>
@@ -108,6 +111,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PaymentPage\Card.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PaymentPage\Cash.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
