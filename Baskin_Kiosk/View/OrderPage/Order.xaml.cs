@@ -182,6 +182,7 @@ namespace Baskin_Kiosk.View.OrderPage
             {
                 this.viewModel.selectMenuList.Clear();
                 this.tbl_totalPrice.Text = "0";
+                this.viewModel.totalAmountPrice = 0;
             }
         }
 

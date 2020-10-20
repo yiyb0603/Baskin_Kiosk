@@ -46,7 +46,11 @@ namespace Baskin_Kiosk.ViewModel
             set => SetProperty(ref _currentCategory, value);
         }
 
-        public int totalAmountPrice { get; set; }
+        private int _totalAmountPrice = 0;
+        public int totalAmountPrice {
+            get => _totalAmountPrice;
+            set => SetProperty(ref _totalAmountPrice, value);
+        }
 
         private ObservableCollection<Food> _selectMenuList = new ObservableCollection<Food>();
         public ObservableCollection<Food> selectMenuList
