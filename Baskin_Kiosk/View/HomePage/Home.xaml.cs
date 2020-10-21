@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Baskin_Kiosk.View.OrderPage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,12 @@ namespace Baskin_Kiosk.View.HomePage
         {
 
             InitializeComponent();
+        }
+
+        private void nextPage(object sender, RoutedEventArgs e)
+        {
+            Order order = new Order();
+            this.NavigationService.Navigate(order);
         }
     }
 }

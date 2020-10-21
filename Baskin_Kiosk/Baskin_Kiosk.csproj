@@ -67,6 +67,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\OrderModel.cs" />
+    <Compile Include="View\HomePage\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\OrderPage\Order.xaml.cs">
       <DependentUpon>Order.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,10 @@
     <Compile Include="ViewModel\OrderViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\HomePage\Home.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\OrderPage\Order.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
