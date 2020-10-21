@@ -32,7 +32,7 @@ namespace Baskin_Kiosk.View.OrderPage
 
         private List<Food> getFoodList(int pageCount)
         {
-            return this.viewModel.foodList.Where(food => food.category == this.viewModel.currentCategory).ToList();
+            return this.viewModel.foodList.Where(food => food.page == pageCount && food.category == this.viewModel.currentCategory).ToList();
         }
 
         private void clickPrev(object sender, EventArgs e)

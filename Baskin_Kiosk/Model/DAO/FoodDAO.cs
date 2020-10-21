@@ -22,24 +22,25 @@ namespace Baskin_Kiosk.Model.DAO
             connection.setCommand("Select * from kiosk.menu");
             MySqlDataReader reader = connection.executeReader();
 
-            int i = 1;
-            int pageCount = 1;
+            int i = 0;
+            int categoryIndex = 1;
+
             while (reader.Read())
             {
-                
                 Food food = new Food();
                 food.foodName = reader["menu_name"].ToString();
                 food.price = int.Parse(reader["menu_price"].ToString());
                 food.imageSrc = reader["menu_image"].ToString();
                 food.category = (Category) int.Parse(reader["category_id"].ToString());
-                food.page = pageCount;
 
-                List<Food> existFoods = foodList.Where((list) => list.category == food.category).ToList();
-                //if (i % 9 == 0)
-                //{
-                //    pageCount++;
-                //}
+                if(categoryIndex != (int) food.category)
+                {
+                    categoryIndex = (int)food.category;
+                    i = 0;
+                }
 
+                food.page = i++ / 9 + 1;
+                
                 foodList.Add(food);
             }
 
