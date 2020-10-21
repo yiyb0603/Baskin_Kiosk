@@ -8,8 +8,10 @@ namespace Baskin_Kiosk.Common
 {
     public enum Category
     {
-        ICECREAM,
-        CAKE,
-        JUICE,
+        ICECREAM = 1,
+        ICECREAM_CAKE = 2,
+        JUICE = 3,
+        COFFEE = 4,
+        DESSERT = 5,
     };
 }

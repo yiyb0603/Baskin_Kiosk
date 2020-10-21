@@ -1,0 +1,49 @@
+﻿using Baskin_Kiosk.Common;
+using Baskin_Kiosk.Util;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+
+namespace Baskin_Kiosk.Model.DAO
+{
+    public class FoodDAO
+    {
+        public ObservableCollection<Food> getFoodList()
+        {
+            DBConnection connection = new DBConnection();
+
+            ObservableCollection<Food> foodList = new ObservableCollection<Food>();
+            connection.getConnection();
+            connection.setCommand("Select * from kiosk.menu");
+            MySqlDataReader reader = connection.executeReader();
+
+            int i = 1;
+            int pageCount = 1;
+            while (reader.Read())
+            {
+                
+                Food food = new Food();
+                food.foodName = reader["menu_name"].ToString();
+                food.price = int.Parse(reader["menu_price"].ToString());
+                food.imageSrc = reader["menu_image"].ToString();
+                food.category = (Category) int.Parse(reader["category_id"].ToString());
+                food.page = pageCount;
+
+                List<Food> existFoods = foodList.Where((list) => list.category == food.category).ToList();
+                //if (i % 9 == 0)
+                //{
+                //    pageCount++;
+                //}
+
+                foodList.Add(food);
+            }
+
+            return foodList;
+        }
+    }
+}

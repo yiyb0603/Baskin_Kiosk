@@ -19,7 +19,9 @@
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                     <ListBoxItem>아이스크림</ListBoxItem>
-                    <ListBoxItem>케이크</ListBoxItem>
+                    <ListBoxItem>아이스크림 케이크</ListBoxItem>
+                    <ListBoxItem>음료</ListBoxItem>
+                    <ListBoxItem>커피</ListBoxItem>
                     <ListBoxItem>디저트</ListBoxItem>
                 </ListBox>
                 <ListBox
