@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using Baskin_Kiosk.View.PaymentPage;
 using Baskin_Kiosk.ViewModel;
 using Baskin_Kiosk.Model;
 
@@ -33,7 +32,7 @@ namespace Baskin_Kiosk.View.OrderPage
 
         private List<Food> getFoodList(int pageCount)
         {
-            return this.viewModel.foodList.Where(food => food.page == pageCount && food.category == this.viewModel.currentCategory).ToList();
+            return this.viewModel.foodList.Where(food => food.category == this.viewModel.currentCategory).ToList();
         }
 
         private void clickPrev(object sender, EventArgs e)
@@ -73,7 +72,7 @@ namespace Baskin_Kiosk.View.OrderPage
                 return;
             }
 
-            Category category = (Category)categoryList.SelectedIndex;
+            Category category = (Category)categoryList.SelectedIndex + 1;
             this.viewModel.currentCategory = category;
             this.menuList.ItemsSource = getFoodList(this.viewModel.pageCount);
         }
@@ -181,8 +180,8 @@ namespace Baskin_Kiosk.View.OrderPage
             if (this.viewModel.selectMenuList.Count > 0)
             {
                 this.viewModel.selectMenuList.Clear();
-                this.tbl_totalPrice.Text = "0";
                 this.viewModel.totalAmountPrice = 0;
+                this.tbl_totalPrice.Text = this.viewModel.totalAmountPrice.ToString();
             }
         }
 
