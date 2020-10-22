@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace Baskin_Kiosk.Common
 {
-    public enum Category
+    public class Category
     {
-        ICECREAM = 1,
-        ICECREAM_CAKE = 2,
-        JUICE = 3,
-        COFFEE = 4,
-        DESSERT = 5,
-    };
+        public String categoryName { get; set; }
+        public int categoryId { get; set; }
+    }
+    //public enum Category
+    //{
+    //    ICECREAM = 1,
+    //    ICECREAM_CAKE = 2,
+    //    JUICE = 3,
+    //    COFFEE = 4,
+    //    DESSERT = 5,
+    //};
 }

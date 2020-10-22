@@ -5,7 +5,8 @@ namespace Baskin_Kiosk.Common
 {
     public class Food : BindableBase
     {
-        public Category category { get; set; }
+        public int categoryId { get; set; }
+        public String categoryName { get; set; }
         public String imageSrc { get; set; }
         public String foodName { get; set; }
         public int page { get; set; }

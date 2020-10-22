@@ -2,8 +2,10 @@
 using Baskin_Kiosk.Model;
 using Baskin_Kiosk.Model.DAO;
 using Prism.Mvvm;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
+using System.Windows.Documents;
 
 namespace Baskin_Kiosk.ViewModel
 {
@@ -13,9 +15,10 @@ namespace Baskin_Kiosk.ViewModel
         OrderModel orderModel = new OrderModel();
 
         public ObservableCollection<Food> foodList = new FoodDAO().getFoodList();
+        public List<Category> categoryList = new CategoryDAO().getCategories();
 
         private int _pageCount = 1;
-        private Category _currentCategory = 0;
+        private int _currentCategory = 0;
 
         public int pageCount
         {
@@ -23,7 +26,7 @@ namespace Baskin_Kiosk.ViewModel
             set => SetProperty(ref _pageCount, value);
         }
 
-        public Category currentCategory
+        public int currentCategory
         {
             get => _currentCategory;
             set => SetProperty(ref _currentCategory, value);

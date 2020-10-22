@@ -19,7 +19,9 @@ namespace Baskin_Kiosk.Model.DAO
 
             ObservableCollection<Food> foodList = new ObservableCollection<Food>();
             connection.getConnection();
-            connection.setCommand("Select * from kiosk.menu");
+
+            String sql = "Select * from kiosk.menu";
+            connection.setCommand(sql);
             MySqlDataReader reader = connection.executeReader();
 
             int i = 0;
@@ -31,11 +33,11 @@ namespace Baskin_Kiosk.Model.DAO
                 food.foodName = reader["menu_name"].ToString();
                 food.price = int.Parse(reader["menu_price"].ToString());
                 food.imageSrc = reader["menu_image"].ToString();
-                food.category = (Category) int.Parse(reader["category_id"].ToString());
+                food.categoryId = int.Parse(reader["category_id"].ToString());
 
-                if(categoryIndex != (int) food.category)
+                if(categoryIndex != (int) food.categoryId)
                 {
-                    categoryIndex = (int)food.category;
+                    categoryIndex = (int)food.categoryId;
                     i = 0;
                 }
 

@@ -112,6 +112,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\DAO\CategoryDAO.cs" />
     <Compile Include="Util\Constants.cs" />
     <Compile Include="Model\DAO\FoodDAO.cs" />
     <Compile Include="Model\OrderModel.cs" />

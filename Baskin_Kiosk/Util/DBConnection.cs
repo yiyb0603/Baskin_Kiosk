@@ -33,10 +33,6 @@ namespace Baskin_Kiosk.Util
             this.connection = new MySqlConnection(Constants.DB_HOST);
 
             this.connection.Open();
-            /* while (reader.Read())
-            {
-                MessageBox.Show(reader["menu_name"].ToString());
-            } */
         }
     }
 }

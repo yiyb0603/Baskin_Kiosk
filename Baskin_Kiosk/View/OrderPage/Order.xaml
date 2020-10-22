@@ -12,17 +12,18 @@
     <Grid>
         <StackPanel Orientation="Horizontal">
             <StackPanel Margin ="20px" HorizontalAlignment="Left">
-                <ListBox x:Name="categoryList" Height="30" VerticalAlignment="Top" SelectionChanged="categoryChange">
+                <ListBox x:Name="categoryMenus" Height="30" VerticalAlignment="Top" SelectionChanged="categoryChange">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal" />
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
-                    <ListBoxItem>아이스크림</ListBoxItem>
-                    <ListBoxItem>아이스크림 케이크</ListBoxItem>
-                    <ListBoxItem>음료</ListBoxItem>
-                    <ListBoxItem>커피</ListBoxItem>
-                    <ListBoxItem>디저트</ListBoxItem>
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding categoryName}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
                 <ListBox
                     x:Name="menuList"
@@ -34,7 +35,6 @@
                     ScrollViewer.VerticalScrollBarVisibility="Auto"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     SelectionChanged="menuList_SelectionChanged"
-                    
                  >
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -43,7 +43,7 @@
                     </ListBox.ItemsPanel>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Width="100" Height="100" Margin="10px">
+                            <StackPanel Width="150" Height="100" Margin="10px">
                                 <Image Source="{Binding imageSrc}" Width="50" Height="50" />
                                 <TextBlock Text="{Binding foodName}" HorizontalAlignment="Center" FontSize="15" />
                                 <TextBlock Text="{Binding price}" HorizontalAlignment="Center" FontSize="12" />
@@ -84,7 +84,7 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="카테고리" Width="250" DisplayMemberBinding="{Binding category}" />
+                            <GridViewColumn Header="카테고리" Width="250" DisplayMemberBinding="{Binding categoryName}" />
                             <GridViewColumn Header="메뉴 이름" Width="250" DisplayMemberBinding="{Binding foodName}" />
                             <GridViewColumn Header ="메뉴 총 가격" Width="250" DisplayMemberBinding ="{Binding price}" />
 
@@ -93,7 +93,7 @@
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="수량: "  VerticalAlignment="Center" />
-                                            <TextBlock Text="{Binding count}" 
+                                            <TextBlock Text="{Binding count}"
                                                        VerticalAlignment="Center" FontSize="18" />
 
                                             <StackPanel Margin="5px 0 0 0">

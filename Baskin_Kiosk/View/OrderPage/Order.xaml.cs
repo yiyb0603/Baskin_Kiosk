@@ -24,15 +24,17 @@ namespace Baskin_Kiosk.View.OrderPage
         private void Order_Loaded(object sender, RoutedEventArgs e)
         {
             DataContext = App.orderViewModel;
-            categoryList.SelectedIndex = (int) viewModel.currentCategory;
+
+            categoryMenus.SelectedIndex = (int) viewModel.currentCategory;
             this.prevButton.Visibility = Visibility.Hidden;
 
             this.tbl_totalPrice.Text = this.viewModel.totalAmountPrice.ToString();
+            categoryMenus.ItemsSource = this.viewModel.categoryList;
         }
 
         private List<Food> getFoodList(int pageCount)
         {
-            return this.viewModel.foodList.Where(food => food.page == pageCount && food.category == this.viewModel.currentCategory).ToList();
+            return this.viewModel.foodList.Where((food) => food.page == pageCount && food.categoryId == this.viewModel.currentCategory).ToList();
         }
 
         private void clickPrev(object sender, EventArgs e)
@@ -67,12 +69,12 @@ namespace Baskin_Kiosk.View.OrderPage
             this.nextButton.Visibility = Visibility.Visible;
             this.prevButton.Visibility = Visibility.Hidden;
 
-            if (categoryList.SelectedIndex <= -1)
+            if (categoryMenus.SelectedIndex <= -1)
             {
                 return;
             }
 
-            Category category = (Category)categoryList.SelectedIndex + 1;
+            int category = categoryMenus.SelectedIndex + 1;
             this.viewModel.currentCategory = category;
             this.menuList.ItemsSource = getFoodList(this.viewModel.pageCount);
         }
@@ -83,11 +85,10 @@ namespace Baskin_Kiosk.View.OrderPage
 
             if (selectedFood != null)
             {
-                Food existFood = this.viewModel.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
-
                 this.viewModel.totalAmountPrice += selectedFood.price;
                 tbl_totalPrice.Text = this.viewModel.totalAmountPrice.ToString();
 
+                Food existFood = this.viewModel.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
                 if (existFood != null)
                 {
                     existFood.count++;
@@ -96,10 +97,13 @@ namespace Baskin_Kiosk.View.OrderPage
 
                 else
                 {
+                    Category findCategory = this.viewModel.categoryList.Where((category) => category.categoryId == selectedFood.categoryId).FirstOrDefault();
+
                     this.viewModel.selectMenuList.Add(
                     new Food()
                     {
-                        category = selectedFood.category,
+                        categoryId = selectedFood.categoryId,
+                        categoryName = findCategory.categoryName,
                         foodName = selectedFood.foodName,
                         imageSrc = selectedFood.imageSrc,
                         price = selectedFood.price,
