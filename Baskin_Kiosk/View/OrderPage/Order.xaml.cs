@@ -226,8 +226,8 @@ namespace Baskin_Kiosk.View.OrderPage
                 return;
             }
 
-            PaymentPage.Payment payment = new PaymentPage.Payment();
-            this.NavigationService.Navigate(payment);
+            SelectPlace.SelectPlace selectPlace = new SelectPlace.SelectPlace();
+            NavigationService.Navigate(selectPlace);
         }
     }
 }
