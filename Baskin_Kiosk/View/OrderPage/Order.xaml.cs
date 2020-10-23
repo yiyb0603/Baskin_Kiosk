@@ -202,6 +202,19 @@ namespace Baskin_Kiosk.View.OrderPage
 
         private void prevPage(object sender, RoutedEventArgs e)
         {
+            if (this.viewModel.selectMenuList.Count > 0)
+            {
+                var confirmMessage = MessageBox.Show("주문을 취소하시겠습니까?", "잠시만요", MessageBoxButton.YesNo);
+
+                if (confirmMessage == MessageBoxResult.Yes)
+                {
+                    this.viewModel.clearMenuList();
+                    this.NavigationService.GoBack();
+                }
+
+                return;
+            }
+
             this.NavigationService.GoBack();
         }
 
