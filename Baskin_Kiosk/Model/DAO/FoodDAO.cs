@@ -2,12 +2,7 @@
 using Baskin_Kiosk.Util;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Baskin_Kiosk.Model.DAO
 {
@@ -35,7 +30,7 @@ namespace Baskin_Kiosk.Model.DAO
                 food.imageSrc = reader["menu_image"].ToString();
                 food.categoryId = int.Parse(reader["category_id"].ToString());
 
-                if(categoryIndex != (int) food.categoryId)
+                if (categoryIndex != (int) food.categoryId)
                 {
                     categoryIndex = (int)food.categoryId;
                     i = 0;
@@ -46,6 +41,7 @@ namespace Baskin_Kiosk.Model.DAO
                 foodList.Add(food);
             }
 
+            connection.closeConnection();
             return foodList;
         }
     }

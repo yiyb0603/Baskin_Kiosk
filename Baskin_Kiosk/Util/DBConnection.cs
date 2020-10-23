@@ -34,5 +34,10 @@ namespace Baskin_Kiosk.Util
 
             this.connection.Open();
         }
+
+        public void closeConnection()
+        {
+            this.connection.Close();
+        }
     }
 }

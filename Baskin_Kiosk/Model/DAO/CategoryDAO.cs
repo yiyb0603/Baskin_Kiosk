@@ -30,6 +30,8 @@ namespace Baskin_Kiosk.Model.DAO
 
                 categoryList.Add(category);
             }
+
+            connection.closeConnection();
             return categoryList;
         }
 

@@ -1,12 +1,12 @@
 ﻿using Baskin_Kiosk.Common;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Baskin_Kiosk.ViewModel;
 using Baskin_Kiosk.Model;
+using System.Collections.Specialized;
 
 namespace Baskin_Kiosk.View.OrderPage
 {
@@ -30,6 +30,22 @@ namespace Baskin_Kiosk.View.OrderPage
 
             this.tbl_totalPrice.Text = this.viewModel.totalAmountPrice.ToString();
             categoryMenus.ItemsSource = this.viewModel.categoryList;
+            this.viewModel.selectMenuList.CollectionChanged += this.collectionChanged;
+        }
+
+        private void collectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            int totalCount = 0;
+            int totalPrice = 0;
+
+            foreach (Food food in this.viewModel.selectMenuList)
+            {
+                totalCount += food.count;
+                totalPrice += food.price;
+            }
+
+            tbl_totalPrice.Text = totalPrice.ToString();
+            tbl_totalCount.Text = totalCount.ToString();
         }
 
         private List<Food> getFoodList(int pageCount)
@@ -86,13 +102,13 @@ namespace Baskin_Kiosk.View.OrderPage
             if (selectedFood != null)
             {
                 this.viewModel.totalAmountPrice += selectedFood.price;
-                tbl_totalPrice.Text = this.viewModel.totalAmountPrice.ToString();
 
                 Food existFood = this.viewModel.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
                 if (existFood != null)
                 {
                     existFood.count++;
                     existFood.price += selectedFood.price;
+                    this.collectionChanged(null, null);
                 }
 
                 else
@@ -132,16 +148,16 @@ namespace Baskin_Kiosk.View.OrderPage
                     foodItem.count++;
                     foodItem.price += selectedFood.price;
                     this.viewModel.totalAmountPrice += selectedFood.price;
-                    tbl_totalPrice.Text = this.viewModel.totalAmountPrice.ToString();
                 }
             }
+
+            this.collectionChanged(null, null);
         }
 
         private void Button_DownClick(object sender, RoutedEventArgs e)
         {
             // 감소 버튼을 누른 엘리먼트 객체
             Food senderFood = (sender as Button).DataContext as Food;
-
             Food selectedFood = this.viewModel.foodList.Where((food) => food.foodName == senderFood.foodName).FirstOrDefault();
 
             if (selectedFood != null)
@@ -153,7 +169,6 @@ namespace Baskin_Kiosk.View.OrderPage
                     foodItem.count--;
                     foodItem.price -= selectedFood.price;
                     this.viewModel.totalAmountPrice -= selectedFood.price;
-                    tbl_totalPrice.Text = this.viewModel.totalAmountPrice.ToString();
 
                     if (foodItem.count <= 0)
                     {
@@ -162,6 +177,7 @@ namespace Baskin_Kiosk.View.OrderPage
                     }
                 }
             }
+            this.collectionChanged(null, null);
         }
 
         private void selectMenuDelete(object sender, RoutedEventArgs e)
@@ -173,8 +189,6 @@ namespace Baskin_Kiosk.View.OrderPage
                 Food deleteItem = this.viewModel.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
                 
                 this.viewModel.totalAmountPrice -= deleteItem.price;
-                this.tbl_totalPrice.Text = this.viewModel.totalAmountPrice.ToString();
-                
                 this.viewModel.selectMenuList.Remove(deleteItem);
             }
         }
@@ -185,7 +199,6 @@ namespace Baskin_Kiosk.View.OrderPage
             {
                 this.viewModel.selectMenuList.Clear();
                 this.viewModel.totalAmountPrice = 0;
-                this.tbl_totalPrice.Text = this.viewModel.totalAmountPrice.ToString();
             }
         }
 
@@ -196,6 +209,12 @@ namespace Baskin_Kiosk.View.OrderPage
 
         private void nextPage(object sender, RoutedEventArgs e)
         {
+            if (this.viewModel.selectMenuList.Count <= 0)
+            {
+                MessageBox.Show("메뉴를 선택해주세요.");
+                return;
+            }
+
             PaymentPage.Payment payment = new PaymentPage.Payment();
             this.NavigationService.Navigate(payment);
         }
