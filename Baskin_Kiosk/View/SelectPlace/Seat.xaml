@@ -12,26 +12,43 @@
         <StackPanel HorizontalAlignment="Center" Margin="0 50 0 0">
             
             <StackPanel Orientation="Horizontal">
-                <Button Style="{DynamicResource seatSelectButton}" Content="1"/>
-                <Button Style="{DynamicResource seatSelectButton}" Content="2"/>
-                <Button Style="{DynamicResource seatSelectButton}" Content="3"/>
+                <Button Style="{DynamicResource seatSelectButton}" x:Name="button1" Click="SeatButton_Click">
+                    <TextBlock TextAlignment="Center">1<LineBreak/>00:59</TextBlock>
+                </Button>
+                <Button Style="{DynamicResource seatSelectButton}" x:Name="button2">
+                    <TextBlock TextAlignment="Center">2<LineBreak/>00:59</TextBlock>
+                </Button>
+                <Button Style="{DynamicResource seatSelectButton}" x:Name="button3">
+                    <TextBlock TextAlignment="Center">3<LineBreak/>00:59</TextBlock>
+                </Button>
             </StackPanel>
-            
+
             <StackPanel Orientation="Horizontal">
-                <Button Style="{DynamicResource seatSelectButton}" Content="4"/>
-                <Button Style="{DynamicResource seatSelectButton}" Content="5"/>
-                <Button Style="{DynamicResource seatSelectButton}" Content="6"/>
+                <Button Style="{DynamicResource seatSelectButton}" x:Name="button4">
+                    <TextBlock TextAlignment="Center">4<LineBreak/>00:59</TextBlock>
+                </Button>
+                <Button Style="{DynamicResource seatSelectButton}" x:Name="button5">
+                    <TextBlock TextAlignment="Center">5<LineBreak/>00:59</TextBlock>
+                </Button>
+                <Button Style="{DynamicResource seatSelectButton}" x:Name="button6">
+                    <TextBlock TextAlignment="Center">6<LineBreak/>00:59</TextBlock>
+                </Button>
             </StackPanel>
-            
+
             <StackPanel Orientation="Horizontal">
-                <Button Style="{DynamicResource seatSelectButton}" Content="7"/>
-                <Button Style="{DynamicResource seatSelectButton}" Content="8"/>
-                <Button Style="{DynamicResource seatSelectButton}" Content="9"/>
+                <Button Style="{DynamicResource seatSelectButton}" x:Name="button7">
+                    <TextBlock TextAlignment="Center">7<LineBreak/>00:59</TextBlock>
+                </Button>
+                <Button Style="{DynamicResource seatSelectButton}" x:Name="button8">
+                    <TextBlock TextAlignment="Center">8<LineBreak/>00:59</TextBlock>
+                </Button>
+                <Button Style="{DynamicResource seatSelectButton}" x:Name="button9">
+                    <TextBlock TextAlignment="Center">9<LineBreak/>00:59</TextBlock>
+                </Button>
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <Button Width="150" Height="30" Content="이전" Margin="0 100 500 0"/>
-                <Button Width="150" Height="30" Content="다음" Margin="0 100 0 0"/>
+                <Button Width="150" Height="30" Content="이전" Margin="0 100 600 0" Click="BackButton_Click"/>
             </StackPanel>
         </StackPanel>
     </Grid>

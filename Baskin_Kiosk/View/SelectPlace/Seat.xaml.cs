@@ -20,9 +20,26 @@ namespace Baskin_Kiosk.View.SelectPlace
     /// </summary>
     public partial class Seat : Page
     {
+        Button[] seatButtonArray;
+
         public Seat()
         {
             InitializeComponent();
+
+            seatButtonArray = new Button[9] { button1, button2, button3, button4, button5, button6, button7, button8, button9 };
+        }
+        
+        private void SeatButton_Click(object sender, RoutedEventArgs e)
+        {
+            button1.IsEnabled = false;
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
         }
     }
 }

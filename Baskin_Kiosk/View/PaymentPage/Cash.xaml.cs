@@ -40,5 +40,10 @@ namespace Baskin_Kiosk.View.PaymentPage
         {
             resultLabel.Content = e;
         }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
