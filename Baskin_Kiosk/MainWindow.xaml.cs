@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Baskin_Kiosk.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,8 @@ namespace Baskin_Kiosk
     /// </summary>
     public partial class MainWindow : Window
     {
+        private OrderViewModel viewModel = App.orderViewModel;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,6 +37,26 @@ namespace Baskin_Kiosk
         private void timerTick(object sender, EventArgs e)
         {
             CurrentTime.Content = DateTime.Now.ToString("yyyy년 MM월 dd일 HH시 mm분 ss초");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Uri uri = new Uri("./View/HomePage/Home.xaml", UriKind.Relative); //Line 1
+
+            if (this.viewModel.selectMenuList.Count > 0)
+            {
+                var confirmDialog = MessageBox.Show("주문을 취소하시겠습니까?", "잠시만요", MessageBoxButton.YesNo);
+                
+                if (confirmDialog == MessageBoxResult.Yes)
+                {
+                    this.viewModel.clearMenuList();
+                    this.frame.Source = uri;
+                }
+
+                return;
+            }
+
+            this.frame.Source = uri;
         }
     }
 }

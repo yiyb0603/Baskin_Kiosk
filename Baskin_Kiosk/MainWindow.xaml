@@ -18,9 +18,10 @@
 				Foreground ="white"
 				HorizontalAlignment ="Right"
 				Content="2020년 9월 25일 금요일 오전 09:20:10"/>
+            <Button FontSize="30" Width="50" Click="Button_Click">🏤</Button>
         </Grid>
 
-        <Frame Name="frame"
+        <Frame x:Name="frame"
                Grid.Row="1"
                NavigationUIVisibility="Hidden"
                Source="/View/HomePage/Home.xaml"/>

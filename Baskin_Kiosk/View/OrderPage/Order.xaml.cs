@@ -45,7 +45,6 @@ namespace Baskin_Kiosk.View.OrderPage
             }
 
             tbl_totalPrice.Text = totalPrice.ToString();
-            tbl_totalCount.Text = totalCount.ToString();
         }
 
         private List<Food> getFoodList(int pageCount)
@@ -197,8 +196,7 @@ namespace Baskin_Kiosk.View.OrderPage
         {
             if (this.viewModel.selectMenuList.Count > 0)
             {
-                this.viewModel.selectMenuList.Clear();
-                this.viewModel.totalAmountPrice = 0;
+                this.viewModel.clearMenuList();
             }
         }
 

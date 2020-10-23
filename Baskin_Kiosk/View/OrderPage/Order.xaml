@@ -115,8 +115,6 @@
                         <TextBlock Text="총 금액: " VerticalAlignment="Center" FontSize="30" />
                         <TextBlock x:Name="tbl_totalPrice" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="30" Margin="0 0 30 0" />
 
-                        <TextBlock Text="총 개수: " VerticalAlignment="Center" FontSize="30" />
-                        <TextBlock x:Name="tbl_totalCount" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="30" Margin="0 0 30 0" />
                         <Button Click="clearSelectMenu" Margin="5 0 300 0">모두 삭제</Button>
                     </StackPanel>
 

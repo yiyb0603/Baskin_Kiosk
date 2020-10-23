@@ -44,5 +44,11 @@ namespace Baskin_Kiosk.ViewModel
             get => _selectMenuList;
             set => SetProperty(ref _selectMenuList, value);
         }
+
+        public void clearMenuList()
+        {
+            this._selectMenuList.Clear();
+            this._totalAmountPrice = 0;
+        }
     }
 }
