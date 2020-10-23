@@ -11,9 +11,13 @@
     <Grid>
         <StackPanel>
             <Label Margin="0 50 0 0">식사 장소를 선택하세요</Label>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="180" Height="200" Margin="0 0 200 0" Content="매장 식사"/>
-                <Button Width="180" Height="200" Margin="0 0 0 0" Content="포장 주문"/>
+            <StackPanel  HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <Button Width="180" Height="200" Margin="0 0 200 0" Content="매장 식사" Click="SeatButton_Click"/>
+                    <Button Width="180" Height="200" Margin="0 0 0 0" Content="포장 주문" Click="TakeOutButton_Click"/>
+                </StackPanel>
+
+                <Button Width="180" Height="50" Margin="0 150 0 0" Content="이전" Click="BackButton_Click"/>
             </StackPanel>
         </StackPanel>
     </Grid>

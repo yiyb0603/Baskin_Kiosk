@@ -24,5 +24,25 @@ namespace Baskin_Kiosk.View.SelectPlace
         {
             InitializeComponent();
         }
+
+        private void SeatButton_Click(object sender, RoutedEventArgs e)
+        {
+            Seat seat = new Seat();
+            NavigationService.Navigate(seat);
+        }
+
+        private void TakeOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            PaymentPage.Payment payment = new PaymentPage.Payment();
+            NavigationService.Navigate(payment);
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+        }
     }
 }
