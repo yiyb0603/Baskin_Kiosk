@@ -43,9 +43,9 @@
                     </ListBox.ItemsPanel>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Width="150" Height="150" Margin="10px" x:Name="stackpanel">
-                                <Image Source="{Binding imageSrc}" Width="100" Height="100" />
-                                <TextBlock Text="{Binding foodName}" HorizontalAlignment="Center" FontSize="15" />
+                            <StackPanel Width="150" Height="180" Margin="10px" x:Name="stackpanel" HorizontalAlignment="Center">
+                                <Image Source="{Binding imageSrc}" Width="75" Height="100" />
+                                <TextBlock Text="{Binding foodName}" TextWrapping="WrapWithOverflow" MaxWidth="150" HorizontalAlignment="Center" FontSize="15" />
                                 <TextBlock Text="{Binding price}" HorizontalAlignment="Center" FontSize="12" />
                             </StackPanel>
                         </DataTemplate>

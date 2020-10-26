@@ -24,8 +24,20 @@ namespace Baskin_Kiosk.View.OrderPage
         private void Order_Loaded(object sender, RoutedEventArgs e)
         {
             DataContext = App.orderViewModel;
+           
+            
+                categoryMenus.SelectedIndex = (int)viewModel.currentCategory;
+            
+            
 
-            categoryMenus.SelectedIndex = (int) viewModel.currentCategory;
+            //if (categoryMenus.SelectedIndex <= -1)
+            //{
+            //    categoryMenus.SelectedIndex = 0;
+            //} else
+            //{
+                //categoryMenus.SelectedIndex = (int)viewModel.currentCategory - 1;
+            //}
+            
             this.prevButton.Visibility = Visibility.Hidden;
 
             this.tbl_totalPrice.Text = this.viewModel.totalAmountPrice.ToString();
@@ -80,17 +92,18 @@ namespace Baskin_Kiosk.View.OrderPage
 
         private void categoryChange(object sender, SelectionChangedEventArgs e)
         {
-            this.viewModel.pageCount = 1;
+            int category = categoryMenus.SelectedIndex <= 0 ? categoryMenus.SelectedIndex + 1 : categoryMenus.SelectedIndex;
+            this.viewModel.currentCategory = category;
+            
+             this.viewModel.pageCount = 1;
+             this.prevButton.Visibility = Visibility.Hidden;
             this.nextButton.Visibility = Visibility.Visible;
-            this.prevButton.Visibility = Visibility.Hidden;
 
             if (categoryMenus.SelectedIndex <= -1)
             {
                 return;
             }
-
-            int category = categoryMenus.SelectedIndex + 1;
-            this.viewModel.currentCategory = category;
+            
             this.menuList.ItemsSource = getFoodList(this.viewModel.pageCount);
         }
 
