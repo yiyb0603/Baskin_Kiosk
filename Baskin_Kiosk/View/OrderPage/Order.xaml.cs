@@ -24,8 +24,8 @@ namespace Baskin_Kiosk.View.OrderPage
         private void Order_Loaded(object sender, RoutedEventArgs e)
         {
             DataContext = App.orderViewModel;
-
-            categoryMenus.SelectedIndex = (int) viewModel.currentCategory;
+            
+            categoryMenus.SelectedIndex = (int)viewModel.currentCategory;
             this.prevButton.Visibility = Visibility.Hidden;
 
             this.tbl_totalPrice.Text = this.viewModel.totalAmountPrice.ToString();
@@ -38,10 +38,10 @@ namespace Baskin_Kiosk.View.OrderPage
             int totalCount = 0;
             int totalPrice = 0;
 
-            foreach (Food food in this.viewModel.selectMenuList)
+            foreach (OrderModel order in this.viewModel.selectMenuList)
             {
-                totalCount += food.count;
-                totalPrice += food.price;
+                totalCount += order.count;
+                totalPrice += order.price;
             }
 
             tbl_totalPrice.Text = totalPrice.ToString();
@@ -80,17 +80,18 @@ namespace Baskin_Kiosk.View.OrderPage
 
         private void categoryChange(object sender, SelectionChangedEventArgs e)
         {
-            this.viewModel.pageCount = 1;
+            int category = categoryMenus.SelectedIndex;
+            this.viewModel.currentCategory = category;
+            
+             this.viewModel.pageCount = 1;
+             this.prevButton.Visibility = Visibility.Hidden;
             this.nextButton.Visibility = Visibility.Visible;
-            this.prevButton.Visibility = Visibility.Hidden;
 
             if (categoryMenus.SelectedIndex <= -1)
             {
                 return;
             }
-
-            int category = categoryMenus.SelectedIndex + 1;
-            this.viewModel.currentCategory = category;
+            
             this.menuList.ItemsSource = getFoodList(this.viewModel.pageCount);
         }
 
@@ -102,7 +103,7 @@ namespace Baskin_Kiosk.View.OrderPage
             {
                 this.viewModel.totalAmountPrice += selectedFood.price;
 
-                Food existFood = this.viewModel.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
+                OrderModel existFood = this.viewModel.selectMenuList.Where((food) => food.menuName == selectedFood.menuName).FirstOrDefault();
                 if (existFood != null)
                 {
                     existFood.count++;
@@ -115,11 +116,12 @@ namespace Baskin_Kiosk.View.OrderPage
                     Category findCategory = this.viewModel.categoryList.Where((category) => category.categoryId == selectedFood.categoryId).FirstOrDefault();
 
                     this.viewModel.selectMenuList.Add(
-                    new Food()
+                    new OrderModel()
                     {
                         categoryId = selectedFood.categoryId,
                         categoryName = findCategory.categoryName,
-                        foodName = selectedFood.foodName,
+                        menuId = selectedFood.menuId,
+                        menuName = selectedFood.menuName,
                         imageSrc = selectedFood.imageSrc,
                         price = selectedFood.price,
                     });
@@ -134,13 +136,13 @@ namespace Baskin_Kiosk.View.OrderPage
         private void Button_UpClick(object sender, RoutedEventArgs e)
         {
             // 증가 버튼을 누른 엘리먼트 객체
-            Food senderFood = (sender as Button).DataContext as Food;
+            OrderModel senderFood = (sender as Button).DataContext as OrderModel;
 
-            Food selectedFood = this.viewModel.foodList.Where((food) => food.foodName == senderFood.foodName).FirstOrDefault();
+            Food selectedFood = this.viewModel.foodList.Where((food) => food.menuName == senderFood.menuName).FirstOrDefault();
 
             if (selectedFood != null)
             {
-                Food foodItem = this.viewModel.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
+                OrderModel foodItem = this.viewModel.selectMenuList.Where((food) => food.menuName == selectedFood.menuName).FirstOrDefault();
 
                 if (foodItem != null)
                 {
@@ -156,12 +158,12 @@ namespace Baskin_Kiosk.View.OrderPage
         private void Button_DownClick(object sender, RoutedEventArgs e)
         {
             // 감소 버튼을 누른 엘리먼트 객체
-            Food senderFood = (sender as Button).DataContext as Food;
-            Food selectedFood = this.viewModel.foodList.Where((food) => food.foodName == senderFood.foodName).FirstOrDefault();
+            OrderModel senderFood = (sender as Button).DataContext as OrderModel;
+            Food selectedFood = this.viewModel.foodList.Where((food) => food.menuName == senderFood.menuName).FirstOrDefault();
 
             if (selectedFood != null)
             {
-                Food foodItem = this.viewModel.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
+                OrderModel foodItem = this.viewModel.selectMenuList.Where((food) => food.menuName == selectedFood.menuName).FirstOrDefault();
 
                 if (foodItem != null)
                 {
@@ -171,7 +173,7 @@ namespace Baskin_Kiosk.View.OrderPage
 
                     if (foodItem.count <= 0)
                     {
-                        Food deleteItem = this.viewModel.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
+                        OrderModel deleteItem = this.viewModel.selectMenuList.Where((food) => food.menuName == selectedFood.menuName).FirstOrDefault();
                         this.viewModel.selectMenuList.Remove(deleteItem);
                     }
                 }
@@ -185,7 +187,7 @@ namespace Baskin_Kiosk.View.OrderPage
 
             if (selectedFood != null)
             {
-                Food deleteItem = this.viewModel.selectMenuList.Where((food) => food.foodName == selectedFood.foodName).FirstOrDefault();
+                OrderModel deleteItem = this.viewModel.selectMenuList.Where((food) => food.menuName == selectedFood.menuName).FirstOrDefault();
                 
                 this.viewModel.totalAmountPrice -= deleteItem.price;
                 this.viewModel.selectMenuList.Remove(deleteItem);
