@@ -117,6 +117,7 @@
     <Compile Include="Model\DAO\FoodDAO.cs" />
     <Compile Include="Model\OrderModel.cs" />
     <Compile Include="Util\DBConnection.cs" />
+    <Compile Include="ViewModel\SeatViewModel.cs" />
     <Compile Include="View\HomePage\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>

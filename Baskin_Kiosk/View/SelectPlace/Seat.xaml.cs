@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Google.Protobuf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,7 +32,13 @@ namespace Baskin_Kiosk.View.SelectPlace
         
         private void SeatButton_Click(object sender, RoutedEventArgs e)
         {
-            button1.IsEnabled = false;
+            MessageBoxResult result = MessageBox.Show("1번 자리를 선택하시겠어요?", "확인", MessageBoxButton.YesNo);
+
+            if(result==MessageBoxResult.Yes)
+            {
+                PaymentPage.Payment payment = new PaymentPage.Payment();
+                NavigationService.Navigate(payment);
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

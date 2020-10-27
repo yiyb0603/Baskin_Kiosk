@@ -30,7 +30,7 @@ namespace Baskin_Kiosk.View.Payment
 
         private void webcam_QrDecoded(object sender, string e)
         {
-            resultLabel.Content = e;
+            resultLabel.Text = e;
         }
     }
 }
