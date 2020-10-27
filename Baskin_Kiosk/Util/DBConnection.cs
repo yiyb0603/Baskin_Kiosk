@@ -18,9 +18,9 @@ namespace Baskin_Kiosk.Util
             this.command = new MySqlCommand(sql, this.connection);
         }
 
-        public int executeQuery()
+        public void executeNonQuery()
         {
-            return command.ExecuteNonQuery();
+            command.ExecuteNonQuery();
         }
 
         public MySqlDataReader executeReader()

@@ -38,11 +38,18 @@ namespace Baskin_Kiosk.ViewModel
             set => SetProperty(ref _totalAmountPrice, value);
         }
 
-        private ObservableCollection<OrderModel> _selectMenuList = new ObservableCollection<OrderModel>();
-        public ObservableCollection<OrderModel> selectMenuList
+        private ObservableCollection<Food> _selectMenuList = new ObservableCollection<Food>();
+        public ObservableCollection<Food> selectMenuList
         {
             get => _selectMenuList;
             set => SetProperty(ref _selectMenuList, value);
+        }
+
+        private ObservableCollection<OrderModel> _orderMenuList = new ObservableCollection<OrderModel>();
+        public ObservableCollection<OrderModel> orderMenuList
+        {
+            get => _orderMenuList;
+            set => SetProperty(ref _orderMenuList, value);
         }
 
         public void clearMenuList()

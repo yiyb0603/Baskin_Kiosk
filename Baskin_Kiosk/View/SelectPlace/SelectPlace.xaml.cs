@@ -33,10 +33,10 @@ namespace Baskin_Kiosk.View.SelectPlace
         private void SeatButton_Click(object sender, RoutedEventArgs e)
         {
             // 매장 식사
-            foreach (OrderModel order in this.viewModel.selectMenuList)
+            foreach(Food food in this.viewModel.selectMenuList)
             {
-                order.orderTypeName = "매장 식사";
-                order.orderType = 0;
+                food.orderType = 0;
+                food.orderTypeName = "매장";
             }
 
             Seat seat = new Seat();
@@ -46,10 +46,10 @@ namespace Baskin_Kiosk.View.SelectPlace
         private void TakeOutButton_Click(object sender, RoutedEventArgs e)
         {
             // 포장 주문
-            foreach (OrderModel order in this.viewModel.selectMenuList)
+            foreach (Food food in this.viewModel.selectMenuList)
             {
-                order.orderTypeName = "포장";
-                order.orderType = 1;
+                food.orderType = 1;
+                food.orderTypeName = "포장";
             }
             PaymentPage.Payment payment = new PaymentPage.Payment();
             NavigationService.Navigate(payment);

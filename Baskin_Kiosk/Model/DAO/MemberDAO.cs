@@ -1,10 +1,6 @@
 ﻿using Baskin_Kiosk.Util;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Baskin_Kiosk.Model.DAO
 {
@@ -28,6 +24,7 @@ namespace Baskin_Kiosk.Model.DAO
                 member.barcode = reader["barcode"].ToString();
             }
 
+            connection.closeConnection();
             return member;
         }
     }
