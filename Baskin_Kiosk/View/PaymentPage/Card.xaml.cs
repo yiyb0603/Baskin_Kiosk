@@ -1,4 +1,6 @@
-﻿using Baskin_Kiosk.ViewModel;
+﻿using Baskin_Kiosk.Model;
+using Baskin_Kiosk.Model.DAO;
+using Baskin_Kiosk.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -31,6 +33,19 @@ namespace Baskin_Kiosk.View.Payment
         private void webcam_QrDecoded(object sender, string e)
         {
             resultLabel.Text = e;
+
+            showUserName(e);
+        }
+
+        private void showUserName(string e)
+        {
+            MemberDAO memberDAO = new MemberDAO();
+
+            MemberModel member =  memberDAO.getMember(0, e);
+
+
+            userName.Content = member.name;
+
         }
     }
 }

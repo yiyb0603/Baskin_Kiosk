@@ -114,6 +114,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\DAO\CategoryDAO.cs" />
     <Compile Include="Model\DAO\OrderDAO.cs" />
+    <Compile Include="Model\DAO\MemberDAO.cs" />
     <Compile Include="Util\Constants.cs" />
     <Compile Include="Model\DAO\FoodDAO.cs" />
     <Compile Include="Model\OrderModel.cs" />
@@ -135,6 +136,9 @@
       <DependentUpon>Payment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Category.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\MemberModel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Food.cs">
