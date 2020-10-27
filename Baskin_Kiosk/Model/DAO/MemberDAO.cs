@@ -16,7 +16,7 @@ namespace Baskin_Kiosk.Model.DAO
             DBConnection connection = new DBConnection();
             connection.getConnection();
 
-            String sql = "select * from kiosk.user where " + (type == 0 ? "qrcode = " + code : "barcode= " + code);
+            String sql = "select * from kiosk.user where " + (type == 0 ? "qrcode = \"" + code + "\"": "barcode = \"" + code + "\"");
             connection.setCommand(sql);
 
             MySqlDataReader reader = connection.executeReader();
