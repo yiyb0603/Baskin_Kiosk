@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Baskin_Kiosk.Common;
+using Baskin_Kiosk.Model;
+using Baskin_Kiosk.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +23,8 @@ namespace Baskin_Kiosk.View.SelectPlace
     /// </summary>
     public partial class SelectPlace : Page
     {
+        private OrderViewModel viewModel = App.orderViewModel;
+
         public SelectPlace()
         {
             InitializeComponent();
@@ -27,12 +32,25 @@ namespace Baskin_Kiosk.View.SelectPlace
 
         private void SeatButton_Click(object sender, RoutedEventArgs e)
         {
+            // 매장 식사
+            foreach (OrderModel order in this.viewModel.selectMenuList)
+            {
+                order.orderTypeName = "매장 식사";
+                order.orderType = 0;
+            }
+
             Seat seat = new Seat();
             NavigationService.Navigate(seat);
         }
 
         private void TakeOutButton_Click(object sender, RoutedEventArgs e)
         {
+            // 포장 주문
+            foreach (OrderModel order in this.viewModel.selectMenuList)
+            {
+                order.orderTypeName = "포장";
+                order.orderType = 1;
+            }
             PaymentPage.Payment payment = new PaymentPage.Payment();
             NavigationService.Navigate(payment);
         }

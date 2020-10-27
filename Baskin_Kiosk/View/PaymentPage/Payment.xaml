@@ -40,9 +40,10 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="주문 음식이름" Width="200" DisplayMemberBinding="{Binding foodName}" />
+                                <GridViewColumn Header="주문 음식이름" Width="200" DisplayMemberBinding="{Binding menuName}" />
                                 <GridViewColumn Header="수량" Width="150" DisplayMemberBinding="{Binding count}" />
                                 <GridViewColumn Header="메뉴 총 가격" Width="150" DisplayMemberBinding="{Binding price}" />
+                                <GridViewColumn Header="타입" Width="100" DisplayMemberBinding="{Binding orderTypeName}" />
                             </GridView>
                         </ListView.View>
                     </ListView>

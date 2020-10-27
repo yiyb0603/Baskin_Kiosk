@@ -11,12 +11,4 @@ namespace Baskin_Kiosk.Common
         public String categoryName { get; set; }
         public int categoryId { get; set; }
     }
-    //public enum Category
-    //{
-    //    ICECREAM = 1,
-    //    ICECREAM_CAKE = 2,
-    //    JUICE = 3,
-    //    COFFEE = 4,
-    //    DESSERT = 5,
-    //};
 }

@@ -25,7 +25,8 @@ namespace Baskin_Kiosk.Model.DAO
             while (reader.Read())
             {
                 Food food = new Food();
-                food.foodName = reader["menu_name"].ToString();
+                food.menuId = int.Parse(reader["id"].ToString());
+                food.menuName = reader["menu_name"].ToString();
                 food.price = int.Parse(reader["menu_price"].ToString());
                 food.imageSrc = reader["menu_image"].ToString();
                 food.categoryId = int.Parse(reader["category_id"].ToString());
