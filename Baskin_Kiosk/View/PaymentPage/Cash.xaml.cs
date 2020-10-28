@@ -25,7 +25,6 @@ namespace Baskin_Kiosk.View.PaymentPage
             InitializeComponent();
 
             price.Content = "총 금액: " + orderViewModel.totalAmountPrice;
-            webcam.CameraIndex = 0;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -34,11 +33,6 @@ namespace Baskin_Kiosk.View.PaymentPage
             {
                 NavigationService.GoBack();
             }
-        }
-
-        private void webcam_QrDecoded(object sender, string e)
-        {
-            resultLabel.Content = e;
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)

@@ -1,6 +1,7 @@
 ﻿using Baskin_Kiosk.Common;
 using Baskin_Kiosk.Model;
 using Baskin_Kiosk.Model.DAO;
+using Baskin_Kiosk.View.PaymentPage;
 using Baskin_Kiosk.ViewModel;
 using System;
 using System.Windows;
@@ -16,6 +17,7 @@ namespace Baskin_Kiosk.View.Payment
     {
         private OrderViewModel orderViewModel = App.orderViewModel;
         private OrderDAO orderDAO = new OrderDAO();
+        private MemberDAO memberDAO = new MemberDAO();
 
         public Card()
         {
@@ -37,28 +39,9 @@ namespace Baskin_Kiosk.View.Payment
         {
             resultLabel.Text = e;
 
-            showUserName(e);
+            PayComplete payComplete = new PayComplete(e);
+            NavigationService.Navigate(payComplete);
         }
 
-        private void showUserName(string e)
-        {
-            MemberDAO memberDAO = new MemberDAO();
-
-            MemberModel member =  memberDAO.getMember(0, e);
-            userName.Content = member.name;
-
-            
-            foreach (Food food in this.orderViewModel.selectMenuList)
-            {
-                foreach (OrderModel order in this.orderViewModel.orderMenuList)
-                {
-                    order.orderType = food.orderType;
-                    order.orderTime = DateTime.Now;
-                    order.userId = member.id;
-                }
-            }
-
-            orderDAO.orderMenu();
-        }
     }
 }

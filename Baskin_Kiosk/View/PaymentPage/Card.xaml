@@ -17,7 +17,6 @@
             <TextBox x:Name="resultLabel" Width='500' Margin="0 50 0 0" Text="테스트"></TextBox>
             <Label x:Name="userName" Width="200" Height="50"></Label>
             <Button Content="이전" Width="150" HorizontalAlignment="Left" Margin="70 0 0 0" Click="Button_Click"/>
-            
         </StackPanel>
     </Grid>
 </Page>
