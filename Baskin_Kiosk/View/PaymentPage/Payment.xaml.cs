@@ -30,28 +30,14 @@ namespace Baskin_Kiosk.View.PaymentPage
 
         private void CardButton_Click(object sender, RoutedEventArgs e)
         {
-            if (NavigationService.CanGoForward)
-            { 
-                NavigationService.GoForward();
-            }
-            else
-            {
-                Card card = new Card();
-                NavigationService.Navigate(card);
-            }
+            Card card = new Card();
+            NavigationService.Navigate(card);
         }
 
         private void CashButton_Click(object sender, RoutedEventArgs e)
         {
-            if (NavigationService.CanGoForward)
-            {
-                NavigationService.GoForward();
-            }
-            else
-            {
-                Cash cash = new Cash();
-                NavigationService.Navigate(cash);
-            }
+            Cash cash = new Cash();
+            NavigationService.Navigate(cash);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
