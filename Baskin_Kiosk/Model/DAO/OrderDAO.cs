@@ -20,7 +20,7 @@ namespace Baskin_Kiosk.Model.DAO
             foreach (OrderModel order in this.viewModel.orderMenuList)
             {
                 String columnSQL = "INSERT INTO kiosk.order (user_id, menu_id, category_id, seat_id, total_price, order_type, order_time) VALUES";
-                String valueSQL = "(" + order.userId + ", " + order.menuId + ", " + order.categoryId + ", " + "0, " + order.totalPrice + ", " + order.orderType + ", " + "'" + order.orderTime.ToString("yyyy-MM-dd HH:mm:ss") + "'" +")";
+                String valueSQL = "(" + order.userId + ", " + order.menuId + ", " + order.categoryId + ", " + "0, " + order.price + ", " + order.orderType + ", " + "'" + order.orderTime.ToString("yyyy-MM-dd HH:mm:ss") + "'" +")";
 
                 connection.setCommand(columnSQL + valueSQL);
                 connection.executeNonQuery();

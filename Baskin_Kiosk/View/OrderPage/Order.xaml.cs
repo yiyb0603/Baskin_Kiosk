@@ -234,7 +234,7 @@ namespace Baskin_Kiosk.View.OrderPage
                 {
                     categoryId = food.categoryId,
                     menuId = food.menuId,
-                    totalPrice = this.viewModel.totalAmountPrice,
+                    price = food.price,
                 });
             }
 
