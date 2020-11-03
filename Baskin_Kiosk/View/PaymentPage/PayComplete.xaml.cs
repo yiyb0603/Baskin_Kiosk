@@ -31,11 +31,11 @@ namespace Baskin_Kiosk.View.PaymentPage
         OrderDAO orderDAO = new OrderDAO();
         OrderViewModel orderViewModel = App.orderViewModel;
 
-        public PayComplete(string e)
+        public PayComplete(int orderType, string e)
         {
             InitializeComponent();
 
-            MemberModel member = memberDAO.getMember(0, e);
+            MemberModel member = memberDAO.getMember(orderType, e);
             int lastNum = getLastNum() + 1;
             userName.Content = "주문자: " + member.name;
             totalPrice.Content = "총 금액: " + orderViewModel.totalAmountPrice;
@@ -45,7 +45,7 @@ namespace Baskin_Kiosk.View.PaymentPage
             {
                 foreach (OrderModel order in orderViewModel.orderMenuList)
                 {
-                    order.orderType = food.orderType;
+                    order.orderType = orderType;
                     order.orderTime = DateTime.Now;
                     order.userId = member.id;
                     order.orderNum = lastNum;
