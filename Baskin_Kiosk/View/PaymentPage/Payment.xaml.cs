@@ -30,12 +30,21 @@ namespace Baskin_Kiosk.View.PaymentPage
 
         private void CardButton_Click(object sender, RoutedEventArgs e)
         {
+            foreach (OrderModel order in this.orderViewModel.orderMenuList)
+            {
+                order.orderType = 0;
+            }
             Card card = new Card();
             NavigationService.Navigate(card);
         }
 
         private void CashButton_Click(object sender, RoutedEventArgs e)
         {
+            foreach (OrderModel order in this.orderViewModel.orderMenuList)
+            {
+                order.orderType = 1;
+            }
+
             Cash cash = new Cash();
             NavigationService.Navigate(cash);
         }

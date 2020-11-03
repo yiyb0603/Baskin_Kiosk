@@ -11,6 +11,7 @@ namespace Baskin_Kiosk.Common
         public String imageSrc { get; set; }
         public String menuName { get; set; }
         public String orderTypeName { get; set; }
+        // 결제 방식 화면 선택리스트에서 매장/포장인지 보여줌
         public int orderType { get; set; }
         public int salePrice { get; set; }
         public int page { get; set; }

@@ -35,7 +35,6 @@ namespace Baskin_Kiosk.View.SelectPlace
             // 매장 식사
             foreach(Food food in this.viewModel.selectMenuList)
             {
-                food.orderType = 0;
                 food.orderTypeName = "매장";
             }
 
@@ -48,8 +47,12 @@ namespace Baskin_Kiosk.View.SelectPlace
             // 포장 주문
             foreach (Food food in this.viewModel.selectMenuList)
             {
-                food.orderType = 1;
                 food.orderTypeName = "포장";
+            }
+
+            foreach (OrderModel order in this.viewModel.orderMenuList)
+            {
+                order.seatId = 0;
             }
             PaymentPage.Payment payment = new PaymentPage.Payment();
             NavigationService.Navigate(payment);
