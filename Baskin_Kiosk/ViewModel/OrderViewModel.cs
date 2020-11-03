@@ -55,6 +55,7 @@ namespace Baskin_Kiosk.ViewModel
         public void clearMenuList()
         {
             this._selectMenuList.Clear();
+            this._orderMenuList.Clear();
             this._totalAmountPrice = 0;
         }
     }

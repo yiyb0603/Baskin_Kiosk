@@ -47,6 +47,11 @@
                                 <Image Source="{Binding imageSrc}" Width="75" Height="100" />
                                 <TextBlock Text="{Binding menuName}" TextWrapping="WrapWithOverflow" MaxWidth="150" HorizontalAlignment="Center" FontSize="15" />
                                 <TextBlock Text="{Binding price}" HorizontalAlignment="Center" FontSize="12" />
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 10px">
+                                    <TextBlock Text="할인금액: " />
+                                    <TextBlock Text="{Binding salePrice}" HorizontalAlignment="Center" FontSize="15" />
+                                </StackPanel>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

@@ -30,6 +30,7 @@ namespace Baskin_Kiosk.Model.DAO
                 food.price = int.Parse(reader["menu_price"].ToString());
                 food.imageSrc = reader["menu_image"].ToString();
                 food.categoryId = int.Parse(reader["category_id"].ToString());
+                food.salePrice = int.Parse(reader["menu_sale"].ToString());
 
                 if (categoryIndex != (int) food.categoryId)
                 {

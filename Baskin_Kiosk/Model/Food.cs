@@ -12,6 +12,7 @@ namespace Baskin_Kiosk.Common
         public String menuName { get; set; }
         public String orderTypeName { get; set; }
         public int orderType { get; set; }
+        public int salePrice { get; set; }
         public int page { get; set; }
         private int _price = 0;
         public int price

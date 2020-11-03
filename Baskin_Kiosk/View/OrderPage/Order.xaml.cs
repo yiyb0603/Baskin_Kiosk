@@ -101,7 +101,7 @@ namespace Baskin_Kiosk.View.OrderPage
 
             if (selectedFood != null)
             {
-                this.viewModel.totalAmountPrice += selectedFood.price;
+                this.viewModel.totalAmountPrice += (selectedFood.price - selectedFood.salePrice);
 
                 Food existFood = this.viewModel.selectMenuList.Where((food) => food.menuName == selectedFood.menuName).FirstOrDefault();
                 if (existFood != null)
@@ -123,7 +123,8 @@ namespace Baskin_Kiosk.View.OrderPage
                         menuId = selectedFood.menuId,
                         menuName = selectedFood.menuName,
                         imageSrc = selectedFood.imageSrc,
-                        price = selectedFood.price,
+                        price = selectedFood.price - selectedFood.salePrice,
+                        salePrice = selectedFood.salePrice,
                     });
 
                     selectListView.ItemsSource = this.viewModel.selectMenuList;
@@ -235,6 +236,7 @@ namespace Baskin_Kiosk.View.OrderPage
                     categoryId = food.categoryId,
                     menuId = food.menuId,
                     price = food.price,
+                    salePrice = food.salePrice,
                 });
             }
 
