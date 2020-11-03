@@ -16,5 +16,6 @@ namespace Baskin_Kiosk.Model
         public DateTime orderTime { get; set; }
         public int menuId { get; set; }
         public int price { get; set; }
+        public int orderNum { get; set; }
     }
 }
