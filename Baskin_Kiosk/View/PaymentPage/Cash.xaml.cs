@@ -27,7 +27,7 @@ namespace Baskin_Kiosk.View.PaymentPage
             price.Content = "총 금액: " + orderViewModel.totalAmountPrice;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Prevbutton_Click(object sender, RoutedEventArgs e)
         {
             if (NavigationService.CanGoBack)
             {
@@ -35,9 +35,12 @@ namespace Baskin_Kiosk.View.PaymentPage
             }
         }
 
-        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        private void Nextbutton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (resultLabel.Text != "")
+            {
+                NavigationService.Navigate(new PayComplete(1, resultLabel.Text));
+            }
         }
     }
 }

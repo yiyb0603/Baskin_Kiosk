@@ -39,8 +39,7 @@ namespace Baskin_Kiosk.View.Payment
         {
             resultLabel.Text = e;
 
-            PayComplete payComplete = new PayComplete(e);
-            NavigationService.Navigate(payComplete);
+            NavigationService.Navigate(new PayComplete(0, e));
         }
 
     }
