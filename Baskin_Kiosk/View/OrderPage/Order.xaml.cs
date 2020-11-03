@@ -148,7 +148,7 @@ namespace Baskin_Kiosk.View.OrderPage
                 if (foodItem != null)
                 {
                     foodItem.count++;
-                    foodItem.price += selectedFood.price;
+                    foodItem.price += (selectedFood.price - selectedFood.salePrice);
                     this.viewModel.totalAmountPrice += selectedFood.price;
                 }
             }
@@ -169,7 +169,7 @@ namespace Baskin_Kiosk.View.OrderPage
                 if (foodItem != null)
                 {
                     foodItem.count--;
-                    foodItem.price -= selectedFood.price;
+                    foodItem.price -= (selectedFood.price - selectedFood.salePrice);
                     this.viewModel.totalAmountPrice -= selectedFood.price;
 
                     if (foodItem.count <= 0)
