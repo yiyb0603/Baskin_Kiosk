@@ -80,6 +80,7 @@ namespace Baskin_Kiosk.View.PaymentPage
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            orderViewModel.clearMenuList();
             while (NavigationService?.CanGoBack == true) { NavigationService?.RemoveBackEntry(); }
             NavigationService.Navigate(new Home());
         }
