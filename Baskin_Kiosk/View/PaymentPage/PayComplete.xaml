@@ -15,7 +15,7 @@
             <Label x:Name="totalPrice">총 금액: </Label>
             <Label x:Name="orderNum">주문번호: </Label>
 
-            <Button Content="처음으로" Margin="0 100 0 0"></Button>
+            <Button Content="처음으로" Margin="0 100 0 0" Click="Button_Click"></Button>
         </StackPanel>
     </Grid>
 </Page>
