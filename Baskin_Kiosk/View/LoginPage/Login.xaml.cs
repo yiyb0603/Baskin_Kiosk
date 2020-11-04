@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.IO;
 
 namespace Baskin_Kiosk.View.LoginPage
 {
@@ -22,14 +12,38 @@ namespace Baskin_Kiosk.View.LoginPage
         private const String ADMIN_ID = "admin";
         private const String ADMIN_PW = "1234";
 
+        // 로그인 유지 유무 파일
+        private const String FILE_PATH = "../../Assets/data.txt";
+
         public Login()
         {
             InitializeComponent();
+            this.Loaded += Login_Loaded;
+        }
+
+        private void Login_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (!File.Exists(FILE_PATH))
+                {
+                    File.Create(FILE_PATH);
+                    return;
+                }
+
+                if (File.ReadAllText(FILE_PATH) == "TRUE")
+                {
+                    this.closeLogin();
+                    return;
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: 로그인 처리 
             String inputID = this.inputID.Text;
             String inputPW = this.inputPW.Password;
 
@@ -44,9 +58,14 @@ namespace Baskin_Kiosk.View.LoginPage
                 MessageBox.Show("비밀번호가 올바르지 않습니다.");
                 return;
             }
+            File.WriteAllText(FILE_PATH, this.autoCheck.IsChecked == true ? "TRUE" : "FALSE");
 
             MessageBox.Show("로그인에 성공하였습니다.");
-            //chris - 아이디와 비밀번호가 다를 경우, 아래 코드 처리하면 안됨
+            this.closeLogin();
+        }
+
+        private void closeLogin()
+        {
             this.DialogResult = true;
             this.Close();
         }
