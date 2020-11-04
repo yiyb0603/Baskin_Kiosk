@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Baskin_Kiosk"
         mc:Ignorable="d"
+        WindowState="Maximized"
         Title="MainWindow" Height="1040" Width="1920">
     <Grid>
         <Grid.RowDefinitions>

@@ -1,4 +1,5 @@
-﻿using Baskin_Kiosk.ViewModel;
+﻿using Baskin_Kiosk.View.LoginPage;
+using Baskin_Kiosk.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,11 +33,30 @@ namespace Baskin_Kiosk
             timer.Interval = TimeSpan.FromMilliseconds(1000);
             timer.Tick += new EventHandler(timerTick);
             timer.Start();
+
+            this.Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoginPopup();
         }
 
         private void timerTick(object sender, EventArgs e)
         {
             CurrentTime.Content = DateTime.Now.ToString("yyyy년 MM월 dd일 HH시 mm분 ss초");
+        }
+
+        private void LoginPopup()
+        {
+            Login login = new Login();
+            login.Owner = this;
+            bool? bResult = login.ShowDialog();
+
+            if(bResult == true)
+            {
+                Uri uri = new Uri("./View/HomePage/Home.xaml", UriKind.Relative);
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
