@@ -5,31 +5,24 @@ using Baskin_Kiosk.Util;
 using Baskin_Kiosk.View.HomePage;
 using Baskin_Kiosk.ViewModel;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
+using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Baskin_Kiosk.View.PaymentPage
 {
-    /// <summary>
-    /// Interaction logic for PayComplete.xaml
-    /// </summary>
     public partial class PayComplete : Page
     {
-        MemberDAO memberDAO = new MemberDAO();
-        OrderDAO orderDAO = new OrderDAO();
-        OrderViewModel orderViewModel = App.orderViewModel;
+        private MemberDAO memberDAO = new MemberDAO();
+        private OrderDAO orderDAO = new OrderDAO();
+        private OrderViewModel orderViewModel = App.orderViewModel;
+        private ServerConnection serverConnection = new ServerConnection();
 
         public PayComplete(int orderType, string e)
         {
@@ -52,6 +45,8 @@ namespace Baskin_Kiosk.View.PaymentPage
                 }
             }
 
+            // 주문됐을때 서버로 메시지 보내기
+            this.serverConnection.sendOrderMessage(orderViewModel.selectMenuList);
             orderDAO.orderMenu();
         }
 

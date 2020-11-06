@@ -19,7 +19,7 @@ namespace Baskin_Kiosk.View.OrderPage
         public Order()
         {
             InitializeComponent();
-            Loaded += Order_Loaded;
+            this.Loaded += Order_Loaded;
         }
 
         private void Order_Loaded(object sender, RoutedEventArgs e)

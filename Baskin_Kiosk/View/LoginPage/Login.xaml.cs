@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.IO;
+using Org.BouncyCastle.Utilities;
 
 namespace Baskin_Kiosk.View.LoginPage
 {
@@ -36,7 +37,8 @@ namespace Baskin_Kiosk.View.LoginPage
                     this.closeLogin();
                     return;
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -47,13 +49,13 @@ namespace Baskin_Kiosk.View.LoginPage
             String inputID = this.inputID.Text;
             String inputPW = this.inputPW.Password;
 
-           if (!ADMIN_ID.Equals(inputID))
+            if (!ADMIN_ID.Equals(inputID))
             {
                 MessageBox.Show("아이디가 올바르지 않습니다.");
                 return;
             }
 
-           if (!ADMIN_PW.Equals(inputPW))
+            if (!ADMIN_PW.Equals(inputPW))
             {
                 MessageBox.Show("비밀번호가 올바르지 않습니다.");
                 return;
