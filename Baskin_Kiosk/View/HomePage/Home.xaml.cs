@@ -23,8 +23,16 @@ namespace Baskin_Kiosk.View.HomePage
     {
         public Home()
         {
-
             InitializeComponent();
+
+            BaskinCf.Play();
+        }
+
+        private void RepeatMedia(object sender, RoutedEventArgs e)
+        {
+            BaskinCf.Position = new TimeSpan(0, 0, 1);
+
+            BaskinCf.Play();
         }
 
         private void nextPage(object sender, RoutedEventArgs e)
