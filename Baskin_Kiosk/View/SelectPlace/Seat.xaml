@@ -9,48 +9,49 @@
       Title="Seat">
 
     <Grid>
-        <StackPanel HorizontalAlignment="Center" Margin="0 50 0 0">
-            
-            <StackPanel Orientation="Horizontal">
-                <Button Style="{DynamicResource seatSelectButton}" x:Name="button1" Click="SeatButton_Click">
-                    <TextBlock TextAlignment="Center">1<LineBreak/>00:59</TextBlock>
-                </Button>
-                <Button Style="{DynamicResource seatSelectButton}" x:Name="button2">
-                    <TextBlock TextAlignment="Center">2<LineBreak/>00:59</TextBlock>
-                </Button>
-                <Button Style="{DynamicResource seatSelectButton}" x:Name="button3">
-                    <TextBlock TextAlignment="Center">3<LineBreak/>00:59</TextBlock>
-                </Button>
+        <StackPanel>
+            <ListBox x:Name="seatList"
+                Width="606"
+                Height="600"
+                Margin="0 50 0 0"
+                FontSize="16"
+                FontWeight="SemiBold"
+                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                BorderThickness="0" SelectionChanged="seatList_SelectionChanged">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Width="200" Height="200" Orientation="Vertical" HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding seatNumber}" HorizontalAlignment="Center" Margin="0 60 0 0"></TextBlock>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="남은시간: "/>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Text="{Binding time}" FontSize="24" FontWeight="Bold" Foreground="Red"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button Width="150" Height="30" Content="이전" Margin="0 100 600 0" Click="BackButton_Click"/>
+                <Button Width="150" Height="30" Content="다음" Margin="0 100 0 0" Click="Button_Click"/>
             </StackPanel>
+        </StackPanel>
+        <!--<StackPanel HorizontalAlignment="Center" Margin="0 50 0 0">
 
             <StackPanel Orientation="Horizontal">
-                <Button Style="{DynamicResource seatSelectButton}" x:Name="button4">
-                    <TextBlock TextAlignment="Center">4<LineBreak/>00:59</TextBlock>
-                </Button>
-                <Button Style="{DynamicResource seatSelectButton}" x:Name="button5">
-                    <TextBlock TextAlignment="Center">5<LineBreak/>00:59</TextBlock>
-                </Button>
-                <Button Style="{DynamicResource seatSelectButton}" x:Name="button6">
-                    <TextBlock TextAlignment="Center">6<LineBreak/>00:59</TextBlock>
-                </Button>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal">
-                <Button Style="{DynamicResource seatSelectButton}" x:Name="button7">
-                    <TextBlock TextAlignment="Center">7<LineBreak/>00:59</TextBlock>
-                </Button>
-                <Button Style="{DynamicResource seatSelectButton}" x:Name="button8">
-                    <TextBlock TextAlignment="Center">8<LineBreak/>00:59</TextBlock>
-                </Button>
-                <Button Style="{DynamicResource seatSelectButton}" x:Name="button9">
-                    <TextBlock TextAlignment="Center">9<LineBreak/>00:59</TextBlock>
-                </Button>
+                <ListBox x:Name="seatList"
+                    />
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <Button Width="150" Height="30" Content="이전" Margin="0 100 500 0" Click="BackButton_Click"/>
-                <Button Width="150" Height="30" Content="다음" Margin="0 100 0 0" Click="BackButton_Click"/>
+                <Button Width="150" Height="30" Content="이전" Margin="0 100 600 0" Click="BackButton_Click"/>
             </StackPanel>
-        </StackPanel>
+        </StackPanel>-->
     </Grid>
 </Page>

@@ -1,4 +1,7 @@
-﻿using Google.Protobuf;
+﻿using Baskin_Kiosk.Common;
+using Baskin_Kiosk.Model;
+using Baskin_Kiosk.ViewModel;
+using Google.Protobuf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,29 +16,50 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Baskin_Kiosk.View.SelectPlace
 {
-    /// <summary>
-    /// Interaction logic for Seat.xaml
-    /// </summary>
     public partial class Seat : Page
     {
-        Button[] seatButtonArray;
+        List<SeatViewModel> lstSeat = new List<SeatViewModel>();
+
+        Dictionary<Button, int> buttonPair;
+        private OrderViewModel viewModel = App.orderViewModel;
+
+        int temp = 0;
 
         public Seat()
         {
             InitializeComponent();
 
-            seatButtonArray = new Button[9] { button1, button2, button3, button4, button5, button6, button7, button8, button9 };
+            lstSeat.Add(new SeatViewModel() { seatNumber = 1, time = 5 });
+            lstSeat.Add(new SeatViewModel() { seatNumber = 2, time = 3 });
+            lstSeat.Add(new SeatViewModel() { seatNumber = 3, time = 4 });
+            lstSeat.Add(new SeatViewModel() { seatNumber = 4, time = 2 });
+            lstSeat.Add(new SeatViewModel() { seatNumber = 5, time = 1 });
+            lstSeat.Add(new SeatViewModel() { seatNumber = 6, time = 5 });
+            lstSeat.Add(new SeatViewModel() { seatNumber = 7, time = 3 });
+            lstSeat.Add(new SeatViewModel() { seatNumber = 8, time = 4 });
+            lstSeat.Add(new SeatViewModel() { seatNumber = 9, time = 2 });
+
+            seatList.ItemsSource = lstSeat;
         }
         
         private void SeatButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("1번 자리를 선택하시겠어요?", "확인", MessageBoxButton.YesNo);
+            Button button = (Button)sender;
+
+            MessageBoxResult result = MessageBox.Show(buttonPair[button] + "번 자리를 선택하시겠어요?", "확인", MessageBoxButton.YesNo);
 
             if(result==MessageBoxResult.Yes)
             {
+                foreach(OrderModel orderModel in viewModel.orderMenuList)
+                {
+                    orderModel.seatId = buttonPair[button];
+                    MessageBox.Show(orderModel.seatId + ", " + buttonPair[button].ToString());
+                }
+
                 PaymentPage.Payment payment = new PaymentPage.Payment();
                 NavigationService.Navigate(payment);
             }
@@ -47,6 +71,17 @@ namespace Baskin_Kiosk.View.SelectPlace
             {
                 NavigationService.GoBack();
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void seatList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SeatViewModel seatViewModel = (SeatViewModel) seatList.SelectedItem;
+            MessageBox.Show(seatViewModel.seatNumber.ToString());
         }
     }
 }
