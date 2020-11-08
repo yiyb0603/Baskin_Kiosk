@@ -45,9 +45,11 @@ namespace Baskin_Kiosk.View.PaymentPage
                 }
             }
 
-            // 주문됐을때 서버로 메시지 보내기
-            this.serverConnection.sendOrderMessage(orderViewModel.selectMenuList);
+            int orderNumber = getLastNum();
             orderDAO.orderMenu();
+
+            // 주문됐을때 서버로 메시지 보내기
+            this.serverConnection.sendOrderMessage(orderViewModel.selectMenuList, orderNumber);
         }
 
         public int getLastNum()

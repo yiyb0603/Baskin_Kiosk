@@ -2,21 +2,18 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Baskin_Kiosk.Util
 {
     public class ServerConnection
     {
-        public void sendOrderMessage(ObservableCollection<Food> foodList)
+        public void sendOrderMessage(ObservableCollection<Food> foodList, int orderNum)
         {
+            String orderNumber = orderNum < 10 ? "00" + orderNum.ToString() : orderNum < 100 ? "0" + orderNum.ToString() : orderNum.ToString();
             int menuLength = foodList.Count;
             JArray menus = new JArray();
 
@@ -25,7 +22,7 @@ namespace Baskin_Kiosk.Util
             json.Add("id", "2205");
             json.Add("Content", "");
             json.Add("ShopName", "베스킨라빈스 구지점");
-            json.Add("OrderNumber", "001");
+            json.Add("OrderNumber", orderNumber);
 
             for (int i = 0; i < foodList.Count; i++)
             {
