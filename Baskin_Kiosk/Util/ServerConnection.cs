@@ -42,14 +42,13 @@ namespace Baskin_Kiosk.Util
             const int MAX_LEN = 4096;
             byte[] sendData = new byte[MAX_LEN];
 
-
             String sendStr = JsonConvert.SerializeObject(json);
             sendData = Encoding.UTF8.GetBytes(sendStr);
             NetworkStream networkStream = null;
             
             try
             {
-                TcpClient client = new TcpClient(Constants.SERVER_ADDRESS, Constants.SERVER_PORT);    // (ip주소 , 포트 번호)
+                TcpClient client = new TcpClient(Constants.SERVER_ADDRESS, Constants.SERVER_PORT); // (ip주소 , 포트 번호)
                 networkStream = client.GetStream();
 
                 networkStream.Write(sendData, 0, sendData.Length);
@@ -57,6 +56,7 @@ namespace Baskin_Kiosk.Util
             catch (Exception ex)
             {
                 MessageBox.Show("서버와 연결이 실패된거같음");
+                MessageBox.Show(ex.ToString());
             } finally
             {
                 if (networkStream != null)

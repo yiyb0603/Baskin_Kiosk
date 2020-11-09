@@ -5,12 +5,7 @@ using Baskin_Kiosk.Util;
 using Baskin_Kiosk.View.HomePage;
 using Baskin_Kiosk.ViewModel;
 using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
-using System.IO;
-using System.Net.Sockets;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -29,10 +24,13 @@ namespace Baskin_Kiosk.View.PaymentPage
             InitializeComponent();
 
             MemberModel member = memberDAO.getMember(orderType, e);
-            int lastNum = getLastNum() + 1;
+
+            int orderNumber = getLastNum() + 1;
+            String lastNum = orderNumber < 10 ? "00" + orderNumber : orderNumber < 100 ? "00" + orderNumber.ToString() : orderNumber.ToString();
+
             userName.Content = "주문자: " + member.name;
             totalPrice.Content = "총 금액: " + orderViewModel.totalAmountPrice;
-            orderNum.Content = "주문번호: " + lastNum.ToString();
+            orderNum.Content = "주문번호: " + lastNum;
 
             foreach (Food food in orderViewModel.selectMenuList)
             {
@@ -41,11 +39,9 @@ namespace Baskin_Kiosk.View.PaymentPage
                     order.orderType = orderType;
                     order.orderTime = DateTime.Now;
                     order.userId = member.id;
-                    order.orderNum = lastNum;
+                    order.orderNum = orderNumber;
                 }
             }
-
-            int orderNumber = getLastNum();
             orderDAO.orderMenu();
 
             // 주문됐을때 서버로 메시지 보내기
@@ -59,7 +55,7 @@ namespace Baskin_Kiosk.View.PaymentPage
 
             int lastNum = 0;
 
-            string sql = "SELECT order_num FROM kiosk.order ORDER BY order_num DESC LIMIT 1";
+            String sql = "SELECT order_num FROM kiosk.order ORDER BY order_num DESC LIMIT 1";
 
             connection.setCommand(sql);
             connection.executeNonQuery();
@@ -71,6 +67,11 @@ namespace Baskin_Kiosk.View.PaymentPage
             }
 
             connection.closeConnection();
+
+            if (lastNum > 100)
+            {
+                lastNum -= 100;
+            }
 
             return lastNum;
         }
