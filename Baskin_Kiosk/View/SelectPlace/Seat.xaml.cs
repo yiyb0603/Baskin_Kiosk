@@ -24,10 +24,8 @@ namespace Baskin_Kiosk.View.SelectPlace
     {
         List<SeatViewModel> lstSeat = new List<SeatViewModel>();
 
-        Dictionary<Button, int> buttonPair;
         private OrderViewModel viewModel = App.orderViewModel;
-
-        int temp = 0;
+        SeatViewModel selectedSeat;
 
         public Seat()
         {
@@ -45,25 +43,6 @@ namespace Baskin_Kiosk.View.SelectPlace
 
             seatList.ItemsSource = lstSeat;
         }
-        
-        private void SeatButton_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = (Button)sender;
-
-            MessageBoxResult result = MessageBox.Show(buttonPair[button] + "번 자리를 선택하시겠어요?", "확인", MessageBoxButton.YesNo);
-
-            if(result==MessageBoxResult.Yes)
-            {
-                foreach(OrderModel orderModel in viewModel.orderMenuList)
-                {
-                    orderModel.seatId = buttonPair[button];
-                    MessageBox.Show(orderModel.seatId + ", " + buttonPair[button].ToString());
-                }
-
-                PaymentPage.Payment payment = new PaymentPage.Payment();
-                NavigationService.Navigate(payment);
-            }
-        }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
@@ -73,15 +52,20 @@ namespace Baskin_Kiosk.View.SelectPlace
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void NextButton_Click(object sender, RoutedEventArgs e)
         {
+            foreach (OrderModel orderModel in viewModel.orderMenuList)
+            {
+                orderModel.seatId = selectedSeat.seatNumber;
+            }
 
+            PaymentPage.Payment payment = new PaymentPage.Payment();
+            NavigationService.Navigate(payment);
         }
 
         private void seatList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SeatViewModel seatViewModel = (SeatViewModel) seatList.SelectedItem;
-            MessageBox.Show(seatViewModel.seatNumber.ToString());
+            selectedSeat = (SeatViewModel) seatList.SelectedItem;
         }
     }
 }
