@@ -39,7 +39,16 @@ namespace Baskin_Kiosk.View.Payment
         {
             resultLabel.Text = e;
 
-            NavigationService.Navigate(new PayComplete(0, e));
+            PayComplete payComplete = new PayComplete(0, e);
+            
+            if(payComplete!=null)
+            {
+                NavigationService.Navigate(payComplete);
+            }
+            else
+            {
+                resultLabel.Text = "해당 회원번호가 없습니다.";
+            }
         }
 
     }

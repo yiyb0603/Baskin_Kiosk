@@ -39,19 +39,8 @@
             </ListBox>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button Width="150" Height="30" Content="이전" Margin="0 100 600 0" Click="BackButton_Click"/>
-                <Button Width="150" Height="30" Content="다음" Margin="0 100 0 0" Click="Button_Click"/>
+                <Button Width="150" Height="30" Content="다음" Margin="0 100 0 0" Click="NextButton_Click"/>
             </StackPanel>
         </StackPanel>
-        <!--<StackPanel HorizontalAlignment="Center" Margin="0 50 0 0">
-
-            <StackPanel Orientation="Horizontal">
-                <ListBox x:Name="seatList"
-                    />
-            </StackPanel>
-
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <Button Width="150" Height="30" Content="이전" Margin="0 100 600 0" Click="BackButton_Click"/>
-            </StackPanel>
-        </StackPanel>-->
     </Grid>
 </Page>
