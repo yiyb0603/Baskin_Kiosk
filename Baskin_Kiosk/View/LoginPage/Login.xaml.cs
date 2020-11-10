@@ -2,6 +2,7 @@
 using System.Windows;
 using System.IO;
 using Org.BouncyCastle.Utilities;
+using Baskin_Kiosk.Util;
 
 namespace Baskin_Kiosk.View.LoginPage
 {
@@ -48,6 +49,7 @@ namespace Baskin_Kiosk.View.LoginPage
         {
             String inputID = this.inputID.Text;
             String inputPW = this.inputPW.Password;
+            ServerConnection connection = new ServerConnection();
 
             if (!ADMIN_ID.Equals(inputID))
             {
@@ -62,8 +64,13 @@ namespace Baskin_Kiosk.View.LoginPage
             }
             File.WriteAllText(FILE_PATH, this.autoCheck.IsChecked == true ? "TRUE" : "FALSE");
 
-            MessageBox.Show("로그인에 성공하였습니다.");
-            this.closeLogin();
+            String response = connection.connectionLogin();
+
+            if (response == "200")
+            {
+                MessageBox.Show("로그인에 성공하였습니다.");
+                this.closeLogin();
+            }
         }
 
         private void closeLogin()
