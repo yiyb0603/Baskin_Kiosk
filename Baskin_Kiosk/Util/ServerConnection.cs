@@ -25,11 +25,13 @@ namespace Baskin_Kiosk.Util
 
             String sendStr = JsonConvert.SerializeObject(json);
             this.sendData = Encoding.UTF8.GetBytes(sendStr);
-            NetworkStream networkStream = null; 
+
+            NetworkStream networkStream = null;
+            TcpClient client = null;
 
             try
             {
-                TcpClient client = new TcpClient(Constants.SERVER_ADDRESS, Constants.SERVER_PORT); // (ip주소 , 포트 번호)
+                client = new TcpClient(Constants.SERVER_ADDRESS, Constants.SERVER_PORT); // (ip주소 , 포트 번호)
                 networkStream = client.GetStream();
 
                 networkStream.Write(sendData, 0, sendData.Length);
@@ -38,6 +40,7 @@ namespace Baskin_Kiosk.Util
 
                 String getResponse = Encoding.UTF8.GetString(response, 0, readData);
                 return getResponse;
+
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
@@ -45,6 +48,49 @@ namespace Baskin_Kiosk.Util
 
             return null;
         }
+
+
+        public String sendMessage(String message)
+        {
+            JObject json = new JObject();
+            json.Add("MSGType", 1);
+            json.Add("id", "2205");
+            json.Add("Content", message);
+
+            String sendStr = JsonConvert.SerializeObject(json);
+            this.sendData = Encoding.UTF8.GetBytes(sendStr);
+
+            NetworkStream networkStream = null;
+            TcpClient client = null;
+
+            try
+            {
+                client = new TcpClient(Constants.SERVER_ADDRESS, Constants.SERVER_PORT); // (ip주소 , 포트 번호)
+                networkStream = client.GetStream();
+
+                networkStream.Write(sendData, 0, sendData.Length);
+                byte[] response = new byte[MAX_LEN];
+                Int32 readData = networkStream.Read(response, 0, response.Length);
+
+                String getResponse = Encoding.UTF8.GetString(response, 0, readData);
+                return getResponse;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("서버와 연결이 실패된거같음");
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                if (networkStream != null)
+                {
+                    networkStream.Close();
+                }
+            }
+
+            return null;
+        }
+
 
         public void sendOrderMessage(ObservableCollection<Food> foodList, int orderNum)
         {
@@ -76,11 +122,13 @@ namespace Baskin_Kiosk.Util
 
             String sendStr = JsonConvert.SerializeObject(json);
             this.sendData = Encoding.UTF8.GetBytes(sendStr);
+
             NetworkStream networkStream = null;
+            TcpClient client = null;
             
             try
             {
-                TcpClient client = new TcpClient(Constants.SERVER_ADDRESS, Constants.SERVER_PORT); // (ip주소 , 포트 번호)
+                client = new TcpClient(Constants.SERVER_ADDRESS, Constants.SERVER_PORT); // (ip주소 , 포트 번호)
                 networkStream = client.GetStream();
 
                 networkStream.Write(sendData, 0, sendData.Length);

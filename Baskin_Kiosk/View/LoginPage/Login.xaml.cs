@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.IO;
-using Org.BouncyCastle.Utilities;
 using Baskin_Kiosk.Util;
 
 namespace Baskin_Kiosk.View.LoginPage
