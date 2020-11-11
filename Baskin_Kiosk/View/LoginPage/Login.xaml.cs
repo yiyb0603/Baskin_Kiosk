@@ -35,6 +35,7 @@ namespace Baskin_Kiosk.View.LoginPage
 
                 if (File.ReadAllText(FILE_PATH) == "TRUE")
                 {
+                    String response = App.connection.sendMessage();
                     this.closeLogin();
                     return;
                 }
@@ -67,7 +68,7 @@ namespace Baskin_Kiosk.View.LoginPage
                 File.WriteAllText(FILE_PATH, this.autoCheck.IsChecked == true ? "TRUE" : "FALSE");
             }
 
-            String response = App.connection.connectionLogin();
+            String response = App.connection.sendMessage();
             if (response == "200")
             {
                 this.closeLogin();
