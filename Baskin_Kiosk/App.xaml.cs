@@ -1,4 +1,5 @@
-﻿using Baskin_Kiosk.ViewModel;
+﻿using Baskin_Kiosk.Network;
+using Baskin_Kiosk.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,5 +16,6 @@ namespace Baskin_Kiosk
     public partial class App : Application
     {
         public static OrderViewModel orderViewModel { get; } = new OrderViewModel();
+        public static ServerConnection connection { get; } = new ServerConnection();
     }
 }

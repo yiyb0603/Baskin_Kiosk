@@ -16,6 +16,9 @@ namespace Baskin_Kiosk.Network
         private const int MAX_LEN = 4096;
         private byte[] sendData = new byte[MAX_LEN];
 
+        NetworkStream networkStream = null;
+        TcpClient client = null;
+
         public String connectionLogin()
         {
             MsgPacket packet = new MsgPacket();
@@ -23,6 +26,7 @@ namespace Baskin_Kiosk.Network
             packet.Id = "2205";
             packet.Content = string.Empty;
             packet.ShopName = "Baskin Robbins";
+
             //packet.OrderNumber = "001";
             //packet.Menus = new List<MsgOrderInfo>();
             //MsgOrderInfo orderInfo = new MsgOrderInfo();
@@ -34,13 +38,13 @@ namespace Baskin_Kiosk.Network
             string JsonStr = JsonConvert.SerializeObject(packet);
             this.sendData = Encoding.UTF8.GetBytes(JsonStr);
 
-            NetworkStream networkStream = null;
-            TcpClient client = null;
-
             try
             {
-                client = new TcpClient(Constants.SERVER_ADDRESS, Constants.SERVER_PORT); // (ip주소 , 포트 번호)
-                networkStream = client.GetStream();
+                if (client == null)
+                {
+                    client = new TcpClient(Constants.SERVER_ADDRESS, Constants.SERVER_PORT); // (ip주소 , 포트 번호)
+                    networkStream = client.GetStream();
+                }
 
                 networkStream.Write(sendData, 0, sendData.Length);
                 byte[] response = new byte[MAX_LEN];
@@ -49,7 +53,6 @@ namespace Baskin_Kiosk.Network
                 String getResponse = Encoding.UTF8.GetString(response, 0, readData);
                 client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
                 return getResponse;
-
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
@@ -59,7 +62,7 @@ namespace Baskin_Kiosk.Network
         }
 
 
-        public String sendMessage(String message)
+        public void sendMessage(String message)
         {
             JObject json = new JObject();
             json.Add("MSGType", 1);
@@ -69,9 +72,6 @@ namespace Baskin_Kiosk.Network
             String sendStr = JsonConvert.SerializeObject(json);
             this.sendData = Encoding.UTF8.GetBytes(sendStr);
 
-            NetworkStream networkStream = null;
-            TcpClient client = null;
-
             try
             {
                 client = new TcpClient(Constants.SERVER_ADDRESS, Constants.SERVER_PORT); // (ip주소 , 포트 번호)
@@ -79,25 +79,15 @@ namespace Baskin_Kiosk.Network
 
                 networkStream.Write(sendData, 0, sendData.Length);
                 byte[] response = new byte[MAX_LEN];
-                Int32 readData = networkStream.Read(response, 0, response.Length);
+                //Int32 readData = networkStream.Read(response, 0, response.Length);
 
-                String getResponse = Encoding.UTF8.GetString(response, 0, readData);
-                return getResponse;
+                //String getResponse = Encoding.UTF8.GetString(response, 0, readData);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("서버와 연결이 실패된거같음");
                 MessageBox.Show(ex.ToString());
             }
-            finally
-            {
-                if (networkStream != null)
-                {
-                    networkStream.Close();
-                }
-            }
-
-            return null;
         }
 
 
@@ -131,9 +121,6 @@ namespace Baskin_Kiosk.Network
 
             String sendStr = JsonConvert.SerializeObject(json);
             this.sendData = Encoding.UTF8.GetBytes(sendStr);
-
-            NetworkStream networkStream = null;
-            TcpClient client = null;
             
             try
             {
@@ -146,12 +133,6 @@ namespace Baskin_Kiosk.Network
             {
                 MessageBox.Show("서버와 연결이 실패된거같음");
                 MessageBox.Show(ex.ToString());
-            } finally
-            {
-                if (networkStream != null)
-                {
-                    networkStream.Close();
-                }
             }
         }
     }

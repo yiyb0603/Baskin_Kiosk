@@ -29,15 +29,17 @@ namespace Baskin_Kiosk.View.MessagePage
         private void sendMessage(object sender, RoutedEventArgs e)
         {
             String message = sendContent.Text;
-            ServerConnection connection = new ServerConnection();
+            App.connection.sendMessage(message);
+            
+            ////ServerConnection connection = new ServerConnection();
 
-            String response = connection.sendMessage(message);
+            //String response = connection.sendMessage(message);
 
-            if (response == "200")
-            {
-                MessageBox.Show("메시지 전송 성공.");
-                sendContent.Text = "";
-            }
+            //if (response == "200")
+            //{
+            //    MessageBox.Show("메시지 전송 성공.");
+            //    sendContent.Text = "";
+            //}
         }
     }
 }

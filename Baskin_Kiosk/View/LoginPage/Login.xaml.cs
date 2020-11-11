@@ -16,7 +16,6 @@ namespace Baskin_Kiosk.View.LoginPage
 
         // 로그인 유지 유무 파일
         private const String FILE_PATH = "../../Assets/data.txt";
-        private ServerConnection connection = new ServerConnection();
 
         public Login()
         {
@@ -68,7 +67,7 @@ namespace Baskin_Kiosk.View.LoginPage
                 File.WriteAllText(FILE_PATH, this.autoCheck.IsChecked == true ? "TRUE" : "FALSE");
             }
 
-            String response = connection.connectionLogin();
+            String response = App.connection.connectionLogin();
             if (response == "200")
             {
                 this.closeLogin();
@@ -78,7 +77,7 @@ namespace Baskin_Kiosk.View.LoginPage
         private void closeLogin()
         {
             this.DialogResult = true;
-            this.Close();
+            this.IsEnabled = false;
         }
 
 #if false //타이틀바사용시 활용
