@@ -1,13 +1,15 @@
 ﻿using Baskin_Kiosk.Common;
+using Baskin_Kiosk.Util;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Sockets;
 using System.Text;
 using System.Windows;
 
-namespace Baskin_Kiosk.Util
+namespace Baskin_Kiosk.Network
 {
     public class ServerConnection
     {
@@ -16,15 +18,21 @@ namespace Baskin_Kiosk.Util
 
         public String connectionLogin()
         {
-            JObject json = new JObject();
-            json.Add("MSGType", 0);
-            json.Add("id", "2205");
-            json.Add("Content", "로그인 되었습니다.");
-            json.Add("OrderNumber", "");
-            json.Add("Menus", "");
+            MsgPacket packet = new MsgPacket();
+            packet.MSGType = "0";
+            packet.Id = "2205";
+            packet.Content = string.Empty;
+            packet.ShopName = "Baskin Robbins";
+            //packet.OrderNumber = "001";
+            //packet.Menus = new List<MsgOrderInfo>();
+            //MsgOrderInfo orderInfo = new MsgOrderInfo();
+            //orderInfo.Name = "싸이버거";
+            //orderInfo.Count = "2";
+            //orderInfo.Price = "1000";
+            //packet.Menus.Add(orderInfo);
 
-            String sendStr = JsonConvert.SerializeObject(json);
-            this.sendData = Encoding.UTF8.GetBytes(sendStr);
+            string JsonStr = JsonConvert.SerializeObject(packet);
+            this.sendData = Encoding.UTF8.GetBytes(JsonStr);
 
             NetworkStream networkStream = null;
             TcpClient client = null;
@@ -39,6 +47,7 @@ namespace Baskin_Kiosk.Util
                 Int32 readData = networkStream.Read(response, 0, response.Length);
 
                 String getResponse = Encoding.UTF8.GetString(response, 0, readData);
+                client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
                 return getResponse;
 
             } catch (Exception ex)

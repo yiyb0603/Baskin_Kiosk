@@ -118,11 +118,12 @@
     <Compile Include="Model\DAO\CategoryDAO.cs" />
     <Compile Include="Model\DAO\OrderDAO.cs" />
     <Compile Include="Model\DAO\MemberDAO.cs" />
+    <Compile Include="Network\MsgPacket.cs" />
     <Compile Include="Util\Constants.cs" />
     <Compile Include="Model\DAO\FoodDAO.cs" />
     <Compile Include="Model\OrderModel.cs" />
     <Compile Include="Util\DBConnection.cs" />
-    <Compile Include="Util\ServerConnection.cs" />
+    <Compile Include="Network\ServerConnection.cs" />
     <Compile Include="ViewModel\SeatViewModel.cs" />
     <Compile Include="View\HomePage\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>

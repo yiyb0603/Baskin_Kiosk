@@ -1,6 +1,7 @@
 ﻿using Baskin_Kiosk.Common;
 using Baskin_Kiosk.Model;
 using Baskin_Kiosk.Model.DAO;
+using Baskin_Kiosk.Network;
 using Baskin_Kiosk.Util;
 using Baskin_Kiosk.View.HomePage;
 using Baskin_Kiosk.ViewModel;

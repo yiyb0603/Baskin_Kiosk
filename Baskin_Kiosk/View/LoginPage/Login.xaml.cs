@@ -2,6 +2,7 @@
 using System.Windows;
 using System.IO;
 using Baskin_Kiosk.Util;
+using Baskin_Kiosk.Network;
 
 namespace Baskin_Kiosk.View.LoginPage
 {
@@ -15,6 +16,7 @@ namespace Baskin_Kiosk.View.LoginPage
 
         // 로그인 유지 유무 파일
         private const String FILE_PATH = "../../Assets/data.txt";
+        private ServerConnection connection = new ServerConnection();
 
         public Login()
         {
@@ -48,7 +50,6 @@ namespace Baskin_Kiosk.View.LoginPage
         {
             String inputID = this.inputID.Text;
             String inputPW = this.inputPW.Password;
-            ServerConnection connection = new ServerConnection();
 
             if (!ADMIN_ID.Equals(inputID))
             {
@@ -61,13 +62,15 @@ namespace Baskin_Kiosk.View.LoginPage
                 MessageBox.Show("비밀번호가 올바르지 않습니다.");
                 return;
             }
-            File.WriteAllText(FILE_PATH, this.autoCheck.IsChecked == true ? "TRUE" : "FALSE");
+
+            if (File.Exists(FILE_PATH))
+            {
+                File.WriteAllText(FILE_PATH, this.autoCheck.IsChecked == true ? "TRUE" : "FALSE");
+            }
 
             String response = connection.connectionLogin();
-
             if (response == "200")
             {
-                MessageBox.Show("로그인에 성공하였습니다.");
                 this.closeLogin();
             }
         }

@@ -25,6 +25,6 @@
         <Frame x:Name="frame"
                Grid.Row="1"
                NavigationUIVisibility="Hidden"
-               Source="/View/HomePage/Home.xaml"/>
+               Source="/View/MessagePage/Message.xaml"/>
     </Grid>
 </Window>

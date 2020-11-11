@@ -1,5 +1,10 @@
-﻿using Baskin_Kiosk.Util;
+﻿using Baskin_Kiosk.Network;
+using Baskin_Kiosk.Util;
 using System;
+using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,6 +18,12 @@ namespace Baskin_Kiosk.View.MessagePage
         public Message()
         {
             InitializeComponent();
+            this.Loaded += Message_Loaded;
+        }
+
+        private void Message_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void sendMessage(object sender, RoutedEventArgs e)
@@ -25,7 +36,7 @@ namespace Baskin_Kiosk.View.MessagePage
             if (response == "200")
             {
                 MessageBox.Show("메시지 전송 성공.");
-                message = "";
+                sendContent.Text = "";
             }
         }
     }

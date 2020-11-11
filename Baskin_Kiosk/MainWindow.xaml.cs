@@ -1,4 +1,5 @@
-﻿using Baskin_Kiosk.View.LoginPage;
+﻿using Baskin_Kiosk.Network;
+using Baskin_Kiosk.View.LoginPage;
 using Baskin_Kiosk.ViewModel;
 using System;
 using System.Collections.Generic;
