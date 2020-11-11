@@ -27,7 +27,7 @@ namespace Baskin_Kiosk.View.PaymentPage
             MemberModel member = memberDAO.getMember(orderType, e);
 
             int orderNumber = getLastNum() + 1;
-            String lastNum = orderNumber < 10 ? "00" + orderNumber : orderNumber < 100 ? "00" + orderNumber.ToString() : orderNumber.ToString();
+            String lastNum = orderNumber < 10 ? "00" + orderNumber : orderNumber < 100 ? "0" + orderNumber.ToString() : orderNumber.ToString();
 
             userName.Content = "주문자: " + member.name;
             totalPrice.Content = "총 금액: " + orderViewModel.totalAmountPrice;
@@ -45,8 +45,14 @@ namespace Baskin_Kiosk.View.PaymentPage
             }
             orderDAO.orderMenu();
 
-            // 주문됐을때 서버로 메시지 보내기
-            this.serverConnection.sendOrderMessage(orderViewModel.selectMenuList, orderNumber);
+            MsgPacket packet = new MsgPacket();
+
+            foreach (Food food in orderViewModel.selectMenuList)
+            {
+                packet.Menus.Add(new MsgOrderInfo() { Count = food.count.ToString(), Name = food.menuName, Price = food.price.ToString() });
+            }
+
+            serverConnection.sendMessage(packet.Menus, lastNum);
         }
 
         public int getLastNum()

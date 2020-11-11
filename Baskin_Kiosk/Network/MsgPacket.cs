@@ -13,7 +13,7 @@ namespace Baskin_Kiosk.Network
         public string Content = string.Empty;
         public string ShopName = string.Empty;
         public string OrderNumber = string.Empty;
-        public  List<MsgOrderInfo> Menus { get; set;}
+        public List<MsgOrderInfo> Menus = new List<MsgOrderInfo>();
     }
 
     public class MsgOrderInfo
