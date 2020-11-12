@@ -1,9 +1,4 @@
-﻿using Baskin_Kiosk.Common;
-using Prism.Mvvm;
-using System;
-using System.Collections.ObjectModel;
-using System.Dynamic;
-using System.Windows.Data;
+﻿using System;
 
 namespace Baskin_Kiosk.Model
 {

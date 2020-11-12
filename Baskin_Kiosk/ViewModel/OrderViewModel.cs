@@ -4,8 +4,6 @@ using Baskin_Kiosk.Model.DAO;
 using Prism.Mvvm;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Configuration;
-using System.Windows.Documents;
 
 namespace Baskin_Kiosk.ViewModel
 {

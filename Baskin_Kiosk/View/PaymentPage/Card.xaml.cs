@@ -1,9 +1,6 @@
-﻿using Baskin_Kiosk.Common;
-using Baskin_Kiosk.Model;
-using Baskin_Kiosk.Model.DAO;
+﻿using Baskin_Kiosk.Model.DAO;
 using Baskin_Kiosk.View.PaymentPage;
 using Baskin_Kiosk.ViewModel;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;

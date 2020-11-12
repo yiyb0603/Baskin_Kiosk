@@ -1,11 +1,6 @@
 ﻿using Baskin_Kiosk.Util;
 using Baskin_Kiosk.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Baskin_Kiosk.Model.DAO
 {
