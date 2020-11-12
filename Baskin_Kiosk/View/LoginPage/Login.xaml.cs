@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.IO;
-using Baskin_Kiosk.Util;
-using Baskin_Kiosk.Network;
 
 namespace Baskin_Kiosk.View.LoginPage
 {

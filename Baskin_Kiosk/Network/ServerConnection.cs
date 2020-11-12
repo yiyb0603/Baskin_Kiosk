@@ -1,11 +1,7 @@
-﻿using Baskin_Kiosk.Common;
-using Baskin_Kiosk.Util;
-using Baskin_Kiosk.ViewModel;
+﻿using Baskin_Kiosk.Util;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Net.Sockets;
 using System.Text;
 using System.Windows;

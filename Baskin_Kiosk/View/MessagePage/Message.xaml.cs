@@ -1,10 +1,4 @@
-﻿using Baskin_Kiosk.Network;
-using Baskin_Kiosk.Util;
-using System;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 
