@@ -23,7 +23,7 @@ namespace Baskin_Kiosk.Network
             packet.Id = "2205";
 
             string JsonStr = JsonConvert.SerializeObject(packet);
-            this.sendData = Encoding.UTF8.GetBytes(JsonStr);
+            sendData = Encoding.UTF8.GetBytes(JsonStr);
 
             try
             {
@@ -35,9 +35,9 @@ namespace Baskin_Kiosk.Network
 
                 networkStream.Write(sendData, 0, sendData.Length);
                 byte[] response = new byte[MAX_LEN];
-                Int32 readData = networkStream.Read(response, 0, response.Length);
+                int readData = networkStream.Read(response, 0, response.Length);
 
-                String getResponse = Encoding.UTF8.GetString(response, 0, readData);
+                string getResponse = Encoding.UTF8.GetString(response, 0, readData);
                 client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
                 return getResponse;
             }
@@ -50,7 +50,7 @@ namespace Baskin_Kiosk.Network
         }
 
 
-        public string sendMessage(String message)
+        public string sendMessage(string message)
         {
             MsgPacket packet = new MsgPacket();
             packet.MSGType = "1";
@@ -58,7 +58,7 @@ namespace Baskin_Kiosk.Network
             packet.Content = message;
 
             string JsonStr = JsonConvert.SerializeObject(packet);
-            this.sendData = Encoding.UTF8.GetBytes(JsonStr);
+            sendData = Encoding.UTF8.GetBytes(JsonStr);
 
             try
             {
@@ -70,9 +70,9 @@ namespace Baskin_Kiosk.Network
 
                 networkStream.Write(sendData, 0, sendData.Length);
                 byte[] response = new byte[MAX_LEN];
-                Int32 readData = networkStream.Read(response, 0, response.Length);
+                int readData = networkStream.Read(response, 0, response.Length);
 
-                String getResponse = Encoding.UTF8.GetString(response, 0, readData);
+                string getResponse = Encoding.UTF8.GetString(response, 0, readData);
                 return getResponse;
             }
             catch (Exception ex)
@@ -94,7 +94,7 @@ namespace Baskin_Kiosk.Network
             packet.OrderNumber = orderNum.ToString();
 
             string JsonStr = JsonConvert.SerializeObject(packet);
-            this.sendData = Encoding.UTF8.GetBytes(JsonStr);
+            sendData = Encoding.UTF8.GetBytes(JsonStr);
 
             try
             {
@@ -106,9 +106,9 @@ namespace Baskin_Kiosk.Network
 
                 networkStream.Write(sendData, 0, sendData.Length);
                 byte[] response = new byte[MAX_LEN];
-                Int32 readData = networkStream.Read(response, 0, response.Length);
+                int readData = networkStream.Read(response, 0, response.Length);
 
-                String getResponse = Encoding.UTF8.GetString(response, 0, readData);
+                string getResponse = Encoding.UTF8.GetString(response, 0, readData);
                 return getResponse;
             }
             catch (Exception ex)

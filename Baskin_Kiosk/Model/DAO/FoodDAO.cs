@@ -1,7 +1,6 @@
 ﻿using Baskin_Kiosk.Common;
 using Baskin_Kiosk.Util;
 using MySql.Data.MySqlClient;
-using System;
 using System.Collections.ObjectModel;
 
 namespace Baskin_Kiosk.Model.DAO
@@ -15,7 +14,7 @@ namespace Baskin_Kiosk.Model.DAO
             ObservableCollection<Food> foodList = new ObservableCollection<Food>();
             connection.getConnection();
 
-            String sql = "Select * from kiosk.menu";
+            string sql = "Select * from kiosk.menu";
             connection.setCommand(sql);
             MySqlDataReader reader = connection.executeReader();
 
@@ -32,9 +31,9 @@ namespace Baskin_Kiosk.Model.DAO
                 food.categoryId = int.Parse(reader["category_id"].ToString());
                 food.salePrice = int.Parse(reader["menu_sale"].ToString());
 
-                if (categoryIndex != (int) food.categoryId)
+                if (categoryIndex != food.categoryId)
                 {
-                    categoryIndex = (int)food.categoryId;
+                    categoryIndex = food.categoryId;
                     i = 0;
                 }
 

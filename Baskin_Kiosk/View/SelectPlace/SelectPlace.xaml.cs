@@ -7,9 +7,6 @@ using System.Windows.Navigation;
 
 namespace Baskin_Kiosk.View.SelectPlace
 {
-    /// <summary>
-    /// Interaction logic for SelectPlace.xaml
-    /// </summary>
     public partial class SelectPlace : Page
     {
         private OrderViewModel viewModel = App.orderViewModel;
@@ -22,7 +19,7 @@ namespace Baskin_Kiosk.View.SelectPlace
         private void SeatButton_Click(object sender, RoutedEventArgs e)
         {
             // 매장 식사
-            foreach(Food food in this.viewModel.selectMenuList)
+            foreach (Food food in viewModel.selectMenuList)
             {
                 food.orderTypeName = "매장";
             }
@@ -34,12 +31,12 @@ namespace Baskin_Kiosk.View.SelectPlace
         private void TakeOutButton_Click(object sender, RoutedEventArgs e)
         {
             // 포장 주문
-            foreach (Food food in this.viewModel.selectMenuList)
+            foreach (Food food in viewModel.selectMenuList)
             {
                 food.orderTypeName = "포장";
             }
 
-            foreach (OrderModel order in this.viewModel.orderMenuList)
+            foreach (OrderModel order in viewModel.orderMenuList)
             {
                 order.seatId = 0;
             }

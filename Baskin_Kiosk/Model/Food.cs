@@ -1,5 +1,4 @@
 ﻿using Prism.Mvvm;
-using System;
 
 namespace Baskin_Kiosk.Common
 {
@@ -7,10 +6,10 @@ namespace Baskin_Kiosk.Common
     {
         public int menuId { get; set; }
         public int categoryId { get; set; }
-        public String categoryName { get; set; }
-        public String imageSrc { get; set; }
-        public String menuName { get; set; }
-        public String orderTypeName { get; set; }
+        public string categoryName { get; set; }
+        public string imageSrc { get; set; }
+        public string menuName { get; set; }
+        public string orderTypeName { get; set; }
         // 결제 방식 화면 선택리스트에서 매장/포장인지 보여줌
         public int orderType { get; set; }
         public int salePrice { get; set; }

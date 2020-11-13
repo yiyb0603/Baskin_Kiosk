@@ -9,16 +9,16 @@ namespace Baskin_Kiosk.View.LoginPage
     /// </summary>
     public partial class Login : Window
     {
-        private const String ADMIN_ID = "admin";
-        private const String ADMIN_PW = "1234";
+        private const string ADMIN_ID = "admin";
+        private const string ADMIN_PW = "1234";
 
         // 로그인 유지 유무 파일
-        private const String FILE_PATH = "../../Assets/data.txt";
+        private const string FILE_PATH = "../../Assets/data.txt";
 
         public Login()
         {
             InitializeComponent();
-            this.Loaded += Login_Loaded;
+            Loaded += Login_Loaded;
         }
 
         private void Login_Loaded(object sender, RoutedEventArgs e)
@@ -33,8 +33,8 @@ namespace Baskin_Kiosk.View.LoginPage
 
                 if (File.ReadAllText(FILE_PATH) == "TRUE")
                 {
-                    String response = App.connection.sendMessage();
-                    this.closeLogin();
+                    string response = App.connection.sendMessage();
+                    closeLogin();
                     return;
                 }
             }
@@ -46,8 +46,8 @@ namespace Baskin_Kiosk.View.LoginPage
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            String inputID = this.inputID.Text;
-            String inputPW = this.inputPW.Password;
+            string inputID = this.inputID.Text;
+            string inputPW = this.inputPW.Password;
 
             if (!ADMIN_ID.Equals(inputID))
             {
@@ -63,20 +63,20 @@ namespace Baskin_Kiosk.View.LoginPage
 
             if (File.Exists(FILE_PATH))
             {
-                File.WriteAllText(FILE_PATH, this.autoCheck.IsChecked == true ? "TRUE" : "FALSE");
+                File.WriteAllText(FILE_PATH, autoCheck.IsChecked == true ? "TRUE" : "FALSE");
             }
 
-            String response = App.connection.sendMessage();
+            string response = App.connection.sendMessage();
             if (response == "200")
             {
-                this.closeLogin();
+                closeLogin();
             }
         }
 
         private void closeLogin()
         {
-            this.DialogResult = true;
-            this.IsEnabled = false;
+            DialogResult = true;
+            IsEnabled = false;
         }
 
 #if false //타이틀바사용시 활용

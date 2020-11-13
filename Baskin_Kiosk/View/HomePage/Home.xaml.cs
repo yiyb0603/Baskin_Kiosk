@@ -27,7 +27,7 @@ namespace Baskin_Kiosk.View.HomePage
         private void nextPage(object sender, RoutedEventArgs e)
         {
             Order order = new Order();
-            this.NavigationService.Navigate(order);
+            NavigationService.Navigate(order);
         }
     }
 }
