@@ -9,9 +9,6 @@ namespace Baskin_Kiosk.ViewModel
 {
     public class OrderViewModel : BindableBase
     {
-        Food food = new Food();
-        OrderModel orderModel = new OrderModel();
-
         public ObservableCollection<Food> foodList = new FoodDAO().getFoodList();
         public List<Category> categoryList = new CategoryDAO().getCategories();
 
@@ -52,9 +49,9 @@ namespace Baskin_Kiosk.ViewModel
 
         public void clearMenuList()
         {
-            this._selectMenuList.Clear();
-            this._orderMenuList.Clear();
-            this._totalAmountPrice = 0;
+            _selectMenuList.Clear();
+            _orderMenuList.Clear();
+            _totalAmountPrice = 0;
         }
     }
 }

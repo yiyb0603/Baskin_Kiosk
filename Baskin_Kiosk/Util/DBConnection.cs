@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
 
 namespace Baskin_Kiosk.Util
 {
@@ -8,9 +7,9 @@ namespace Baskin_Kiosk.Util
         private MySqlConnection connection = null;
         private MySqlCommand command = null;
 
-        public void setCommand(String sql)
+        public void setCommand(string sql)
         {
-            this.command = new MySqlCommand(sql, this.connection);
+            command = new MySqlCommand(sql, connection);
         }
 
         public void executeNonQuery()
@@ -25,14 +24,14 @@ namespace Baskin_Kiosk.Util
 
         public void getConnection()
         {
-            this.connection = new MySqlConnection(Constants.DB_HOST);
+            connection = new MySqlConnection(Constants.DB_HOST);
 
-            this.connection.Open();
+            connection.Open();
         }
 
         public void closeConnection()
         {
-            this.connection.Close();
+            connection.Close();
         }
     }
 }

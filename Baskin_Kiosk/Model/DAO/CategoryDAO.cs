@@ -1,7 +1,6 @@
 ﻿using Baskin_Kiosk.Common;
 using Baskin_Kiosk.Util;
 using MySql.Data.MySqlClient;
-using System;
 using System.Collections.Generic;
 
 namespace Baskin_Kiosk.Model.DAO
@@ -15,7 +14,7 @@ namespace Baskin_Kiosk.Model.DAO
             List<Category> categoryList = new List<Category>();
             connection.getConnection();
 
-            String sql = "Select * from kiosk.category";
+            string sql = "Select * from kiosk.category";
             connection.setCommand(sql);
             MySqlDataReader reader = connection.executeReader();
 

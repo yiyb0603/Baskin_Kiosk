@@ -19,14 +19,14 @@ namespace Baskin_Kiosk.View.PaymentPage
 
         private void Payment_Loaded(object sender, RoutedEventArgs e)
         {
-            DataContext = this.orderViewModel;
-            this.itemList.ItemsSource = this.orderViewModel.selectMenuList;
-            this.totalPrice.Text = "총금액: " + this.orderViewModel.totalAmountPrice + "원";
+            DataContext = orderViewModel;
+            itemList.ItemsSource = orderViewModel.selectMenuList;
+            totalPrice.Text = "총금액: " + orderViewModel.totalAmountPrice + "원";
         }
 
         private void CardButton_Click(object sender, RoutedEventArgs e)
         {
-            foreach (OrderModel order in this.orderViewModel.orderMenuList)
+            foreach (OrderModel order in orderViewModel.orderMenuList)
             {
                 order.orderType = 0;
             }
@@ -36,7 +36,7 @@ namespace Baskin_Kiosk.View.PaymentPage
 
         private void CashButton_Click(object sender, RoutedEventArgs e)
         {
-            foreach (OrderModel order in this.orderViewModel.orderMenuList)
+            foreach (OrderModel order in orderViewModel.orderMenuList)
             {
                 order.orderType = 1;
             }

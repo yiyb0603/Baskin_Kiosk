@@ -52,7 +52,7 @@ namespace Baskin_Kiosk.View.SelectPlace
 
         private void seatList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedSeat = (SeatViewModel) seatList.SelectedItem;
+            selectedSeat = (SeatViewModel)seatList.SelectedItem;
         }
     }
 }

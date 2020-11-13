@@ -22,9 +22,9 @@ namespace Baskin_Kiosk.View.MessagePage
 
         private void sendMessage(object sender, RoutedEventArgs e)
         {
-            String message = sendContent.Text;
+            string message = sendContent.Text;
             App.connection.sendMessage(message);
-            
+
             ////ServerConnection connection = new ServerConnection();
 
             //String response = connection.sendMessage(message);

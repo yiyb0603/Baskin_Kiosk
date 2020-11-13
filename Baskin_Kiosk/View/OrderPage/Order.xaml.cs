@@ -14,24 +14,23 @@ namespace Baskin_Kiosk.View.OrderPage
     public partial class Order : Page
     {
         private OrderViewModel viewModel = App.orderViewModel;
-        OrderModel orderModel = new OrderModel();
 
         public Order()
         {
             InitializeComponent();
-            this.Loaded += Order_Loaded;
+            Loaded += Order_Loaded;
         }
 
         private void Order_Loaded(object sender, RoutedEventArgs e)
         {
             DataContext = App.orderViewModel;
-            
-            categoryMenus.SelectedIndex = (int)viewModel.currentCategory;
-            this.prevButton.Visibility = Visibility.Hidden;
 
-            this.tbl_totalPrice.Text = this.viewModel.totalAmountPrice.ToString();
-            categoryMenus.ItemsSource = this.viewModel.categoryList;
-            this.viewModel.selectMenuList.CollectionChanged += this.collectionChanged;
+            categoryMenus.SelectedIndex = viewModel.currentCategory;
+            prevButton.Visibility = Visibility.Hidden;
+
+            tbl_totalPrice.Text = viewModel.totalAmountPrice.ToString();
+            categoryMenus.ItemsSource = viewModel.categoryList;
+            viewModel.selectMenuList.CollectionChanged += collectionChanged;
         }
 
         private void collectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -39,7 +38,7 @@ namespace Baskin_Kiosk.View.OrderPage
             int totalCount = 0;
             int totalPrice = 0;
 
-            foreach (Food food in this.viewModel.selectMenuList)
+            foreach (Food food in viewModel.selectMenuList)
             {
                 totalCount += food.count;
                 totalPrice += food.price;
@@ -50,7 +49,7 @@ namespace Baskin_Kiosk.View.OrderPage
 
         private List<Food> getFoodList(int pageCount)
         {
-            return this.viewModel.foodList.Where((food) => food.page == pageCount && food.categoryId == this.viewModel.currentCategory).ToList();
+            return viewModel.foodList.Where((food) => food.page == pageCount && food.categoryId == viewModel.currentCategory).ToList();
         }
 
         private Food getFoodObject(ObservableCollection<Food> list, Food selectedFood)
@@ -61,26 +60,26 @@ namespace Baskin_Kiosk.View.OrderPage
 
         private void clickPrev(object sender, EventArgs e)
         {
-            --this.viewModel.pageCount;
-            menuList.ItemsSource = getFoodList(this.viewModel.pageCount);
-            this.nextButton.Visibility = Visibility.Visible;
+            --viewModel.pageCount;
+            menuList.ItemsSource = getFoodList(viewModel.pageCount);
+            nextButton.Visibility = Visibility.Visible;
 
-            if (getFoodList(this.viewModel.pageCount - 1).Count == 0)
+            if (getFoodList(viewModel.pageCount - 1).Count == 0)
             {
-                this.prevButton.Visibility = Visibility.Hidden;
+                prevButton.Visibility = Visibility.Hidden;
                 return;
             }
         }
 
         private void clickNext(object sender, EventArgs e)
         {
-            ++this.viewModel.pageCount;
-            this.menuList.ItemsSource = getFoodList(this.viewModel.pageCount);
-            this.prevButton.Visibility = Visibility.Visible;
+            ++viewModel.pageCount;
+            menuList.ItemsSource = getFoodList(viewModel.pageCount);
+            prevButton.Visibility = Visibility.Visible;
 
-            if (getFoodList(this.viewModel.pageCount + 1).Count == 0)
+            if (getFoodList(viewModel.pageCount + 1).Count == 0)
             {
-                this.nextButton.Visibility = Visibility.Hidden;
+                nextButton.Visibility = Visibility.Hidden;
                 return;
             }
         }
@@ -88,18 +87,18 @@ namespace Baskin_Kiosk.View.OrderPage
         private void categoryChange(object sender, SelectionChangedEventArgs e)
         {
             int category = categoryMenus.SelectedIndex;
-            this.viewModel.currentCategory = category;
-            
-             this.viewModel.pageCount = 1;
-             this.prevButton.Visibility = Visibility.Hidden;
-            this.nextButton.Visibility = Visibility.Visible;
+            viewModel.currentCategory = category;
+
+            viewModel.pageCount = 1;
+            prevButton.Visibility = Visibility.Hidden;
+            nextButton.Visibility = Visibility.Visible;
 
             if (categoryMenus.SelectedIndex <= -1)
             {
                 return;
             }
-            
-            this.menuList.ItemsSource = getFoodList(this.viewModel.pageCount);
+
+            menuList.ItemsSource = getFoodList(viewModel.pageCount);
         }
 
         private void menuList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -108,21 +107,21 @@ namespace Baskin_Kiosk.View.OrderPage
 
             if (selectedFood != null)
             {
-                this.viewModel.totalAmountPrice += (selectedFood.price - selectedFood.salePrice);
+                viewModel.totalAmountPrice += (selectedFood.price - selectedFood.salePrice);
 
-                Food existFood = getFoodObject(this.viewModel.selectMenuList, selectedFood);
+                Food existFood = getFoodObject(viewModel.selectMenuList, selectedFood);
                 if (existFood != null)
                 {
                     existFood.count++;
                     existFood.price += selectedFood.price;
-                    this.collectionChanged(null, null);
+                    collectionChanged(null, null);
                 }
 
                 else
                 {
-                    Category findCategory = this.viewModel.categoryList.Where((category) => category.categoryId == selectedFood.categoryId).FirstOrDefault();
+                    Category findCategory = viewModel.categoryList.Where((category) => category.categoryId == selectedFood.categoryId).FirstOrDefault();
 
-                    this.viewModel.selectMenuList.Add(
+                    viewModel.selectMenuList.Add(
                     new Food()
                     {
                         categoryId = selectedFood.categoryId,
@@ -134,7 +133,7 @@ namespace Baskin_Kiosk.View.OrderPage
                         salePrice = selectedFood.salePrice,
                     });
 
-                    selectListView.ItemsSource = this.viewModel.selectMenuList;
+                    selectListView.ItemsSource = viewModel.selectMenuList;
                 }
 
                 menuList.UnselectAll();
@@ -146,47 +145,47 @@ namespace Baskin_Kiosk.View.OrderPage
             // 증가 버튼을 누른 엘리먼트 객체
             Food senderFood = (sender as Button).DataContext as Food;
 
-            Food selectedFood = this.getFoodObject(this.viewModel.foodList, senderFood);
+            Food selectedFood = getFoodObject(viewModel.foodList, senderFood);
 
             if (selectedFood != null)
             {
-                Food foodItem = this.getFoodObject(this.viewModel.selectMenuList, selectedFood);
+                Food foodItem = getFoodObject(viewModel.selectMenuList, selectedFood);
 
                 if (foodItem != null)
                 {
                     foodItem.count++;
                     foodItem.price += (selectedFood.price - selectedFood.salePrice);
-                    this.viewModel.totalAmountPrice += selectedFood.price;
+                    viewModel.totalAmountPrice += selectedFood.price;
                 }
             }
 
-            this.collectionChanged(null, null);
+            collectionChanged(null, null);
         }
 
         private void Button_DownClick(object sender, RoutedEventArgs e)
         {
             // 감소 버튼을 누른 엘리먼트 객체
             Food senderFood = (sender as Button).DataContext as Food;
-            Food selectedFood = this.getFoodObject(this.viewModel.foodList, senderFood);
+            Food selectedFood = getFoodObject(viewModel.foodList, senderFood);
 
             if (selectedFood != null)
             {
-                Food foodItem = this.getFoodObject(this.viewModel.selectMenuList, selectedFood);
+                Food foodItem = getFoodObject(viewModel.selectMenuList, selectedFood);
 
                 if (foodItem != null)
                 {
                     foodItem.count--;
                     foodItem.price -= (selectedFood.price - selectedFood.salePrice);
-                    this.viewModel.totalAmountPrice -= selectedFood.price;
+                    viewModel.totalAmountPrice -= selectedFood.price;
 
                     if (foodItem.count <= 0)
                     {
-                        Food deleteItem = this.getFoodObject(this.viewModel.selectMenuList, selectedFood);
-                        this.viewModel.selectMenuList.Remove(deleteItem);
+                        Food deleteItem = getFoodObject(viewModel.selectMenuList, selectedFood);
+                        viewModel.selectMenuList.Remove(deleteItem);
                     }
                 }
             }
-            this.collectionChanged(null, null);
+            collectionChanged(null, null);
         }
 
         private void selectMenuDelete(object sender, RoutedEventArgs e)
@@ -195,50 +194,50 @@ namespace Baskin_Kiosk.View.OrderPage
 
             if (selectedFood != null)
             {
-                Food deleteItem = this.getFoodObject(this.viewModel.selectMenuList, selectedFood);
-                
-                this.viewModel.totalAmountPrice -= deleteItem.price;
-                this.viewModel.selectMenuList.Remove(deleteItem);
+                Food deleteItem = getFoodObject(viewModel.selectMenuList, selectedFood);
+
+                viewModel.totalAmountPrice -= deleteItem.price;
+                viewModel.selectMenuList.Remove(deleteItem);
             }
         }
 
         private void clearSelectMenu(object sender, RoutedEventArgs e)
         {
-            if (this.viewModel.selectMenuList.Count > 0)
+            if (viewModel.selectMenuList.Count > 0)
             {
-                this.viewModel.clearMenuList();
+                viewModel.clearMenuList();
             }
         }
 
         private void prevPage(object sender, RoutedEventArgs e)
         {
-            if (this.viewModel.selectMenuList.Count > 0)
+            if (viewModel.selectMenuList.Count > 0)
             {
                 var confirmMessage = MessageBox.Show("주문을 취소하시겠습니까?", "잠시만요", MessageBoxButton.YesNo);
 
                 if (confirmMessage == MessageBoxResult.Yes)
                 {
-                    this.viewModel.clearMenuList();
-                    this.NavigationService.GoBack();
+                    viewModel.clearMenuList();
+                    NavigationService.GoBack();
                 }
 
                 return;
             }
 
-            this.NavigationService.GoBack();
+            NavigationService.GoBack();
         }
 
         private void nextPage(object sender, RoutedEventArgs e)
         {
-            if (this.viewModel.selectMenuList.Count <= 0)
+            if (viewModel.selectMenuList.Count <= 0)
             {
                 MessageBox.Show("메뉴를 선택해주세요.");
                 return;
             }
-            
-            foreach (Food food in this.viewModel.selectMenuList)
+
+            foreach (Food food in viewModel.selectMenuList)
             {
-                this.viewModel.orderMenuList.Add(new OrderModel()
+                viewModel.orderMenuList.Add(new OrderModel()
                 {
                     categoryId = food.categoryId,
                     menuId = food.menuId,

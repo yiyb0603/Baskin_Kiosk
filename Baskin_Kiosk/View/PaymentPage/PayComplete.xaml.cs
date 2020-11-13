@@ -27,7 +27,7 @@ namespace Baskin_Kiosk.View.PaymentPage
             MemberModel member = memberDAO.getMember(orderType, e);
 
             int orderNumber = getLastNum() + 1;
-            String lastNum = orderNumber < 10 ? "00" + orderNumber : orderNumber < 100 ? "0" + orderNumber.ToString() : orderNumber.ToString();
+            string lastNum = orderNumber < 10 ? "00" + orderNumber : orderNumber < 100 ? "0" + orderNumber.ToString() : orderNumber.ToString();
 
             userName.Content = "주문자: " + member.name;
             totalPrice.Content = "총 금액: " + orderViewModel.totalAmountPrice;
@@ -62,7 +62,7 @@ namespace Baskin_Kiosk.View.PaymentPage
 
             int lastNum = 0;
 
-            String sql = "SELECT order_num FROM kiosk.order ORDER BY order_num DESC LIMIT 1";
+            string sql = "SELECT order_num FROM kiosk.order ORDER BY order_num DESC LIMIT 1";
 
             connection.setCommand(sql);
             connection.executeNonQuery();
