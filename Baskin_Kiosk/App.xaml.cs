@@ -8,5 +8,6 @@ namespace Baskin_Kiosk
     {
         public static OrderViewModel orderViewModel { get; } = new OrderViewModel();
         public static ServerConnection connection { get; } = new ServerConnection();
+        public static MessageViewModel messageViewModel = new MessageViewModel();
     }
 }

@@ -13,17 +13,16 @@ namespace Baskin_Kiosk
         public MainWindow()
         {
             InitializeComponent();
+            this.Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
             DispatcherTimer timer = new DispatcherTimer();
 
             timer.Interval = TimeSpan.FromMilliseconds(1000);
             timer.Tick += new EventHandler(timerTick);
             timer.Start();
-
-            Loaded += MainWindow_Loaded;
-        }
-
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
             LoginPopup();
         }
 
@@ -46,7 +45,7 @@ namespace Baskin_Kiosk
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Uri uri = new Uri("./View/HomePage/Home.xaml", UriKind.Relative); //Line 1
+            Uri uri = new Uri("./View/HomePage/Home.xaml", UriKind.Relative);
 
             if (viewModel.selectMenuList.Count > 0)
             {

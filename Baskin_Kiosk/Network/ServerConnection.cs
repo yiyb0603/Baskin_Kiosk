@@ -1,10 +1,17 @@
-﻿using Baskin_Kiosk.Util;
+﻿using Baskin_Kiosk.Common;
+using Baskin_Kiosk.Util;
+using Baskin_Kiosk.ViewModel;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Windows;
+using System.Windows.Data;
 
 namespace Baskin_Kiosk.Network
 {
@@ -12,18 +19,22 @@ namespace Baskin_Kiosk.Network
     {
         private const int MAX_LEN = 4096;
         private byte[] sendData = new byte[MAX_LEN];
+        private byte[] receiveData = new byte[MAX_LEN];
+        private Thread networkThread = null;
+
+        private bool isSend = false;
 
         NetworkStream networkStream = null;
         TcpClient client = null;
-
+        
         public string sendMessage()
         {
             MsgPacket packet = new MsgPacket();
             packet.MSGType = "0";
             packet.Id = "2205";
 
-            string JsonStr = JsonConvert.SerializeObject(packet);
-            sendData = Encoding.UTF8.GetBytes(JsonStr);
+            String JsonStr = JsonConvert.SerializeObject(packet);
+            this.sendData = Encoding.UTF8.GetBytes(JsonStr);
 
             try
             {
@@ -35,9 +46,9 @@ namespace Baskin_Kiosk.Network
 
                 networkStream.Write(sendData, 0, sendData.Length);
                 byte[] response = new byte[MAX_LEN];
-                int readData = networkStream.Read(response, 0, response.Length);
+                Int32 readData = networkStream.Read(response, 0, response.Length);
 
-                string getResponse = Encoding.UTF8.GetString(response, 0, readData);
+                String getResponse = Encoding.UTF8.GetString(response, 0, readData);
                 client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
                 return getResponse;
             }
@@ -49,8 +60,52 @@ namespace Baskin_Kiosk.Network
             return null;
         }
 
+        public async void receiveMessage()
+        {
+            IPEndPoint serverEP = new IPEndPoint(IPAddress.Any, 1000);
+            NetworkStream receiveStream = client.GetStream();
+            int readData = 0;
+            string response = "";
 
-        public string sendMessage(string message)
+            while (true)
+            {
+                try
+                {
+                    isSend = false;
+                    readData = await receiveStream.ReadAsync(receiveData, 0, receiveData.Length);
+                    response = Encoding.UTF8.GetString(receiveData, 0, readData);
+
+                    if (!isSend)
+                    {
+                        MessageBox.Show(response);
+                        object _lock = new object();
+                        BindingOperations.EnableCollectionSynchronization(App.messageViewModel.messageList, _lock);
+                        //App.Current.Dispatcher.Invoke(() => BindingOperations.EnableCollectionSynchronization(App.messageViewModel.messageList, _lock));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    break;
+                }
+            }
+        }
+
+        public void threadStart()
+        {
+            this.networkThread = new Thread(new ThreadStart(receiveMessage));
+            networkThread.Start();
+        }
+
+        public void threadEnd()
+        {
+            if (networkThread != null)
+            {
+                networkThread.Abort();
+            }
+        }
+
+        public void sendMessage(String message)
         {
             MsgPacket packet = new MsgPacket();
             packet.MSGType = "1";
@@ -58,7 +113,7 @@ namespace Baskin_Kiosk.Network
             packet.Content = message;
 
             string JsonStr = JsonConvert.SerializeObject(packet);
-            sendData = Encoding.UTF8.GetBytes(JsonStr);
+            this.sendData = Encoding.UTF8.GetBytes(JsonStr);
 
             try
             {
@@ -68,23 +123,17 @@ namespace Baskin_Kiosk.Network
                     networkStream = client.GetStream();
                 }
 
+                App.messageViewModel.setMessageList(message);
                 networkStream.Write(sendData, 0, sendData.Length);
-                byte[] response = new byte[MAX_LEN];
-                int readData = networkStream.Read(response, 0, response.Length);
-
-                string getResponse = Encoding.UTF8.GetString(response, 0, readData);
-                return getResponse;
+                isSend = true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
-
-            return null;
         }
 
-
-        public string sendMessage(List<MsgOrderInfo> orderInfo, string orderNum)
+        public String sendMessage(List<MsgOrderInfo> orderInfo, String orderNum)
         {
             MsgPacket packet = new MsgPacket();
             packet.MSGType = "2";
@@ -93,8 +142,8 @@ namespace Baskin_Kiosk.Network
             packet.Menus = orderInfo;
             packet.OrderNumber = orderNum.ToString();
 
-            string JsonStr = JsonConvert.SerializeObject(packet);
-            sendData = Encoding.UTF8.GetBytes(JsonStr);
+            String JsonStr = JsonConvert.SerializeObject(packet);
+            this.sendData = Encoding.UTF8.GetBytes(JsonStr);
 
             try
             {
@@ -106,9 +155,9 @@ namespace Baskin_Kiosk.Network
 
                 networkStream.Write(sendData, 0, sendData.Length);
                 byte[] response = new byte[MAX_LEN];
-                int readData = networkStream.Read(response, 0, response.Length);
+                Int32 readData = networkStream.Read(response, 0, response.Length);
 
-                string getResponse = Encoding.UTF8.GetString(response, 0, readData);
+                String getResponse = Encoding.UTF8.GetString(response, 0, readData);
                 return getResponse;
             }
             catch (Exception ex)
