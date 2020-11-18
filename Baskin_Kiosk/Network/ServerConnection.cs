@@ -1,18 +1,12 @@
-﻿using Baskin_Kiosk.Common;
-using Baskin_Kiosk.Util;
-using Baskin_Kiosk.ViewModel;
+﻿using Baskin_Kiosk.Util;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Data;
 
 namespace Baskin_Kiosk.Network
 {
@@ -103,12 +97,13 @@ namespace Baskin_Kiosk.Network
             }
         }
 
-        public void sendMessage(String message)
+        public void sendMessage(string message, bool? isGroup)
         {
             MsgPacket packet = new MsgPacket();
             packet.MSGType = "1";
             packet.Id = "2205";
             packet.Content = message;
+            packet.Group = (isGroup == true) ? true : false;
 
             string JsonStr = JsonConvert.SerializeObject(packet);
             this.sendData = Encoding.UTF8.GetBytes(JsonStr);
@@ -121,7 +116,6 @@ namespace Baskin_Kiosk.Network
                     networkStream = client.GetStream();
                 }
 
-                App.messageViewModel.setMessageList(message);
                 networkStream.Write(sendData, 0, sendData.Length);
                 isSend = true;
             }

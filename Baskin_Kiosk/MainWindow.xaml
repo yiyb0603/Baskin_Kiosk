@@ -22,6 +22,11 @@
             <Button FontSize="30" Width="50" Click="Button_Click">🏤</Button>
         </Grid>
 
+        <!--<Frame x:Name="frame"
+               Grid.Row="1"
+               NavigationUIVisibility="Hidden"
+               Source="/View/MessagePage/Message.xaml"/>-->
+
         <Frame x:Name="frame"
                Grid.Row="1"
                NavigationUIVisibility="Hidden"

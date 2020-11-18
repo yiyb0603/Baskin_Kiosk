@@ -10,11 +10,16 @@
 
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <StackPanel Orientation="Horizontal" Margin="0 0 0 20px">
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 8px">
                 <TextBlock Text="내용을 입력해주세요: "  VerticalAlignment="Center" Margin="0 0 20px 0"/>
                 <TextBox x:Name="sendContent" Width="300" Height="50" VerticalContentAlignment="Center" Padding="7px 0 0 0"/>
                 <Button Click="sendMessage" Content="보내기" Width="150" Margin="20px 0 0 0" />
             </StackPanel>
+
+            <StackPanel HorizontalAlignment="Right" Margin="0 0 0 8px">
+                <CheckBox x:Name="sendType" Content="그룹메시지 전송" VerticalAlignment="Center"  />
+            </StackPanel>
+
             <StackPanel>
                 <ListView
                     x:Name="selectListView"
