@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
@@ -17,15 +18,15 @@ namespace Baskin_Kiosk.Network
 {
     public class ServerConnection
     {
+        private bool isSend = false;
         private const int MAX_LEN = 4096;
+
         private byte[] sendData = new byte[MAX_LEN];
         private byte[] receiveData = new byte[MAX_LEN];
         private Thread networkThread = null;
 
-        private bool isSend = false;
-
-        NetworkStream networkStream = null;
         TcpClient client = null;
+        NetworkStream networkStream = null;
         
         public string sendMessage()
         {
@@ -78,9 +79,6 @@ namespace Baskin_Kiosk.Network
                     if (!isSend)
                     {
                         MessageBox.Show(response);
-                        object _lock = new object();
-                        BindingOperations.EnableCollectionSynchronization(App.messageViewModel.messageList, _lock);
-                        //App.Current.Dispatcher.Invoke(() => BindingOperations.EnableCollectionSynchronization(App.messageViewModel.messageList, _lock));
                     }
                 }
                 catch (Exception ex)
