@@ -4,6 +4,7 @@ using Baskin_Kiosk.Model.DAO;
 using Baskin_Kiosk.Network;
 using Baskin_Kiosk.Util;
 using Baskin_Kiosk.View.HomePage;
+using Baskin_Kiosk.View.SelectPlace;
 using Baskin_Kiosk.ViewModel;
 using MySql.Data.MySqlClient;
 using System;
@@ -26,7 +27,7 @@ namespace Baskin_Kiosk.View.PaymentPage
 
             MemberModel member = memberDAO.getMember(orderType, e);
 
-            int orderNumber = getLastNum() + 1;
+            int orderNumber = GetLastNum() + 1;
             string lastNum = orderNumber < 10 ? "00" + orderNumber : orderNumber < 100 ? "0" + orderNumber.ToString() : orderNumber.ToString();
 
             userName.Content = "주문자: " + member.name;
@@ -53,9 +54,12 @@ namespace Baskin_Kiosk.View.PaymentPage
             }
 
             serverConnection.sendMessage(packet.Menus, lastNum);
+
+            Seat.lstSeat[Seat.selectedSeat.seatNumber - 1].time = 60;
+            Seat.lstSeat[Seat.selectedSeat.seatNumber - 1].UseSeat();
         }
 
-        public int getLastNum()
+        public int GetLastNum()
         {
             DBConnection connection = new DBConnection();
             connection.getConnection();

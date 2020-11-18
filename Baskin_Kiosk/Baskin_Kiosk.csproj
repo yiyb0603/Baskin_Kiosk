@@ -132,7 +132,7 @@
     <Compile Include="Util\DBConnection.cs" />
     <Compile Include="Network\ServerConnection.cs" />
     <Compile Include="ViewModel\MessageViewModel.cs" />
-    <Compile Include="ViewModel\SeatViewModel.cs" />
+    <Compile Include="Model\SeatModel.cs" />
     <Compile Include="View\HomePage\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>

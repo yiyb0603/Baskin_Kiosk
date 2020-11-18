@@ -18,7 +18,7 @@
                 FontWeight="SemiBold"
                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                BorderThickness="0" SelectionChanged="seatList_SelectionChanged">
+                BorderThickness="0" SelectionChanged="SeatList_SelectionChanged">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
@@ -30,7 +30,7 @@
                             <TextBlock Text="{Binding seatNumber}" HorizontalAlignment="Center" Margin="0 60 0 0"></TextBlock>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="남은시간: "/>
-                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="timeText"
                                 Text="{Binding time}" FontSize="24" FontWeight="Bold" Foreground="Red"/>
                             </StackPanel>
                         </StackPanel>
