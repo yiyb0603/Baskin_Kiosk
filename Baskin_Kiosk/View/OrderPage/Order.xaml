@@ -12,7 +12,7 @@
     <Grid>
         <StackPanel Orientation="Horizontal">
             <StackPanel Margin ="20px" HorizontalAlignment="Left">
-                <ListBox x:Name="categoryMenus" Height="30" VerticalAlignment="Top" SelectionChanged="categoryChange">
+                <ListBox x:Name="categoryMenus" Height="30" VerticalAlignment="Top" SelectionChanged="CategoryChange">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal" />
@@ -34,7 +34,7 @@
                     VerticalAlignment="Top"
                     ScrollViewer.VerticalScrollBarVisibility="Auto"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                    SelectionChanged="menuList_SelectionChanged"
+                    SelectionChanged="MenuList_SelectionChanged"
                  >
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -58,8 +58,8 @@
                 </ListBox>
 
                 <StackPanel Orientation="Horizontal">
-                    <Button x:Name ="prevButton" Content="이전" Width="200" Padding="0 10px" Click="clickPrev" />
-                    <Button x:Name="nextButton" Content="다음" Width="200" Margin="100px 0 0 0" Padding="0 10px" Click="clickNext" />
+                    <Button x:Name ="prevButton" Content="이전" Width="200" Padding="0 10px" Click="ClickPrev" />
+                    <Button x:Name="nextButton" Content="다음" Width="200" Margin="100px 0 0 0" Padding="0 10px" Click="ClickNext" />
                 </StackPanel>
             </StackPanel>
 

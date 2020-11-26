@@ -8,7 +8,7 @@ namespace Baskin_Kiosk.ViewModel
     {
         DispatcherTimer useTimer = new DispatcherTimer();
 
-        public bool used = false;
+        public bool isEmpty { get; set; } = true;
         public int seatNumber { get; set; }
         public int _time = 0;
 
@@ -40,7 +40,7 @@ namespace Baskin_Kiosk.ViewModel
 
         public void UseSeat()
         {
-            used = true;
+            isEmpty = false;
             useTimer.Start();
         }
 
@@ -50,7 +50,7 @@ namespace Baskin_Kiosk.ViewModel
             if (time <= 0)
             {
                 useTimer.Stop();
-                used = false;
+                isEmpty = true;
             }
         }
     }

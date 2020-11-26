@@ -55,8 +55,11 @@ namespace Baskin_Kiosk.View.PaymentPage
 
             serverConnection.sendMessage(packet.Menus, lastNum);
 
-            Seat.lstSeat[Seat.selectedSeat.seatNumber - 1].time = 60;
-            Seat.lstSeat[Seat.selectedSeat.seatNumber - 1].UseSeat();
+            if (App.selectedSeat != null)
+            {
+                App.lstSeat[App.selectedSeat.seatNumber - 1].time = 60;
+                App.lstSeat[App.selectedSeat.seatNumber - 1].UseSeat();
+            }
         }
 
         public int GetLastNum()

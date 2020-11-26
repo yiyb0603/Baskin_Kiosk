@@ -24,9 +24,11 @@ namespace Baskin_Kiosk.Network
         
         public string sendMessage()
         {
-            MsgPacket packet = new MsgPacket();
-            packet.MSGType = "0";
-            packet.Id = "2205";
+            MsgPacket packet = new MsgPacket
+            {
+                MSGType = "0",
+                Id = "2205"
+            };
 
             String JsonStr = JsonConvert.SerializeObject(packet);
             this.sendData = Encoding.UTF8.GetBytes(JsonStr);
@@ -50,6 +52,7 @@ namespace Baskin_Kiosk.Network
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+                threadEnd();
             }
 
             return null;
@@ -57,29 +60,34 @@ namespace Baskin_Kiosk.Network
 
         public async void receiveMessage()
         {
-            IPEndPoint serverEP = new IPEndPoint(IPAddress.Any, 1000);
-            NetworkStream receiveStream = client.GetStream();
-            int readData = 0;
-            string response = "";
-
-            while (true)
+            try
             {
-                try
-                {
-                    isSend = false;
-                    readData = await receiveStream.ReadAsync(receiveData, 0, receiveData.Length);
-                    response = Encoding.UTF8.GetString(receiveData, 0, readData);
+                NetworkStream receiveStream = client.GetStream();
+                int readData = 0;
+                string response = "";
 
-                    if (!isSend)
+                while (true)
+                {
+                    try
                     {
-                        MessageBox.Show(response);
+                        isSend = false;
+                        readData = await receiveStream.ReadAsync(receiveData, 0, receiveData.Length);
+                        response = Encoding.UTF8.GetString(receiveData, 0, readData);
+
+                        if (!isSend)
+                        {
+                            MessageBox.Show(response);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                        break;
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                    break;
-                }
+            } catch(Exception e)
+            {
+                MessageBox.Show(e.ToString());
             }
         }
 
@@ -99,11 +107,13 @@ namespace Baskin_Kiosk.Network
 
         public void sendMessage(string message, bool? isGroup)
         {
-            MsgPacket packet = new MsgPacket();
-            packet.MSGType = "1";
-            packet.Id = "2205";
-            packet.Content = message;
-            packet.Group = (isGroup == true) ? true : false;
+            MsgPacket packet = new MsgPacket
+            {
+                MSGType = "1",
+                Id = "2205",
+                Content = message,
+                Group = (isGroup == true)
+            };
 
             string JsonStr = JsonConvert.SerializeObject(packet);
             this.sendData = Encoding.UTF8.GetBytes(JsonStr);
@@ -127,12 +137,14 @@ namespace Baskin_Kiosk.Network
 
         public String sendMessage(List<MsgOrderInfo> orderInfo, String orderNum)
         {
-            MsgPacket packet = new MsgPacket();
-            packet.MSGType = "2";
-            packet.Id = "2205";
-            packet.ShopName = "배스킨라빈스 구지점";
-            packet.Menus = orderInfo;
-            packet.OrderNumber = orderNum.ToString();
+            MsgPacket packet = new MsgPacket
+            {
+                MSGType = "2",
+                Id = "2205",
+                ShopName = "배스킨라빈스 구지점",
+                Menus = orderInfo,
+                OrderNumber = orderNum.ToString()
+            };
 
             String JsonStr = JsonConvert.SerializeObject(packet);
             this.sendData = Encoding.UTF8.GetBytes(JsonStr);
