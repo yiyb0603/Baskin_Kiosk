@@ -13,14 +13,16 @@ namespace Baskin_Kiosk
         public MainWindow()
         {
             InitializeComponent();
-            this.Loaded += MainWindow_Loaded;
+            Loaded += MainWindow_Loaded;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            DispatcherTimer timer = new DispatcherTimer();
+            DispatcherTimer timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(1000)
+            };
 
-            timer.Interval = TimeSpan.FromMilliseconds(1000);
             timer.Tick += new EventHandler(timerTick);
             timer.Start();
             LoginPopup();
@@ -33,13 +35,16 @@ namespace Baskin_Kiosk
 
         private void LoginPopup()
         {
-            Login login = new Login();
-            login.Owner = this;
+            Login login = new Login
+            {
+                Owner = this
+            };
+
             bool? bResult = login.ShowDialog();
 
-            if(bResult == true)
+            if (bResult == true)
             {
-                Uri uri = new Uri("./View/HomePage/Home.xaml", UriKind.Relative);
+                new Uri("./View/HomePage/Home.xaml", UriKind.Relative);
             }
         }
 
@@ -50,7 +55,7 @@ namespace Baskin_Kiosk
             if (viewModel.selectMenuList.Count > 0)
             {
                 var confirmDialog = MessageBox.Show("주문을 취소하시겠습니까?", "잠시만요", MessageBoxButton.YesNo);
-                
+
                 if (confirmDialog == MessageBoxResult.Yes)
                 {
                     viewModel.clearMenuList();

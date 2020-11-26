@@ -11,6 +11,7 @@
     <Grid>
         <StackPanel>
             <ListBox x:Name="seatList"
+                x:FieldModifier="public"
                 Width="606"
                 Height="600"
                 Margin="0 50 0 0"
@@ -24,10 +25,20 @@
                         <WrapPanel />
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="IsEnabled" Value="{Binding isEmpty}"></Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="LightCoral" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Width="200" Height="200" Orientation="Vertical" HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding seatNumber}" HorizontalAlignment="Center" Margin="0 60 0 0"></TextBlock>
+                            <TextBlock Text="{Binding seatNumber}" HorizontalAlignment="Center" Margin="0 60 0 0"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="남은시간: "/>
                                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="timeText"

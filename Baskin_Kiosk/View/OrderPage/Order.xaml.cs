@@ -30,10 +30,10 @@ namespace Baskin_Kiosk.View.OrderPage
 
             tbl_totalPrice.Text = viewModel.totalAmountPrice.ToString();
             categoryMenus.ItemsSource = viewModel.categoryList;
-            viewModel.selectMenuList.CollectionChanged += collectionChanged;
+            viewModel.selectMenuList.CollectionChanged += CollectionChanged;
         }
 
-        private void collectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             int totalCount = 0;
             int totalPrice = 0;
@@ -47,44 +47,44 @@ namespace Baskin_Kiosk.View.OrderPage
             tbl_totalPrice.Text = totalPrice.ToString();
         }
 
-        private List<Food> getFoodList(int pageCount)
+        private List<Food> GetFoodList(int pageCount)
         {
             return viewModel.foodList.Where((food) => food.page == pageCount && food.categoryId == viewModel.currentCategory).ToList();
         }
 
-        private Food getFoodObject(ObservableCollection<Food> list, Food selectedFood)
+        private Food GetFoodObject(ObservableCollection<Food> list, Food selectedFood)
         {
             Food findObject = list.Where((food) => food.menuId == selectedFood.menuId).FirstOrDefault();
             return findObject;
         }
 
-        private void clickPrev(object sender, EventArgs e)
+        private void ClickPrev(object sender, EventArgs e)
         {
             --viewModel.pageCount;
-            menuList.ItemsSource = getFoodList(viewModel.pageCount);
+            menuList.ItemsSource = GetFoodList(viewModel.pageCount);
             nextButton.Visibility = Visibility.Visible;
 
-            if (getFoodList(viewModel.pageCount - 1).Count == 0)
+            if (GetFoodList(viewModel.pageCount - 1).Count == 0)
             {
                 prevButton.Visibility = Visibility.Hidden;
                 return;
             }
         }
 
-        private void clickNext(object sender, EventArgs e)
+        private void ClickNext(object sender, EventArgs e)
         {
             ++viewModel.pageCount;
-            menuList.ItemsSource = getFoodList(viewModel.pageCount);
+            menuList.ItemsSource = GetFoodList(viewModel.pageCount);
             prevButton.Visibility = Visibility.Visible;
 
-            if (getFoodList(viewModel.pageCount + 1).Count == 0)
+            if (GetFoodList(viewModel.pageCount + 1).Count == 0)
             {
                 nextButton.Visibility = Visibility.Hidden;
                 return;
             }
         }
 
-        private void categoryChange(object sender, SelectionChangedEventArgs e)
+        private void CategoryChange(object sender, SelectionChangedEventArgs e)
         {
             int category = categoryMenus.SelectedIndex;
             viewModel.currentCategory = category;
@@ -98,10 +98,10 @@ namespace Baskin_Kiosk.View.OrderPage
                 return;
             }
 
-            menuList.ItemsSource = getFoodList(viewModel.pageCount);
+            menuList.ItemsSource = GetFoodList(viewModel.pageCount);
         }
 
-        private void menuList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void MenuList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Food selectedFood = (Food)menuList.SelectedItem;
 
@@ -109,12 +109,12 @@ namespace Baskin_Kiosk.View.OrderPage
             {
                 viewModel.totalAmountPrice += (selectedFood.price - selectedFood.salePrice);
 
-                Food existFood = getFoodObject(viewModel.selectMenuList, selectedFood);
+                Food existFood = GetFoodObject(viewModel.selectMenuList, selectedFood);
                 if (existFood != null)
                 {
                     existFood.count++;
                     existFood.price += selectedFood.price;
-                    collectionChanged(null, null);
+                    CollectionChanged(null, null);
                 }
 
                 else
@@ -145,11 +145,11 @@ namespace Baskin_Kiosk.View.OrderPage
             // 증가 버튼을 누른 엘리먼트 객체
             Food senderFood = (sender as Button).DataContext as Food;
 
-            Food selectedFood = getFoodObject(viewModel.foodList, senderFood);
+            Food selectedFood = GetFoodObject(viewModel.foodList, senderFood);
 
             if (selectedFood != null)
             {
-                Food foodItem = getFoodObject(viewModel.selectMenuList, selectedFood);
+                Food foodItem = GetFoodObject(viewModel.selectMenuList, selectedFood);
 
                 if (foodItem != null)
                 {
@@ -159,18 +159,18 @@ namespace Baskin_Kiosk.View.OrderPage
                 }
             }
 
-            collectionChanged(null, null);
+            CollectionChanged(null, null);
         }
 
         private void Button_DownClick(object sender, RoutedEventArgs e)
         {
             // 감소 버튼을 누른 엘리먼트 객체
             Food senderFood = (sender as Button).DataContext as Food;
-            Food selectedFood = getFoodObject(viewModel.foodList, senderFood);
+            Food selectedFood = GetFoodObject(viewModel.foodList, senderFood);
 
             if (selectedFood != null)
             {
-                Food foodItem = getFoodObject(viewModel.selectMenuList, selectedFood);
+                Food foodItem = GetFoodObject(viewModel.selectMenuList, selectedFood);
 
                 if (foodItem != null)
                 {
@@ -180,21 +180,19 @@ namespace Baskin_Kiosk.View.OrderPage
 
                     if (foodItem.count <= 0)
                     {
-                        Food deleteItem = getFoodObject(viewModel.selectMenuList, selectedFood);
+                        Food deleteItem = GetFoodObject(viewModel.selectMenuList, selectedFood);
                         viewModel.selectMenuList.Remove(deleteItem);
                     }
                 }
             }
-            collectionChanged(null, null);
+            CollectionChanged(null, null);
         }
 
         private void selectMenuDelete(object sender, RoutedEventArgs e)
         {
-            Food selectedFood = (sender as Button).DataContext as Food;
-
-            if (selectedFood != null)
+            if ((sender as Button).DataContext is Food selectedFood)
             {
-                Food deleteItem = getFoodObject(viewModel.selectMenuList, selectedFood);
+                Food deleteItem = GetFoodObject(viewModel.selectMenuList, selectedFood);
 
                 viewModel.totalAmountPrice -= deleteItem.price;
                 viewModel.selectMenuList.Remove(deleteItem);
