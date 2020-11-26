@@ -53,7 +53,10 @@ namespace Baskin_Kiosk.View.PaymentPage
                 packet.Menus.Add(new MsgOrderInfo() { Count = food.count.ToString(), Name = food.menuName, Price = food.price.ToString() });
             }
 
-            serverConnection.sendMessage(packet.Menus, lastNum);
+            if (App.connection.isConnected)
+            {
+                serverConnection.sendMessage(packet.Menus, lastNum);
+            }
 
             if (App.selectedSeat != null)
             {

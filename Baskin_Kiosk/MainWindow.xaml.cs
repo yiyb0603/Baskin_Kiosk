@@ -1,4 +1,5 @@
 ﻿using Baskin_Kiosk.View.LoginPage;
+using Baskin_Kiosk.View.MessagePage;
 using Baskin_Kiosk.ViewModel;
 using System;
 using System.Windows;
@@ -23,14 +24,14 @@ namespace Baskin_Kiosk
                 Interval = TimeSpan.FromMilliseconds(1000)
             };
 
-            timer.Tick += new EventHandler(timerTick);
+            timer.Tick += new EventHandler(TimerTick);
             timer.Start();
             LoginPopup();
         }
 
-        private void timerTick(object sender, EventArgs e)
+        private void TimerTick(object sender, EventArgs e)
         {
-            CurrentTime.Content = DateTime.Now.ToString("yyyy년 MM월 dd일 HH시 mm분 ss초");
+            CurrentTime.Text = DateTime.Now.ToString("yyyy년 MM월 dd일 HH시 mm분 ss초");
         }
 
         private void LoginPopup()
@@ -48,7 +49,7 @@ namespace Baskin_Kiosk
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Home_Click(object sender, RoutedEventArgs e)
         {
             Uri uri = new Uri("./View/HomePage/Home.xaml", UriKind.Relative);
 
@@ -66,6 +67,18 @@ namespace Baskin_Kiosk
             }
 
             frame.Source = uri;
+        }
+
+        private void Message_Click(object sender, RoutedEventArgs e)
+        {
+            if (App.connection.isConnected)
+            {
+                Message message = new Message();
+                message.Show();
+            } else
+            {
+                MessageBox.Show("현재 서버가 작동중이지 않습니다.");
+            }
         }
     }
 }

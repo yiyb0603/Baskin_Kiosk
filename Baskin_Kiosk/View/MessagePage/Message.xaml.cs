@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Specialized;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace Baskin_Kiosk.View.MessagePage
@@ -8,7 +6,7 @@ namespace Baskin_Kiosk.View.MessagePage
     /// <summary>
     /// Interaction logic for Message.xaml
     /// </summary>
-    public partial class Message : Page
+    public partial class Message : Window
     {
         public Message()
         {

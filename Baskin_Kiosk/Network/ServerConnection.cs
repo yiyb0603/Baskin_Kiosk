@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -18,6 +17,8 @@ namespace Baskin_Kiosk.Network
         private byte[] sendData = new byte[MAX_LEN];
         private byte[] receiveData = new byte[MAX_LEN];
         private Thread networkThread = null;
+
+        public bool isConnected = false;
 
         TcpClient client = null;
         NetworkStream networkStream = null;
@@ -47,12 +48,15 @@ namespace Baskin_Kiosk.Network
 
                 String getResponse = Encoding.UTF8.GetString(response, 0, readData);
                 client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
+
+                this.isConnected = true;
                 return getResponse;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
-                threadEnd();
+                this.isConnected = false;
+                MessageBox.Show("현재 서버가 작동중이지 않습니다.");
+                this.threadEnd();
             }
 
             return null;
@@ -81,7 +85,8 @@ namespace Baskin_Kiosk.Network
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.ToString());
+                        MessageBox.Show("서버와 연결이 닫혔습니다.");
+                        this.isConnected = false;
                         break;
                     }
                 }
@@ -93,8 +98,11 @@ namespace Baskin_Kiosk.Network
 
         public void threadStart()
         {
-            this.networkThread = new Thread(new ThreadStart(receiveMessage));
-            networkThread.Start();
+            if (this.isConnected)
+            {
+                this.networkThread = new Thread(new ThreadStart(receiveMessage));
+                networkThread.Start();
+            }
         }
 
         public void threadEnd()

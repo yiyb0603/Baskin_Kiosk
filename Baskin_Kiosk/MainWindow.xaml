@@ -9,27 +9,31 @@
         Title="MainWindow" Height="1040" Width="1920">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60px"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Background="Gray">
-            <Label
+            <TextBlock
                 x:Name="CurrentTime"
 				Foreground ="white"
 				HorizontalAlignment ="Right"
-				/>
-            <Button FontSize="30" Width="50" Click="Button_Click">🏤</Button>
+                VerticalAlignment="Center"
+                Margin="0 0 10px 0"
+                FontSize="14px"
+			 />
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button FontSize="30" Width="50" Height="50" Margin="0 0 20px 0" Click="Home_Click">🏤</Button>
+                <Button FontSize="30" Width="50" Height="50" Click="Message_Click">💬</Button>
+            </StackPanel>
         </Grid>
 
-        <!--<Frame x:Name="frame"
+        <Frame
+               x:Name="frame"
                Grid.Row="1"
                NavigationUIVisibility="Hidden"
-               Source="/View/MessagePage/Message.xaml"/>-->
-
-        <Frame x:Name="frame"
-               Grid.Row="1"
-               NavigationUIVisibility="Hidden"
-               Source="/View/HomePage/Home.xaml"/>
+               Source="/View/HomePage/Home.xaml"
+         />
     </Grid>
 </Window>
