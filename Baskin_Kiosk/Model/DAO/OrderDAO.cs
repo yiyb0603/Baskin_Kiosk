@@ -1,14 +1,16 @@
 ﻿using Baskin_Kiosk.Util;
 using Baskin_Kiosk.ViewModel;
+using MySql.Data.MySqlClient;
 
 namespace Baskin_Kiosk.Model.DAO
 {
     public class OrderDAO
     {
         private OrderViewModel viewModel = App.orderViewModel;
+        DBConnection connection = new DBConnection();
+
         public void orderMenu()
         {
-            DBConnection connection = new DBConnection();
             connection.getConnection();
 
             foreach (OrderModel order in viewModel.orderMenuList)
@@ -22,6 +24,23 @@ namespace Baskin_Kiosk.Model.DAO
             }
 
             connection.closeConnection();
+        }
+
+        public string getTotalPrice()
+        {
+            int totalPrice = 0;
+            connection.getConnection();
+            string sql = "select total_price from kiosk.order WHERE date(order_time) <= date(now())";
+
+            connection.setCommand(sql);
+            MySqlDataReader reader = connection.executeReader();
+
+            while (reader.Read())
+            {
+                totalPrice += int.Parse(reader["total_price"].ToString());
+            }
+
+            return totalPrice.ToString();
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Baskin_Kiosk
 
         private void TimerTick(object sender, EventArgs e)
         {
-            string date = DateTime.Now.ToString("yyyy년 MM월 dd일 tt HH시 mm분 ss초 ddd요일", new CultureInfo("ko-KR"));
+            string date = DateTime.Now.ToString("yyyy년 MM월 dd일 ddd요일 tt HH시 mm분 ss초", new CultureInfo("ko-KR"));
             CurrentTime.Text = date;
         }
 
@@ -59,11 +59,12 @@ namespace Baskin_Kiosk
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
-            Uri uri = new Uri("./View/HomePage/Home.xaml", UriKind.Relative);
+            const string HOME_URI = "./View/HomePage/Home.xaml";
+            Uri uri = new Uri(HOME_URI, UriKind.Relative);
 
             if (viewModel.selectMenuList.Count > 0)
             {
-                var confirmDialog = MessageBox.Show("주문을 취소하시겠습니까?", "잠시만요", MessageBoxButton.YesNo);
+                MessageBoxResult confirmDialog = MessageBox.Show("주문을 취소하시겠습니까?", "잠시만요", MessageBoxButton.YesNo);
 
                 if (confirmDialog == MessageBoxResult.Yes)
                 {
