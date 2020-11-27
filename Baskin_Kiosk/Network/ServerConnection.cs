@@ -1,4 +1,5 @@
-﻿using Baskin_Kiosk.Util;
+﻿using Baskin_Kiosk.Model.DAO;
+using Baskin_Kiosk.Util;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace Baskin_Kiosk.Network
         private byte[] response = new byte[MAX_LEN];
         private Thread networkThread = null;
 
+        private OrderDAO orderDAO = new OrderDAO();
         public bool isConnected = false;
 
         TcpClient client = null;
@@ -96,6 +98,12 @@ namespace Baskin_Kiosk.Network
                         {
                             if (response.Length > 0)
                             {
+                                if (response.IndexOf("총매출액") > -1)
+                                {
+                                    string totalPrice = "현재 총 매출액은 " + orderDAO.getTotalPrice() + "원 입니다.";
+                                    this.sendMessage(totalPrice, true);
+                                    break;
+                                }
                                 MessageBox.Show(response);
                             } else
                             {
