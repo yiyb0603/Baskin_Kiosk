@@ -32,16 +32,37 @@ namespace Baskin_Kiosk.View.LoginPage
                 }
 
                 if (File.ReadAllText(FILE_PATH) == "TRUE")
-                {
-                    App.connection.sendMessage();
-                    App.connection.threadStart();
-                    closeLogin();
+                {   
+                    string response = App.connection.sendMessage();
+                    this.validateLogin(response);
                     return;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void validateLogin(string response)
+        {
+            switch (response)
+            {
+                // 서버가 꺼져있을때, 비연결 상태로 로그인 확인 눌렀을때
+                case "1":
+                    this.closeLogin();
+                    break;
+
+                // 서버가 꺼져있을때, 비연결 상태로 로그인 취소 눌렀을때
+                case "2":
+                    this.IsEnabled = true;
+                    break;
+
+                // 서버가 켜져있고, 로그인 됬을때
+                case "200":
+                    App.connection.threadStart();
+                    this.closeLogin();
+                    break;
             }
         }
 
@@ -68,17 +89,13 @@ namespace Baskin_Kiosk.View.LoginPage
             }
 
             string response = App.connection.sendMessage();
-            if (response == "200")
-            {
-                App.connection.threadStart();
-                closeLogin();
-            }
+            this.validateLogin(response);
         }
 
         private void closeLogin()
         {
-            DialogResult = true;
-            IsEnabled = false;
+            this.DialogResult = true;
+            this.IsEnabled = false;
         }
 
 #if false //타이틀바사용시 활용

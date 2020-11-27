@@ -64,11 +64,16 @@ namespace Baskin_Kiosk.Network
             catch (Exception ex)
             {
                 this.isConnected = false;
-                MessageBox.Show("현재 서버가 작동중이지 않습니다.");
-                this.threadEnd();
-            }
+                MessageBoxResult confirm = MessageBox.Show("서버가 꺼진상태로 로그인 하시겠습니까?", "잠시만요", MessageBoxButton.YesNo);
 
-            return null;
+                if (confirm == MessageBoxResult.Yes)
+                {
+                    return "1";
+                } else
+                {
+                    return "2";
+                }
+            }
         }
 
         public async void receiveMessage()
@@ -89,7 +94,15 @@ namespace Baskin_Kiosk.Network
 
                         if (!isSend)
                         {
-                            MessageBox.Show(response);
+                            if (response.Length > 0)
+                            {
+                                MessageBox.Show(response);
+                            } else
+                            {
+                                this.isConnected = false;
+                                MessageBox.Show("서버와 연결이 종료되었습니다.");
+                                break;
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -99,7 +112,7 @@ namespace Baskin_Kiosk.Network
                         break;
                     }
                 }
-            } catch(Exception e)
+            } catch (Exception e)
             {
                 MessageBox.Show(e.ToString());
             }
