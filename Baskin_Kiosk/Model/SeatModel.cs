@@ -8,9 +8,11 @@ namespace Baskin_Kiosk.ViewModel
     {
         DispatcherTimer useTimer = new DispatcherTimer();
 
-        public bool isEmpty { get; set; } = true;
-        public int seatNumber { get; set; }
         public int _time = 0;
+        public bool _isEmpty = true;
+        public string _paidTime = "";
+
+        public int seatNumber { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -32,6 +34,32 @@ namespace Baskin_Kiosk.ViewModel
             }
         }
 
+        public string paidTime
+        {
+            get
+            {
+                return _paidTime;
+            }
+            set
+            {
+                _paidTime = value;
+                OnPropertyChanged(nameof(paidTime));
+            } 
+        }
+
+        public bool isEmpty
+        {
+            get
+            {
+                return _isEmpty;
+            }
+            set
+            {
+                _isEmpty = value;
+                OnPropertyChanged(nameof(isEmpty));
+            }
+        }
+
         public SeatModel()
         {
             useTimer.Interval = TimeSpan.FromSeconds(1);
@@ -42,6 +70,7 @@ namespace Baskin_Kiosk.ViewModel
         {
             isEmpty = false;
             useTimer.Start();
+            paidTime = "결제시간: " + DateTime.Now.ToString("HH시 mm분 ss초");
         }
 
         private void UseTimer_Tick(object sender, EventArgs e)
@@ -51,6 +80,7 @@ namespace Baskin_Kiosk.ViewModel
             {
                 useTimer.Stop();
                 isEmpty = true;
+                paidTime = "";
             }
         }
     }

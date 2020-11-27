@@ -8,18 +8,13 @@ namespace Baskin_Kiosk.View.SelectPlace
 {
     public partial class Seat : Page
     {
-        private OrderViewModel viewModel = App.orderViewModel;
+        private readonly OrderViewModel viewModel = App.orderViewModel;
 
         public Seat()
         {
             InitializeComponent();
 
             seatList.ItemsSource = App.lstSeat;
-        }
-
-        public void DisableSeat(int seatNumber)
-        {
-            ((ListBoxItem)seatList.Items[seatNumber]).IsEnabled = false;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
