@@ -16,12 +16,31 @@ namespace Baskin_Kiosk.Network
 
         private byte[] sendData = new byte[MAX_LEN];
         private byte[] receiveData = new byte[MAX_LEN];
+        private byte[] response = new byte[MAX_LEN];
         private Thread networkThread = null;
 
         public bool isConnected = false;
 
         TcpClient client = null;
         NetworkStream networkStream = null;
+
+        private void messageSettings()
+        {
+            if (this.client == null)
+            {
+                this.client = new TcpClient(Constants.SERVER_ADDRESS, Constants.SERVER_PORT); // (ip주소 , 포트 번호)
+                networkStream = this.client.GetStream();
+            }
+
+            networkStream.Write(this.sendData, 0, this.sendData.Length);
+        }
+
+        private string getResponse()
+        {
+            Int32 readData = networkStream.Read(this.response, 0, this.response.Length);
+            String response = Encoding.UTF8.GetString(this.response, 0, readData);
+            return response;
+        }
         
         public string sendMessage()
         {
@@ -36,21 +55,11 @@ namespace Baskin_Kiosk.Network
 
             try
             {
-                if (client == null)
-                {
-                    client = new TcpClient(Constants.SERVER_ADDRESS, Constants.SERVER_PORT); // (ip주소 , 포트 번호)
-                    networkStream = client.GetStream();
-                }
-
-                networkStream.Write(sendData, 0, sendData.Length);
-                byte[] response = new byte[MAX_LEN];
-                Int32 readData = networkStream.Read(response, 0, response.Length);
-
-                String getResponse = Encoding.UTF8.GetString(response, 0, readData);
+                messageSettings();
                 client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
 
                 this.isConnected = true;
-                return getResponse;
+                return getResponse();
             }
             catch (Exception ex)
             {
@@ -128,13 +137,7 @@ namespace Baskin_Kiosk.Network
 
             try
             {
-                if (client == null)
-                {
-                    client = new TcpClient(Constants.SERVER_ADDRESS, Constants.SERVER_PORT); // (ip주소 , 포트 번호)
-                    networkStream = client.GetStream();
-                }
-
-                networkStream.Write(sendData, 0, sendData.Length);
+                messageSettings();
                 isSend = true;
             }
             catch (Exception ex)
@@ -149,9 +152,10 @@ namespace Baskin_Kiosk.Network
             {
                 MSGType = "2",
                 Id = "2205",
+                Group = true,
                 ShopName = "배스킨라빈스 구지점",
                 Menus = orderInfo,
-                OrderNumber = orderNum.ToString()
+                OrderNumber = orderNum.ToString(),
             };
 
             String JsonStr = JsonConvert.SerializeObject(packet);
@@ -159,18 +163,8 @@ namespace Baskin_Kiosk.Network
 
             try
             {
-                if (client == null)
-                {
-                    client = new TcpClient(Constants.SERVER_ADDRESS, Constants.SERVER_PORT); // (ip주소 , 포트 번호)
-                    networkStream = client.GetStream();
-                }
-
-                networkStream.Write(sendData, 0, sendData.Length);
-                byte[] response = new byte[MAX_LEN];
-                Int32 readData = networkStream.Read(response, 0, response.Length);
-
-                String getResponse = Encoding.UTF8.GetString(response, 0, readData);
-                return getResponse;
+                messageSettings();
+                return getResponse();
             }
             catch (Exception ex)
             {

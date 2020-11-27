@@ -14,6 +14,11 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Background="Gray">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button FontSize="30" Width="50" Height="50" Margin="0 0 20px 0" Click="Home_Click">🏤</Button>
+                <Button FontSize="30" Width="50" Height="50" Click="Message_Click">💬</Button>
+            </StackPanel>
+
             <TextBlock
                 x:Name="CurrentTime"
 				Foreground ="white"
@@ -22,11 +27,6 @@
                 Margin="0 0 10px 0"
                 FontSize="14px"
 			 />
-            
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button FontSize="30" Width="50" Height="50" Margin="0 0 20px 0" Click="Home_Click">🏤</Button>
-                <Button FontSize="30" Width="50" Height="50" Click="Message_Click">💬</Button>
-            </StackPanel>
         </Grid>
 
         <Frame

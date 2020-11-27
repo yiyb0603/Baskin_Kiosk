@@ -2,6 +2,7 @@
 using Baskin_Kiosk.View.MessagePage;
 using Baskin_Kiosk.ViewModel;
 using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -14,7 +15,8 @@ namespace Baskin_Kiosk
         public MainWindow()
         {
             InitializeComponent();
-            Loaded += MainWindow_Loaded;
+            this.Loaded += MainWindow_Loaded;
+            this.Unloaded += MainWindow_Unloaded;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -29,9 +31,15 @@ namespace Baskin_Kiosk
             LoginPopup();
         }
 
+        private void MainWindow_Unloaded(object sender, RoutedEventArgs e)
+        {
+            App.connection.threadEnd();
+        }
+
         private void TimerTick(object sender, EventArgs e)
         {
-            CurrentTime.Text = DateTime.Now.ToString("yyyy년 MM월 dd일 HH시 mm분 ss초");
+            string date = DateTime.Now.ToString("yyyy년 MM월 dd일 tt HH시 mm분 ss초 ddd요일", new CultureInfo("ko-KR"));
+            CurrentTime.Text = date;
         }
 
         private void LoginPopup()

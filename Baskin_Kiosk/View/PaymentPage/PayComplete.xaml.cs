@@ -63,6 +63,8 @@ namespace Baskin_Kiosk.View.PaymentPage
                 App.lstSeat[App.selectedSeat.seatNumber - 1].time = 60;
                 App.lstSeat[App.selectedSeat.seatNumber - 1].UseSeat();
             }
+
+            orderViewModel.clearMenuList();
         }
 
         public int GetLastNum()
