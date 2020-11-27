@@ -28,7 +28,12 @@ namespace Baskin_Kiosk.View.PaymentPage
         {
             if (resultLabel.Text != "")
             {
-                NavigationService.Navigate(new PayComplete(1, resultLabel.Text));
+                PayComplete pay = new PayComplete(1, resultLabel.Text);
+
+                if (pay != null)
+                {
+                    NavigationService.Navigate(pay);
+                }
             }
         }
     }
