@@ -11,8 +11,8 @@
     <Grid>
         <StackPanel>
             <Label>현금 계산을 선택하셨습니다. 현금영수증카드를 제시해주세요</Label>
-            <Label x:Name="price" Content="총 금액: "></Label>
             <TextBox x:Name="resultLabel" Width='500' Margin="0 500 0 0" Text=""></TextBox>
+            <Label x:Name="price" Content="총 금액: " HorizontalAlignment="Center"></Label>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Content="이전" Width="150" HorizontalAlignment="Left" Margin="0 100 800 0" Click="Prevbutton_Click"/>

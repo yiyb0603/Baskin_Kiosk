@@ -31,8 +31,10 @@ namespace Baskin_Kiosk.View.PaymentPage
             string lastNum = orderNumber < 10 ? "00" + orderNumber : orderNumber < 100 ? "0" + orderNumber.ToString() : orderNumber.ToString();
 
             userName.Content = "주문자: " + member.name;
+            cardNum.Content = "카드번호: " + e;
             totalPrice.Content = "총 금액: " + orderViewModel.totalAmountPrice;
             orderNum.Content = "주문번호: " + lastNum;
+            
 
             foreach (Food food in orderViewModel.selectMenuList)
             {

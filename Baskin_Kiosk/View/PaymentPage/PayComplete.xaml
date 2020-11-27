@@ -11,7 +11,8 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center">
             <Label>결제되었습니다.</Label>
-            <Label x:Name="userName">주문자: </Label>
+            <Label x:Name="userName">주문자:</Label>
+            <Label x:Name="cardNum">카드번호:</Label>
             <Label x:Name="totalPrice">총 금액: </Label>
             <Label x:Name="orderNum">주문번호: </Label>
 
