@@ -4,9 +4,6 @@ using System.IO;
 
 namespace Baskin_Kiosk.View.LoginPage
 {
-    /// <summary>
-    /// Interaction logic for Login.xaml
-    /// </summary>
     public partial class Login : Window
     {
         private const string ADMIN_ID = "admin";
@@ -18,7 +15,7 @@ namespace Baskin_Kiosk.View.LoginPage
         public Login()
         {
             InitializeComponent();
-            Loaded += Login_Loaded;
+            this.Loaded += Login_Loaded;
         }
 
         private void Login_Loaded(object sender, RoutedEventArgs e)

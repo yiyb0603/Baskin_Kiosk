@@ -14,6 +14,29 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Background="Gray">
+            <StackPanel Orientation="Horizontal" Margin="20px 0 0 0" VerticalAlignment="Center">
+                <StackPanel x:Name="serverConnectedDot" Width="15" Height="16" Background="Red" Margin="0 0 3px 0" VerticalAlignment="Center" />
+                <TextBlock
+                    x:Name="serverConnected"
+                    FontSize="16px"
+                    Foreground="White"
+                />
+
+                <Button
+                    x:Name="connectionBtn"
+                    Margin="5px 0 0 0"
+                    Background="Blue"
+                    Padding="5px 2px"
+                    Cursor="Hand"
+                    Foreground="White"
+                    BorderThickness="0"
+                    FontSize="16px"
+                    VerticalContentAlignment="Center"
+                    VerticalAlignment="Center"
+                    Click="TryConnection"
+                 >연결</Button>
+            </StackPanel>
+
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button FontSize="30" Width="50" Height="50" Margin="0 0 20px 0" Click="Home_Click">🏤</Button>
                 <Button FontSize="30" Width="50" Height="50" Click="Message_Click">💬</Button>

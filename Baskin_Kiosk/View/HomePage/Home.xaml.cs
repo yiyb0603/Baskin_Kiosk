@@ -1,4 +1,5 @@
-﻿using Baskin_Kiosk.View.OrderPage;
+﻿using Baskin_Kiosk.View.LoginPage;
+using Baskin_Kiosk.View.OrderPage;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,7 +14,6 @@ namespace Baskin_Kiosk.View.HomePage
         public Home()
         {
             InitializeComponent();
-
             BaskinCf.Play();
         }
 
