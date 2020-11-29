@@ -15,7 +15,7 @@
 
         <Grid Grid.Row="0" Background="Gray">
             <StackPanel Orientation="Horizontal" Margin="20px 0 0 0" VerticalAlignment="Center">
-                <StackPanel x:Name="serverConnectedDot" Width="15" Height="16" Background="Red" Margin="0 0 3px 0" VerticalAlignment="Center" />
+                <StackPanel x:Name="serverConnectedDot" Width="15" Height="16" Margin="0 0 3px 0" VerticalAlignment="Center" />
                 <TextBlock
                     x:Name="serverConnected"
                     FontSize="16px"
@@ -35,6 +35,8 @@
                     VerticalAlignment="Center"
                     Click="TryConnection"
                  >연결</Button>
+
+                <TextBlock x:Name="connectedTime" Margin="10px 0 0 0" FontSize="14px" VerticalAlignment="Center" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
