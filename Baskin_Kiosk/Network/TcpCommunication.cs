@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace Baskin_Kiosk.Network
 {
-    public class ServerConnection
+    public class TcpCommunication
     {
         private bool isSend = false;
         private const int MAX_LEN = 4096;
@@ -21,70 +21,36 @@ namespace Baskin_Kiosk.Network
         private byte[] response = new byte[MAX_LEN];
         private Thread networkThread = null;
 
-        private OrderDAO orderDAO = new OrderDAO();
+        private readonly OrderDAO orderDAO = new OrderDAO();
         public static bool isConnected = false;
 
         TcpClient client = null;
         NetworkStream networkStream = null;
 
-        public void messageSettings()
+        public void MessageSettings()
         {
-            this.client = new TcpClient(); // (ip주소 , 포트 번호)
+            client = new TcpClient(); // (ip주소 , 포트 번호)
 
             const int THIRD_SECOND = 3000;
             var result = client.BeginConnect(Constants.SERVER_ADDRESS, Constants.SERVER_PORT, null, null);
             result.AsyncWaitHandle.WaitOne(THIRD_SECOND, true);
 
-            networkStream = this.client.GetStream();
-            networkStream.Write(this.sendData, 0, this.sendData.Length);
+            networkStream = client.GetStream();
+            networkStream.Write(sendData, 0, sendData.Length);
         }
 
-        private void getResponse()
+        private void GetResponse()
         {
-            Int32 readData = networkStream.Read(this.response, 0, this.response.Length);
-            serverResponse = Encoding.UTF8.GetString(this.response, 0, readData);
+            int readData = networkStream.Read(response, 0, response.Length);
+            serverResponse = Encoding.UTF8.GetString(response, 0, readData);
 
             if (serverResponse == "200")
             {
                 isConnected = true;
             }
         }
-        
-        public string sendMessage()
-        {
-            MsgPacket packet = new MsgPacket
-            {
-                MSGType = "0",
-                Id = "2205"
-            };
 
-            string JsonStr = JsonConvert.SerializeObject(packet);
-            this.sendData = Encoding.UTF8.GetBytes(JsonStr);
-
-            try
-            {
-                
-
-                this.messageSettings();
-                this.getResponse();
-                return serverResponse;
-            }
-            catch (Exception ex)
-            {
-                isConnected = false;
-                MessageBoxResult confirm = MessageBox.Show("서버가 꺼진상태로 로그인 하시겠습니까?", "잠시만요", MessageBoxButton.YesNo);
-
-                if (confirm == MessageBoxResult.Yes)
-                {
-                    return "1";
-                } else
-                {
-                    return "2";
-                }
-            }
-        }
-
-        public async void receiveMessage()
+        public async void ReceiveMessage()
         {
             try
             {
@@ -106,44 +72,46 @@ namespace Baskin_Kiosk.Network
                             {
                                 if (response.IndexOf("총매출액") > -1)
                                 {
-                                    string totalPrice = "현재 총 매출액은 " + orderDAO.getTotalPrice() + "원 입니다.";
-                                    this.sendMessage(totalPrice, true);
+                                    string totalPrice = "현재 총 매출액은 " + orderDAO.GetTotalPrice() + "원 입니다.";
+                                    SendMessage(totalPrice, true);
                                     break;
                                 }
                                 MessageBox.Show(response);
-                            } else
+                            }
+                            else
                             {
                                 isConnected = false;
                                 MessageBox.Show("서버와 연결이 종료되었습니다.");
-                                this.client.Close();
-                                this.networkStream.Close();
+                                client.Close();
+                                networkStream.Close();
                                 break;
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         MessageBox.Show("서버와 연결이 닫혔습니다.");
                         isConnected = false;
                         break;
                     }
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 MessageBox.Show(e.ToString());
             }
         }
 
-        public void threadStart()
+        public void ThreadStart()
         {
             if (isConnected)
             {
-                this.networkThread = new Thread(new ThreadStart(receiveMessage));
+                networkThread = new Thread(new ThreadStart(ReceiveMessage));
                 networkThread.Start();
             }
         }
 
-        public void threadEnd()
+        public void ThreadEnd()
         {
             if (networkThread != null)
             {
@@ -151,7 +119,40 @@ namespace Baskin_Kiosk.Network
             }
         }
 
-        public void sendMessage(string message, bool? isGroup)
+        public string SendMessage()
+        {
+            MsgPacket packet = new MsgPacket
+            {
+                MSGType = "0",
+                Id = "2205"
+            };
+
+            string JsonStr = JsonConvert.SerializeObject(packet);
+            sendData = Encoding.UTF8.GetBytes(JsonStr);
+
+            try
+            {
+                MessageSettings();
+                GetResponse();
+                return serverResponse;
+            }
+            catch (Exception)
+            {
+                isConnected = false;
+                MessageBoxResult confirm = MessageBox.Show("서버가 꺼진상태로 로그인 하시겠습니까?", "잠시만요", MessageBoxButton.YesNo);
+
+                if (confirm == MessageBoxResult.Yes)
+                {
+                    return "1";
+                }
+                else
+                {
+                    return "2";
+                }
+            }
+        }
+
+        public void SendMessage(string message, bool? isGroup)
         {
             MsgPacket packet = new MsgPacket
             {
@@ -162,11 +163,11 @@ namespace Baskin_Kiosk.Network
             };
 
             string JsonStr = JsonConvert.SerializeObject(packet);
-            this.sendData = Encoding.UTF8.GetBytes(JsonStr);
+            sendData = Encoding.UTF8.GetBytes(JsonStr);
 
             try
             {
-                messageSettings();
+                MessageSettings();
                 isSend = true;
             }
             catch (Exception ex)
@@ -175,7 +176,7 @@ namespace Baskin_Kiosk.Network
             }
         }
 
-        public string sendMessage(List<MsgOrderInfo> orderInfo, String orderNum)
+        public string SendMessage(List<MsgOrderInfo> orderInfo, string orderNum)
         {
             MsgPacket packet = new MsgPacket
             {
@@ -187,13 +188,13 @@ namespace Baskin_Kiosk.Network
                 OrderNumber = orderNum.ToString(),
             };
 
-            String JsonStr = JsonConvert.SerializeObject(packet);
-            this.sendData = Encoding.UTF8.GetBytes(JsonStr);
+            string JsonStr = JsonConvert.SerializeObject(packet);
+            sendData = Encoding.UTF8.GetBytes(JsonStr);
 
             try
             {
-                messageSettings();
-                getResponse();
+                MessageSettings();
+                GetResponse();
                 return serverResponse;
             }
             catch (Exception ex)

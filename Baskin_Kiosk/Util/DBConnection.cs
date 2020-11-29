@@ -2,34 +2,34 @@
 
 namespace Baskin_Kiosk.Util
 {
-    public class DBConnection
+    public class DBConnection : IDB
     {
         private MySqlConnection connection = null;
         private MySqlCommand command = null;
 
-        public void setCommand(string sql)
+        public void SetCommand(string sql)
         {
             command = new MySqlCommand(sql, connection);
         }
 
-        public void executeNonQuery()
+        public void ExecuteNonQuery()
         {
             command.ExecuteNonQuery();
         }
 
-        public MySqlDataReader executeReader()
+        public MySqlDataReader ExecuteReader()
         {
             return command.ExecuteReader();
         }
 
-        public void getConnection()
+        public void GetConnection()
         {
             connection = new MySqlConnection(Constants.DB_HOST);
 
             connection.Open();
         }
 
-        public void closeConnection()
+        public void CloseConnection()
         {
             connection.Close();
         }

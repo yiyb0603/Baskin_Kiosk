@@ -30,7 +30,7 @@ namespace Baskin_Kiosk.View.LoginPage
 
                 if (File.ReadAllText(FILE_PATH) == "TRUE")
                 {   
-                    string response = App.connection.sendMessage();
+                    string response = App.connection.SendMessage();
                     this.validateLogin(response);
                     return;
                 }
@@ -57,7 +57,7 @@ namespace Baskin_Kiosk.View.LoginPage
 
                 // 서버가 켜져있고, 로그인 됬을때
                 case "200":
-                    App.connection.threadStart();
+                    App.connection.ThreadStart();
                     this.closeLogin();
                     break;
             }
@@ -85,7 +85,7 @@ namespace Baskin_Kiosk.View.LoginPage
                 File.WriteAllText(FILE_PATH, autoCheck.IsChecked == true ? "TRUE" : "FALSE");
             }
 
-            string response = App.connection.sendMessage();
+            string response = App.connection.SendMessage();
             this.validateLogin(response);
         }
 

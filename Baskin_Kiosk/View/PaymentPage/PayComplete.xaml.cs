@@ -16,17 +16,17 @@ namespace Baskin_Kiosk.View.PaymentPage
 {
     public partial class PayComplete : Page
     {
-        private MemberDAO memberDAO = new MemberDAO();
-        private OrderDAO orderDAO = new OrderDAO();
-        private OrderViewModel orderViewModel = App.orderViewModel;
-        private ServerConnection serverConnection = new ServerConnection();
-        private static bool isConnected = ServerConnection.isConnected;
+        private readonly MemberDAO memberDAO = new MemberDAO();
+        private readonly OrderDAO orderDAO = new OrderDAO();
+        private readonly OrderViewModel orderViewModel = App.orderViewModel;
+        private readonly TcpCommunication serverConnection = new TcpCommunication();
+        private static bool isConnected = TcpCommunication.isConnected;
 
         public PayComplete(int orderType, string e)
         {
             InitializeComponent();
 
-            MemberModel member = memberDAO.getMember(orderType, e);
+            MemberModel member = memberDAO.GetMember(orderType, e);
 
             int orderNumber = GetLastNum() + 1;
             string lastNum = orderNumber < 10 ? "00" + orderNumber : orderNumber < 100 ? "0" + orderNumber.ToString() : orderNumber.ToString();
@@ -47,7 +47,7 @@ namespace Baskin_Kiosk.View.PaymentPage
                     order.orderNum = orderNumber;
                 }
             }
-            orderDAO.orderMenu();
+            orderDAO.InsertOrderDB();
 
             MsgPacket packet = new MsgPacket();
 
@@ -58,7 +58,7 @@ namespace Baskin_Kiosk.View.PaymentPage
 
             if (isConnected)
             {
-                serverConnection.sendMessage(packet.Menus, lastNum);
+                serverConnection.SendMessage(packet.Menus, lastNum);
             }
 
             if (App.selectedSeat != null)
@@ -72,23 +72,23 @@ namespace Baskin_Kiosk.View.PaymentPage
 
         public int GetLastNum()
         {
-            DBConnection connection = new DBConnection();
-            connection.getConnection();
+            IDB connection = new DBConnection();
+            connection.GetConnection();
 
             int lastNum = 0;
 
             string sql = "SELECT order_num FROM kiosk.order ORDER BY order_num DESC LIMIT 1";
 
-            connection.setCommand(sql);
-            connection.executeNonQuery();
-            MySqlDataReader reader = connection.executeReader();
+            connection.SetCommand(sql);
+            connection.ExecuteNonQuery();
+            MySqlDataReader reader = connection.ExecuteReader();
 
             while (reader.Read())
             {
                 lastNum = int.Parse(reader["order_num"].ToString());
             }
 
-            connection.closeConnection();
+            connection.CloseConnection();
 
             if (lastNum > 100)
             {

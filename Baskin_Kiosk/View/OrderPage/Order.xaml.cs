@@ -13,7 +13,7 @@ namespace Baskin_Kiosk.View.OrderPage
 {
     public partial class Order : Page
     {
-        private OrderViewModel viewModel = App.orderViewModel;
+        private readonly OrderViewModel viewModel = App.orderViewModel;
 
         public Order()
         {
@@ -188,7 +188,7 @@ namespace Baskin_Kiosk.View.OrderPage
             CollectionChanged(null, null);
         }
 
-        private void selectMenuDelete(object sender, RoutedEventArgs e)
+        private void SelectMenuDelete(object sender, RoutedEventArgs e)
         {
             if ((sender as Button).DataContext is Food selectedFood)
             {
@@ -199,7 +199,7 @@ namespace Baskin_Kiosk.View.OrderPage
             }
         }
 
-        private void clearSelectMenu(object sender, RoutedEventArgs e)
+        private void ClearSelectMenu(object sender, RoutedEventArgs e)
         {
             if (viewModel.selectMenuList.Count > 0)
             {
@@ -207,7 +207,7 @@ namespace Baskin_Kiosk.View.OrderPage
             }
         }
 
-        private void prevPage(object sender, RoutedEventArgs e)
+        private void PrevPage(object sender, RoutedEventArgs e)
         {
             if (viewModel.selectMenuList.Count > 0)
             {
@@ -225,7 +225,7 @@ namespace Baskin_Kiosk.View.OrderPage
             NavigationService.GoBack();
         }
 
-        private void nextPage(object sender, RoutedEventArgs e)
+        private void NextPage(object sender, RoutedEventArgs e)
         {
             if (viewModel.selectMenuList.Count <= 0)
             {

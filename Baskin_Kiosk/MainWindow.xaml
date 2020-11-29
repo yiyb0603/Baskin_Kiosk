@@ -13,8 +13,15 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="Gray">
+        <Grid Grid.Row="0">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="2.5, 0" StartPoint="0, 0">
+                    <GradientStop Color="#DE5B9E" Offset="0"/>
+                    <GradientStop Color="#005EA6" Offset="0.5"/>
+                </LinearGradientBrush>
+            </Grid.Background>
             <StackPanel Orientation="Horizontal" Margin="20px 0 0 0" VerticalAlignment="Center">
+                <Image Source="Assets/Baskin-Robbins_logo.svg.png" HorizontalAlignment="Left"/>
                 <StackPanel x:Name="serverConnectedDot" Width="15" Height="16" Margin="0 0 3px 0" VerticalAlignment="Center" />
                 <TextBlock
                     x:Name="serverConnected"
@@ -40,8 +47,18 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button FontSize="30" Width="50" Height="50" Margin="0 0 20px 0" Click="Home_Click">🏤</Button>
-                <Button FontSize="30" Width="50" Height="50" Click="Message_Click">💬</Button>
+                <Button FontSize="30" Width="50" Height="50" Margin="0 0 20px 0" Click="Home_Click"
+                        Content="🏤" Foreground="white" BorderThickness="5, 5, 5, 5">
+                    <Button.Background>
+                        <SolidColorBrush Opacity="0" Color="White" />
+                    </Button.Background>
+                </Button>
+                <Button FontSize="30" Width="50" Height="50" Click="Message_Click"
+                        Content="💬" Foreground="White" BorderThickness="5, 5, 5, 5">
+                    <Button.Background>
+                        <SolidColorBrush Opacity="0" Color="White" />
+                    </Button.Background>
+                </Button>
             </StackPanel>
 
             <TextBlock

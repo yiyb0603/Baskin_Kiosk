@@ -7,27 +7,29 @@ namespace Baskin_Kiosk.Model.DAO
 {
     public class CategoryDAO
     {
-        DBConnection connection = new DBConnection();
+        readonly DBConnection connection = new DBConnection();
 
-        public List<Category> getCategories()
+        public List<Category> GetCategories()
         {
             List<Category> categoryList = new List<Category>();
-            connection.getConnection();
+            connection.GetConnection();
 
             string sql = "Select * from kiosk.category";
-            connection.setCommand(sql);
-            MySqlDataReader reader = connection.executeReader();
+            connection.SetCommand(sql);
+            MySqlDataReader reader = connection.ExecuteReader();
 
             while (reader.Read())
             {
-                Category category = new Category();
-                category.categoryId = int.Parse(reader["id"].ToString());
-                category.categoryName = reader["name"].ToString();
+                Category category = new Category
+                {
+                    categoryId = int.Parse(reader["id"].ToString()),
+                    categoryName = reader["name"].ToString()
+                };
 
                 categoryList.Add(category);
             }
 
-            connection.closeConnection();
+            connection.CloseConnection();
             return categoryList;
         }
 

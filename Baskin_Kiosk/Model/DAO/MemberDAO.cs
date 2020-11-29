@@ -5,16 +5,16 @@ namespace Baskin_Kiosk.Model.DAO
 {
     public class MemberDAO
     {
-        public MemberModel getMember(int type, string code)
+        public MemberModel GetMember(int type, string code)
         {
             MemberModel member = new MemberModel();
             DBConnection connection = new DBConnection();
-            connection.getConnection();
+            connection.GetConnection();
 
             string sql = "select * from kiosk.user where " + (type == 0 ? "qrcode = \"" + code + "\"": "barcode = \"" + code + "\"");
-            connection.setCommand(sql);
+            connection.SetCommand(sql);
 
-            MySqlDataReader reader = connection.executeReader();
+            MySqlDataReader reader = connection.ExecuteReader();
             while (reader.Read())
             {
                 member.id = int.Parse(reader["id"].ToString());
@@ -23,7 +23,7 @@ namespace Baskin_Kiosk.Model.DAO
                 member.barcode = reader["barcode"].ToString();
             }
 
-            connection.closeConnection();
+            connection.CloseConnection();
             return member;
         }
     }
