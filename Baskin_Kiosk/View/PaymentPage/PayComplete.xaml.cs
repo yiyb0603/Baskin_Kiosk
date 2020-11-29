@@ -20,6 +20,7 @@ namespace Baskin_Kiosk.View.PaymentPage
         private OrderDAO orderDAO = new OrderDAO();
         private OrderViewModel orderViewModel = App.orderViewModel;
         private ServerConnection serverConnection = new ServerConnection();
+        private static bool isConnected = ServerConnection.isConnected;
 
         public PayComplete(int orderType, string e)
         {
@@ -53,7 +54,7 @@ namespace Baskin_Kiosk.View.PaymentPage
                 packet.Menus.Add(new MsgOrderInfo() { Count = food.count.ToString(), Name = food.menuName, Price = food.price.ToString() });
             }
 
-            if (App.connection.isConnected)
+            if (isConnected)
             {
                 serverConnection.sendMessage(packet.Menus, lastNum);
             }

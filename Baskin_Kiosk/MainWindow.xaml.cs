@@ -6,13 +6,14 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Threading;
 using System.Windows.Media;
+using Baskin_Kiosk.Network;
+using System.Threading;
 
 namespace Baskin_Kiosk
 {
     public partial class MainWindow : Window
     {
         private OrderViewModel viewModel = App.orderViewModel;
-        private bool isConnected = App.connection.isConnected;
 
         BrushConverter converter = new BrushConverter();
         Brush red = null;
@@ -38,6 +39,27 @@ namespace Baskin_Kiosk
             timer.Tick += new EventHandler(TimerTick);
             timer.Start();
             LoginPopup();
+            startState();
+        }
+
+        private void startState()
+        {
+            Thread networkThread = new Thread(new ThreadStart(connectState));
+            networkThread.IsBackground = true;
+            networkThread.Start();
+        }
+
+        private void connectState()
+        {
+            while (true)
+            {
+                Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate
+                {
+                    serverConnected.Text = ServerConnection.isConnected ? "현재 서버와 연결 되어있습니다." : "현재 서버와 연결 되어있지 않습니다.";
+                    serverConnectedDot.Background = ServerConnection.isConnected ? this.green : this.red;
+                    connectionBtn.IsEnabled = !ServerConnection.isConnected;
+                 }));
+            }
         }
 
         private void MainWindow_Unloaded(object sender, RoutedEventArgs e)
@@ -49,9 +71,6 @@ namespace Baskin_Kiosk
         {
             string date = DateTime.Now.ToString("yyyy년 MM월 dd일 ddd요일 tt HH시 mm분 ss초", new CultureInfo("ko-KR"));
             CurrentTime.Text = date;
-
-            serverConnected.Text = this.isConnected ? "현재 서버와 연결 되어있습니다." : "현재 서버와 연결 되어있지 않습니다.";
-            serverConnectedDot.Background = this.isConnected ? this.green : this.red;
         }
 
         private void LoginPopup()
@@ -65,6 +84,7 @@ namespace Baskin_Kiosk
             if (bResult == true)
             {
                 new Uri("./View/HomePage/Home.xaml", UriKind.Relative);
+                connectedTime.Text = ServerConnection.isConnected ? "최근 서버 접속 시간: " + DateTime.Now.ToString("yyyy년 MM월 dd일 HH시 mm분 ss초") : "";
             }
         }
 
@@ -91,7 +111,7 @@ namespace Baskin_Kiosk
 
         private void Message_Click(object sender, RoutedEventArgs e)
         {
-            if (App.connection.isConnected)
+            if (ServerConnection.isConnected)
             {
                 Message message = new Message();
                 message.Show();
@@ -108,7 +128,8 @@ namespace Baskin_Kiosk
             if (response == "200")
             {
                 App.connection.threadStart();
-                connectionBtn.IsEnabled = false;
+                ServerConnection.isConnected = true;
+                connectedTime.Text = ServerConnection.isConnected ? "최근 서버 접속 시간: " + DateTime.Now.ToString("yyyy년 MM월 dd일 HH시 mm분 ss초") : "";
             }
         }
     }
