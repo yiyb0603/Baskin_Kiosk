@@ -13,9 +13,10 @@
         <StackPanel>
             <Label>카드 결제 페이지</Label>
             <qrcode:KQRWebCam x:Name="webcam" Margin="12" QrDecoded="webcam_QrDecoded" Width="640" Height="480"/>
-            <Label x:Name="price" Content="총 금액: "></Label>
+            <Label x:Name="price" Content="총 금액: " HorizontalAlignment="Center"></Label>
             <TextBox x:Name="resultLabel" Width='500' Margin="0 50 0 0"></TextBox>
             <Label x:Name="userName" Width="200" Height="50"></Label>
+            
             <Button Content="이전" Width="150" HorizontalAlignment="Left" Margin="70 0 0 0" Click="Button_Click"/>
         </StackPanel>
     </Grid>

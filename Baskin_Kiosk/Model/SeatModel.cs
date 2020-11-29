@@ -6,7 +6,7 @@ namespace Baskin_Kiosk.ViewModel
 {
     public class SeatModel : INotifyPropertyChanged
     {
-        DispatcherTimer useTimer = new DispatcherTimer();
+        readonly DispatcherTimer useTimer = new DispatcherTimer();
 
         public int _time = 0;
         public bool _isEmpty = true;

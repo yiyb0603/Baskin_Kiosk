@@ -1,17 +1,20 @@
 ﻿using Baskin_Kiosk.Util;
 using Baskin_Kiosk.ViewModel;
 using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace Baskin_Kiosk.Model.DAO
 {
-    public class OrderDAO
+    public class OrderDAO : IOrderDB
     {
-        private OrderViewModel viewModel = App.orderViewModel;
-        DBConnection connection = new DBConnection();
+        private readonly OrderViewModel viewModel = App.orderViewModel;
+        private readonly IDB connection = new DBConnection();
 
-        public void orderMenu()
+        public void InsertOrderDB()
         {
-            connection.getConnection();
+            connection.GetConnection();
 
             foreach (OrderModel order in viewModel.orderMenuList)
             {
@@ -19,21 +22,49 @@ namespace Baskin_Kiosk.Model.DAO
                 string valueSQL = "(" + order.userId + ", " + order.menuId + ", " + order.categoryId + ", " + order.seatId + ", " + (order.price + order.salePrice) + ", " +
                     order.salePrice + ", " + order.orderType + ", " + "'" + order.orderTime.ToString("yyyy-MM-dd HH:mm:ss") + "'" + ", " + order.orderNum + ")";
 
-                connection.setCommand(columnSQL + valueSQL);
-                connection.executeNonQuery();
+                connection.SetCommand(columnSQL + valueSQL);
+                connection.ExecuteNonQuery();
             }
 
-            connection.closeConnection();
+            connection.CloseConnection();
         }
 
-        public string getTotalPrice()
+        public List<OrderModel> ReadOrderDB()
+        {
+            string sql = "select * from kiosk.order";
+
+            List<OrderModel> orderModel = new List<OrderModel>();
+
+            connection.SetCommand(sql);
+            MySqlDataReader reader = connection.ExecuteReader();
+
+            while (reader.Read())
+            {
+                orderModel.Add(new OrderModel()
+                {
+                    userId = int.Parse(reader["user_id"].ToString()),
+                    menuId = int.Parse(reader["menu_id"].ToString()),
+                    categoryId = int.Parse(reader["category_id"].ToString()),
+                    seatId = int.Parse(reader["seat_id"].ToString()),
+                    price = int.Parse(reader["total_price"].ToString()),
+                    salePrice = int.Parse(reader["sale_price"].ToString()),
+                    orderType = int.Parse(reader["order_type"].ToString()),
+                    orderTime = DateTime.ParseExact(reader["order_time"].ToString(), "yyyy-MM-dd HH:mm:ss", new CultureInfo("ko-KR")),
+                    orderNum = int.Parse(reader["order_num"].ToString())
+                });
+            }
+
+            return orderModel;
+        }
+
+        public string GetTotalPrice()
         {
             int totalPrice = 0;
-            connection.getConnection();
+            connection.GetConnection();
             string sql = "select total_price from kiosk.order WHERE date(order_time) <= date(now())";
 
-            connection.setCommand(sql);
-            MySqlDataReader reader = connection.executeReader();
+            connection.SetCommand(sql);
+            MySqlDataReader reader = connection.ExecuteReader();
 
             while (reader.Read())
             {
@@ -42,5 +73,6 @@ namespace Baskin_Kiosk.Model.DAO
 
             return totalPrice.ToString();
         }
+
     }
 }

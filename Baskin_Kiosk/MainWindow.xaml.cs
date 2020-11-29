@@ -13,17 +13,16 @@ namespace Baskin_Kiosk
 {
     public partial class MainWindow : Window
     {
-        private OrderViewModel viewModel = App.orderViewModel;
-
-        BrushConverter converter = new BrushConverter();
+        private readonly OrderViewModel viewModel = App.orderViewModel;
+        readonly BrushConverter converter = new BrushConverter();
         Brush red = null;
         Brush green = null;
 
         public MainWindow()
         {
             InitializeComponent();
-            this.Loaded += MainWindow_Loaded;
-            this.Unloaded += MainWindow_Unloaded;
+            Loaded += MainWindow_Loaded;
+            Unloaded += MainWindow_Unloaded;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -39,32 +38,34 @@ namespace Baskin_Kiosk
             timer.Tick += new EventHandler(TimerTick);
             timer.Start();
             LoginPopup();
-            startState();
+            StartState();
         }
 
-        private void startState()
+        private void StartState()
         {
-            Thread networkThread = new Thread(new ThreadStart(connectState));
-            networkThread.IsBackground = true;
+            Thread networkThread = new Thread(new ThreadStart(ConnectState))
+            {
+                IsBackground = true
+            };
             networkThread.Start();
         }
 
-        private void connectState()
+        private void ConnectState()
         {
             while (true)
             {
                 Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate
                 {
-                    serverConnected.Text = ServerConnection.isConnected ? "현재 서버와 연결 되어있습니다." : "현재 서버와 연결 되어있지 않습니다.";
-                    serverConnectedDot.Background = ServerConnection.isConnected ? this.green : this.red;
-                    connectionBtn.IsEnabled = !ServerConnection.isConnected;
+                    serverConnected.Text = TcpCommunication.isConnected ? "현재 서버와 연결 되어있습니다." : "현재 서버와 연결 되어있지 않습니다.";
+                    serverConnectedDot.Background = TcpCommunication.isConnected ? green : red;
+                    connectionBtn.IsEnabled = !TcpCommunication.isConnected;
                  }));
             }
         }
 
         private void MainWindow_Unloaded(object sender, RoutedEventArgs e)
         {
-            App.connection.threadEnd();
+            App.connection.ThreadEnd();
         }
 
         private void TimerTick(object sender, EventArgs e)
@@ -84,7 +85,7 @@ namespace Baskin_Kiosk
             if (bResult == true)
             {
                 new Uri("./View/HomePage/Home.xaml", UriKind.Relative);
-                connectedTime.Text = ServerConnection.isConnected ? "최근 서버 접속 시간: " + DateTime.Now.ToString("yyyy년 MM월 dd일 HH시 mm분 ss초") : "";
+                connectedTime.Text = TcpCommunication.isConnected ? "최근 서버 접속 시간: " + DateTime.Now.ToString("yyyy년 MM월 dd일 HH시 mm분 ss초") : "";
             }
         }
 
@@ -111,7 +112,7 @@ namespace Baskin_Kiosk
 
         private void Message_Click(object sender, RoutedEventArgs e)
         {
-            if (ServerConnection.isConnected)
+            if (TcpCommunication.isConnected)
             {
                 Message message = new Message();
                 message.Show();
@@ -123,13 +124,13 @@ namespace Baskin_Kiosk
 
         private void TryConnection(object sender, RoutedEventArgs e)
         {
-            string response = App.connection.sendMessage();
+            string response = App.connection.SendMessage();
 
             if (response == "200")
             {
-                App.connection.threadStart();
-                ServerConnection.isConnected = true;
-                connectedTime.Text = ServerConnection.isConnected ? "최근 서버 접속 시간: " + DateTime.Now.ToString("yyyy년 MM월 dd일 HH시 mm분 ss초") : "";
+                App.connection.ThreadStart();
+                TcpCommunication.isConnected = true;
+                connectedTime.Text = TcpCommunication.isConnected ? "최근 서버 접속 시간: " + DateTime.Now.ToString("yyyy년 MM월 dd일 HH시 mm분 ss초") : "";
             }
         }
     }

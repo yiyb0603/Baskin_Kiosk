@@ -9,8 +9,8 @@ namespace Baskin_Kiosk.ViewModel
 {
     public class OrderViewModel : BindableBase
     {
-        public ObservableCollection<Food> foodList = new FoodDAO().getFoodList();
-        public List<Category> categoryList = new CategoryDAO().getCategories();
+        public ObservableCollection<Food> foodList = new FoodDAO().GetFoodList();
+        public List<Category> categoryList = new CategoryDAO().GetCategories();
 
         private int _pageCount = 1;
         private int _currentCategory = 0;

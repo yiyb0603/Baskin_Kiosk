@@ -7,29 +7,31 @@ namespace Baskin_Kiosk.Model.DAO
 {
     public class FoodDAO
     {
-        public ObservableCollection<Food> getFoodList()
+        public ObservableCollection<Food> GetFoodList()
         {
             DBConnection connection = new DBConnection();
 
             ObservableCollection<Food> foodList = new ObservableCollection<Food>();
-            connection.getConnection();
+            connection.GetConnection();
 
             string sql = "Select * from kiosk.menu";
-            connection.setCommand(sql);
-            MySqlDataReader reader = connection.executeReader();
+            connection.SetCommand(sql);
+            MySqlDataReader reader = connection.ExecuteReader();
 
             int i = 0;
             int categoryIndex = 1;
 
             while (reader.Read())
             {
-                Food food = new Food();
-                food.menuId = int.Parse(reader["id"].ToString());
-                food.menuName = reader["menu_name"].ToString();
-                food.price = int.Parse(reader["menu_price"].ToString());
-                food.imageSrc = reader["menu_image"].ToString();
-                food.categoryId = int.Parse(reader["category_id"].ToString());
-                food.salePrice = int.Parse(reader["menu_sale"].ToString());
+                Food food = new Food
+                {
+                    menuId = int.Parse(reader["id"].ToString()),
+                    menuName = reader["menu_name"].ToString(),
+                    price = int.Parse(reader["menu_price"].ToString()),
+                    imageSrc = reader["menu_image"].ToString(),
+                    categoryId = int.Parse(reader["category_id"].ToString()),
+                    salePrice = int.Parse(reader["menu_sale"].ToString())
+                };
 
                 if (categoryIndex != food.categoryId)
                 {
@@ -42,7 +44,7 @@ namespace Baskin_Kiosk.Model.DAO
                 foodList.Add(food);
             }
 
-            connection.closeConnection();
+            connection.CloseConnection();
             return foodList;
         }
     }

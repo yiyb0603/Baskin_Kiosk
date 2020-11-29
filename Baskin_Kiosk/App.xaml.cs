@@ -8,7 +8,7 @@ namespace Baskin_Kiosk
     public partial class App : Application
     {
         public static OrderViewModel orderViewModel { get; } = new OrderViewModel();
-        public static ServerConnection connection { get; } = new ServerConnection();
+        public static TcpCommunication connection { get; } = new TcpCommunication();
         public static MessageViewModel messageViewModel = new MessageViewModel();
 
         public static List<SeatModel> lstSeat = new List<SeatModel>()

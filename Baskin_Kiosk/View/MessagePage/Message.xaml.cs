@@ -24,7 +24,7 @@ namespace Baskin_Kiosk.View.MessagePage
         {
             string message = sendContent.Text;
             bool? isGroup = sendType.IsChecked;
-            App.connection.sendMessage(message, isGroup);
+            App.connection.SendMessage(message, isGroup);
 
             App.messageViewModel.setMessageList(message);
             sendContent.Text = "";
