@@ -128,6 +128,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Interface\ICategoryDB.cs" />
+    <Compile Include="Interface\IFoodDB.cs" />
+    <Compile Include="Interface\IMemberDB.cs" />
     <Compile Include="Model\DAO\CategoryDAO.cs" />
     <Compile Include="Model\DAO\CsvOrderDAO.cs" />
     <Compile Include="Model\DAO\OrderDAO.cs" />
@@ -151,6 +154,9 @@
     </Compile>
     <Compile Include="View\LoginPage\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManagementPage\Management.xaml.cs">
+      <DependentUpon>Management.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MessagePage\Message.xaml.cs">
       <DependentUpon>Message.xaml</DependentUpon>
@@ -207,6 +213,10 @@
     <Page Include="View\LoginPage\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManagementPage\Management.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\MessagePage\Message.xaml">
       <SubType>Designer</SubType>

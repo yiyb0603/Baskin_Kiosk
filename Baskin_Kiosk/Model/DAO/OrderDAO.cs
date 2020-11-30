@@ -62,19 +62,69 @@ namespace Baskin_Kiosk.Model.DAO
         public string GetTotalPrice()
         {
             int totalPrice = 0;
-            connection.GetConnection(Constants.DB_HOST);
-            string sql = "select total_price from kiosk.order WHERE date(order_time) <= date(now())";
+            connection.GetConnection();
+            string sql = "select total_price, sale_price from kiosk.order WHERE date(order_time) <= date(now())";
 
             connection.SetCommand(sql);
             MySqlDataReader reader = connection.ExecuteReader();
 
             while (reader.Read())
             {
-                totalPrice += int.Parse(reader["total_price"].ToString());
+                totalPrice += (int.Parse(reader["total_price"].ToString()) - int.Parse(reader["sale_price"].ToString()));
             }
 
             return totalPrice.ToString();
         }
 
+        public string GetSalePrice()
+        {
+            int salePrice = 0;
+            connection.GetConnection();
+            string sql = "select sale_price from kiosk.order";
+
+            connection.SetCommand(sql);
+            MySqlDataReader reader = connection.ExecuteReader();
+
+            while (reader.Read())
+            {
+                salePrice += int.Parse(reader["sale_price"].ToString());
+            }
+
+            return salePrice.ToString();
+        }
+
+        public string GetPurePrice()
+        {
+            int salePrice = 0;
+            connection.GetConnection();
+            string sql = "select total_price from kiosk.order";
+
+            connection.SetCommand(sql);
+            MySqlDataReader reader = connection.ExecuteReader();
+
+            while (reader.Read())
+            {
+                salePrice += int.Parse(reader["total_price"].ToString());
+            }
+
+            return salePrice.ToString();
+        }
+
+        public string GetTypePrice(int type) // 0 = 카드, 1 = 현금
+        {
+            int salePrice = 0;
+            connection.GetConnection();
+            string sql = "select total_price from kiosk.order where order_type = " + type;
+
+            connection.SetCommand(sql);
+            MySqlDataReader reader = connection.ExecuteReader();
+
+            while (reader.Read())
+            {
+                salePrice += int.Parse(reader["total_price"].ToString());
+            }
+
+            return salePrice.ToString();
+        }
     }
 }

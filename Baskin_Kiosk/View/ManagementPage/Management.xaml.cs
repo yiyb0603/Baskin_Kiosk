@@ -1,23 +1,6 @@
-﻿using Baskin_Kiosk.Common;
-using Baskin_Kiosk.ViewModel;
-using Baskin_Kiosk.Model;
+﻿using Baskin_Kiosk.Model.DAO;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MySql.Data.MySqlClient;
-using System.Data;
 using System.Windows.Threading;
 
 namespace Baskin_Kiosk.View.ManagementPage
@@ -32,9 +15,21 @@ namespace Baskin_Kiosk.View.ManagementPage
         int hour = 0;
         public DispatcherTimer timer = new DispatcherTimer();
 
+        private OrderDAO orderDAO = new OrderDAO();
+
         public Management()
         {
             InitializeComponent();
+            this.Loaded += Management_Loaded;
+        }
+
+        private void Management_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            SalePrice.Text = this.orderDAO.GetSalePrice();
+            PureTotal.Text = this.orderDAO.GetPurePrice();
+            TotalPrice.Text = this.orderDAO.GetTotalPrice();
+            CardPrice.Text = this.orderDAO.GetTypePrice(0);
+            CashPrice.Text = this.orderDAO.GetTypePrice(1);
 
             timer.Interval = TimeSpan.FromTicks(10000000);
             timer.Tick += new EventHandler(timerTick);
