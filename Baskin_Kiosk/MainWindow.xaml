@@ -21,39 +21,40 @@
                 </LinearGradientBrush>
             </Grid.Background>
             <StackPanel Orientation="Horizontal" Margin="20px 0 0 0" VerticalAlignment="Center">
-                <Image Source="Assets/Baskin-Robbins_logo.svg.png" HorizontalAlignment="Left"/>
+                <Image Source="Assets/Baskin-Robbins_logo.svg.png" HorizontalAlignment="Left" Margin="5px" />
                 <StackPanel x:Name="serverConnectedDot" Width="15" Height="16" Margin="0 0 3px 0" VerticalAlignment="Center" />
-                <TextBlock
-                    x:Name="serverConnected"
-                    FontSize="16px"
-                    Foreground="White"
-                />
+                    <TextBlock
+                        x:Name="serverConnected"
+                        FontSize="16px"
+                        Foreground="White"
+                        VerticalAlignment="Center"
+                     />
 
-                <Button
-                    x:Name="connectionBtn"
-                    Margin="5px 0 0 0"
-                    Background="Blue"
-                    Padding="5px 2px"
-                    Cursor="Hand"
-                    Foreground="White"
-                    BorderThickness="0"
-                    FontSize="16px"
-                    VerticalContentAlignment="Center"
-                    VerticalAlignment="Center"
-                    Click="TryConnection"
-                 >연결</Button>
+                    <Button
+                        x:Name="connectionBtn"
+                        Margin="10px 0 0 0"
+                        Background="Blue"
+                        Padding="5px 2px"
+                        Cursor="Hand"
+                        Foreground="White"
+                        BorderThickness="0"
+                        FontSize="16px"
+                        VerticalContentAlignment="Center"
+                        VerticalAlignment="Center"
+                        Click="TryConnection"
+                    >연결</Button>
 
-                <TextBlock x:Name="connectedTime" Margin="10px 0 0 0" FontSize="14px" VerticalAlignment="Center" />
+                    <TextBlock x:Name="connectedTime" Margin="10px 0 0 0" FontSize="14px" VerticalAlignment="Center" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button FontSize="30" Width="50" Height="50" Margin="0 0 20px 0" Click="Home_Click"
+                <Button FontSize="30" Width="50" Height="50" Margin="0 0 20px 0" Click="Home_Click" Cursor="Hand"
                         Content="🏤" Foreground="white" BorderThickness="5, 5, 5, 5">
                     <Button.Background>
                         <SolidColorBrush Opacity="0" Color="White" />
                     </Button.Background>
                 </Button>
-                <Button FontSize="30" Width="50" Height="50" Click="Message_Click"
+                <Button FontSize="30" Width="50" Height="50" Click="Message_Click" Cursor="Hand"
                         Content="💬" Foreground="White" BorderThickness="5, 5, 5, 5">
                     <Button.Background>
                         <SolidColorBrush Opacity="0" Color="White" />

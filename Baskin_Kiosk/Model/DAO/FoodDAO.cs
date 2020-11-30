@@ -1,11 +1,12 @@
 ﻿using Baskin_Kiosk.Common;
+using Baskin_Kiosk.Interface;
 using Baskin_Kiosk.Util;
 using MySql.Data.MySqlClient;
 using System.Collections.ObjectModel;
 
 namespace Baskin_Kiosk.Model.DAO
 {
-    public class FoodDAO
+    public class FoodDAO : IFoodDB
     {
         public ObservableCollection<Food> GetFoodList()
         {

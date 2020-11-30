@@ -1,9 +1,10 @@
-﻿using Baskin_Kiosk.Util;
+﻿using Baskin_Kiosk.Interface;
+using Baskin_Kiosk.Util;
 using MySql.Data.MySqlClient;
 
 namespace Baskin_Kiosk.Model.DAO
 {
-    public class MemberDAO
+    public class MemberDAO : IMemberDB
     {
         public MemberModel GetMember(int type, string code)
         {

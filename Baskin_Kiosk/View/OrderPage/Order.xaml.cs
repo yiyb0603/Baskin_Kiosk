@@ -203,7 +203,11 @@ namespace Baskin_Kiosk.View.OrderPage
         {
             if (viewModel.selectMenuList.Count > 0)
             {
-                viewModel.clearMenuList();
+                MessageBoxResult confirm = MessageBox.Show("주문을 취소하시겠습니까?", "잠시만요", MessageBoxButton.YesNo);
+                if (confirm == MessageBoxResult.Yes)
+                {
+                    viewModel.clearMenuList();
+                }
             }
         }
 

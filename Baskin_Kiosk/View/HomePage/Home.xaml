@@ -9,7 +9,7 @@
       Title="Home">
 
     <Grid>
-        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="50">로딩중</TextBlock>
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40px">Loading...</TextBlock>
         <MediaElement VerticalAlignment="Top" x:Name="BaskinCf" Stretch="Fill" MediaEnded="RepeatMedia" LoadedBehavior="Manual" Height="800">
             <MediaElement.Triggers>
                 <EventTrigger RoutedEvent="MediaElement.Loaded">

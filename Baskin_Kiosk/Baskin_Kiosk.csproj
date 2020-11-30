@@ -133,8 +133,8 @@
     <Compile Include="Model\OrderModel.cs" />
     <Compile Include="Util\DBConnection.cs" />
     <Compile Include="Network\TcpCommunication.cs" />
-    <Compile Include="Util\IDB.cs" />
-    <Compile Include="Util\IOrderDB.cs" />
+    <Compile Include="Interface\IDB.cs" />
+    <Compile Include="Interface\IOrderDB.cs" />
     <Compile Include="ViewModel\MessageViewModel.cs" />
     <Compile Include="Model\SeatModel.cs" />
     <Compile Include="View\HomePage\Home.xaml.cs">

@@ -1,11 +1,12 @@
 ﻿using Baskin_Kiosk.Common;
+using Baskin_Kiosk.Interface;
 using Baskin_Kiosk.Util;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 
 namespace Baskin_Kiosk.Model.DAO
 {
-    public class CategoryDAO
+    public class CategoryDAO : ICategoryDB
     {
         readonly DBConnection connection = new DBConnection();
 
