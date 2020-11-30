@@ -1,58 +1,46 @@
-﻿using Baskin_Kiosk.Model.DAO;
+﻿using Baskin_Kiosk.Common;
+using Baskin_Kiosk.Model;
+using Baskin_Kiosk.Model.DAO;
+using LiveCharts;
+using LiveCharts.Wpf;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Threading;
 
 namespace Baskin_Kiosk.View.ManagementPage
 {
-    /// <summary>
-    /// Management.xaml에 대한 상호 작용 논리
-    /// </summary>
     public partial class Management : Page
     {
-        int sec = 0;
-        int min = 0;
-        int hour = 0;
-        public DispatcherTimer timer = new DispatcherTimer();
-
         private OrderDAO orderDAO = new OrderDAO();
 
         public Management()
         {
             InitializeComponent();
-            this.Loaded += Management_Loaded;
+            Loaded += Management_Loaded;
         }
 
-        private void Management_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        private void Management_Loaded(object sender, RoutedEventArgs e)
         {
-            SalePrice.Text = this.orderDAO.GetSalePrice();
-            PureTotal.Text = this.orderDAO.GetPurePrice();
-            TotalPrice.Text = this.orderDAO.GetTotalPrice();
-            CardPrice.Text = this.orderDAO.GetTypePrice(0);
-            CashPrice.Text = this.orderDAO.GetTypePrice(1);
+            SalePrice.Text = orderDAO.GetSalePrice();
+            PureTotal.Text = orderDAO.GetPurePrice();
+            TotalPrice.Text = orderDAO.GetTotalPrice();
 
-            timer.Interval = TimeSpan.FromTicks(10000000);
-            timer.Tick += new EventHandler(timerTick);
-            timer.Start();
+            CardPrice.Text = orderDAO.GetTypePrice(0);
+            CashPrice.Text = orderDAO.GetTypePrice(1);
         }
 
-        public void timerTick(object sender, EventArgs e)
+        private void menu_Click(object sender, RoutedEventArgs e)
         {
-            sec++;
-            uptime_sec.Content = sec.ToString();
+            MenuStatistic menu = new MenuStatistic();
+            NavigationService.Navigate(menu);
+        }
 
-            if (sec == 60)
-            {
-                sec = 0;
-                min++;
-                uptime_min.Content = min.ToString();
-            }
-            else if (min == 60)
-            {
-                min = 0;
-                hour++;
-                uptime_hour.Content = hour.ToString();
-            }
+        private void category_Click(object sender, RoutedEventArgs e)
+        {
+            CategoryStatistic category = new CategoryStatistic();
+            NavigationService.Navigate(category);
         }
     }
 }

@@ -2,12 +2,10 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Baskin_Kiosk.View.HomePage
 {
-    /// <summary>
-    /// Home.xaml에 대한 상호 작용 논리
-    /// </summary>
     public partial class Home : Page
     {
         public Home()

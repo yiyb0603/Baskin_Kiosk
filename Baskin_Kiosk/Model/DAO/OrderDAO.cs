@@ -51,7 +51,6 @@ namespace Baskin_Kiosk.Model.DAO
                     price = int.Parse(reader["total_price"].ToString()),
                     salePrice = int.Parse(reader["sale_price"].ToString()),
                     orderType = int.Parse(reader["order_type"].ToString()),
-                    orderTime = DateTime.ParseExact(reader["order_time"].ToString(), "yyyy-MM-dd HH:mm:ss", new CultureInfo("ko-KR")),
                     orderNum = int.Parse(reader["order_num"].ToString())
                 });
             }

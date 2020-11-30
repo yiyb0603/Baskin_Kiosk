@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using System.Windows.Media;
 using Baskin_Kiosk.Network;
 using System.Threading;
+using System.Windows.Input;
 
 namespace Baskin_Kiosk
 {
@@ -131,6 +132,14 @@ namespace Baskin_Kiosk
                 App.connection.ThreadStart();
                 TcpCommunication.isConnected = true;
                 connectedTime.Text = TcpCommunication.isConnected ? "최근 서버 접속 시간: " + DateTime.Now.ToString("yyyy년 MM월 dd일 HH시 mm분 ss초") : "";
+            }
+        }
+
+        private void Window_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F2)
+            {
+                frame.Source = new Uri("./View/ManagementPage/Management.xaml", UriKind.Relative);
             }
         }
     }
