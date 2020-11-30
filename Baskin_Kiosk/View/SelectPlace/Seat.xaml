@@ -11,7 +11,7 @@
         <StackPanel>
             <ListBox x:Name="seatList"
                 x:FieldModifier="public"
-                Width="606"
+                Width="710"
                 Height="600"
                 Margin="0 50 0 0"
                 FontSize="16"

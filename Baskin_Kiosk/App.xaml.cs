@@ -11,6 +11,10 @@ namespace Baskin_Kiosk
         public static TcpCommunication connection { get; } = new TcpCommunication();
         public static MessageViewModel messageViewModel = new MessageViewModel();
 
+        public static int hour = 0;
+        public static int minute = 0;
+        public static int second = 0;
+
         public static List<SeatModel> lstSeat = new List<SeatModel>()
         {
             new SeatModel() { seatNumber = 1, time = 0 },

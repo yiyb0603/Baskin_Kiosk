@@ -11,11 +11,12 @@
 
     <Grid>
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10 80 0 0">구동시간</Label>
-        <Label Name="uptime_hour" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10 100 0 0"></Label>
+        <Label x:Name="uptime_hour" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10 100 0 0"></Label>
+        
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30 100 0 0">:</Label>
-        <Label Name="uptime_min" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40 100 0 0"></Label>
+        <Label x:Name="uptime_min" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40 100 0 0"></Label>
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60 100 0 0">:</Label>
-        <Label Name="uptime_sec" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70 100 0 0"></Label>
+        <Label x:Name="uptime_sec" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70 100 0 0"></Label>
 
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10 200 0 0">할인금액</Label>
         <TextBlock x:Name="SalePrice" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10 230 0 0" FontSize="20px" />

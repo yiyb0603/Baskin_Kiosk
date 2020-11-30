@@ -1,24 +1,30 @@
-﻿using Baskin_Kiosk.Common;
-using Baskin_Kiosk.Model;
-using Baskin_Kiosk.Model.DAO;
-using LiveCharts;
-using LiveCharts.Wpf;
+﻿using Baskin_Kiosk.Model.DAO;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace Baskin_Kiosk.View.ManagementPage
 {
     public partial class Management : Page
     {
+        public DispatcherTimer timer = new DispatcherTimer();
         private OrderDAO orderDAO = new OrderDAO();
 
         public Management()
         {
             InitializeComponent();
             Loaded += Management_Loaded;
+            timer.Interval = TimeSpan.FromTicks(10000000);
+            timer.Tick += new EventHandler(timerTick);
+            timer.Start();
+        }
+
+        public void timerTick(object sender, EventArgs e)
+        {
+            uptime_sec.Content = App.second.ToString();
+            uptime_min.Content = App.minute.ToString();
+            uptime_hour.Content = App.hour.ToString();
         }
 
         private void Management_Loaded(object sender, RoutedEventArgs e)

@@ -135,6 +135,7 @@
     <Compile Include="Interface\IOrderDB.cs" />
     <Compile Include="Model\DAO\CategoryDAO.cs" />
     <Compile Include="Model\DAO\CsvOrderDAO.cs" />
+    <Compile Include="Model\DAO\OperationDAO.cs" />
     <Compile Include="Model\DAO\OrderDAO.cs" />
     <Compile Include="Model\DAO\MemberDAO.cs" />
     <Compile Include="Model\DAO\FoodDAO.cs" />
@@ -221,16 +222,13 @@
     <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
     </Reference>
-
-<Compile Include="View\ManagementPage\CategoryStatistic.xaml.cs">
+    <Compile Include="View\ManagementPage\CategoryStatistic.xaml.cs">
       <DependentUpon>CategoryStatistic.xaml</DependentUpon>
     </Compile>
-
-<Compile Include="View\ManagementPage\MenuStatistic.xaml.cs">
+    <Compile Include="View\ManagementPage\MenuStatistic.xaml.cs">
       <DependentUpon>MenuStatistic.xaml</DependentUpon>
     </Compile>
-
-<Page Include="View\ManagementPage\CategoryStatistic.xaml">
+    <Page Include="View\ManagementPage\CategoryStatistic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

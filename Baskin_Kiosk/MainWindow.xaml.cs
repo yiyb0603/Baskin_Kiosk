@@ -73,6 +73,20 @@ namespace Baskin_Kiosk
         {
             string date = DateTime.Now.ToString("yyyy년 MM월 dd일 ddd요일 tt HH시 mm분 ss초", new CultureInfo("ko-KR"));
             CurrentTime.Text = date;
+
+            App.second++;
+
+            if (App.second == 60)
+            {
+                App.second = 0;
+                App.minute++;
+            }
+
+            else if (App.minute == 60)
+            {
+                App.minute = 0;
+                App.hour++;
+            }
         }
 
         private void LoginPopup()
