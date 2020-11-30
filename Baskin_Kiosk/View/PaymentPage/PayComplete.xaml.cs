@@ -8,6 +8,7 @@ using Baskin_Kiosk.View.SelectPlace;
 using Baskin_Kiosk.ViewModel;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -17,7 +18,8 @@ namespace Baskin_Kiosk.View.PaymentPage
     public partial class PayComplete : Page
     {
         private readonly MemberDAO memberDAO = new MemberDAO();
-        private readonly CsvOrderDAO orderDAO = new CsvOrderDAO();
+        private readonly CsvOrderDAO csvOrderDAO = new CsvOrderDAO();
+        private readonly OrderDAO orderDAO = new OrderDAO();
         private readonly OrderViewModel orderViewModel = App.orderViewModel;
         private readonly TcpCommunication serverConnection = new TcpCommunication();
         private static bool isConnected = TcpCommunication.isConnected;
@@ -46,6 +48,7 @@ namespace Baskin_Kiosk.View.PaymentPage
                     order.orderNum = orderNumber;
                 }
             }
+            csvOrderDAO.InsertOrderDB();
             orderDAO.InsertOrderDB();
 
             MsgPacket packet = new MsgPacket();

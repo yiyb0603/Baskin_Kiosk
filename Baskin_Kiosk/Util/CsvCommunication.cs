@@ -13,14 +13,33 @@ namespace Baskin_Kiosk.Util
         {
             using var reader = new StreamReader(address);
             csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
-            using var writer = new StreamWriter(address);
-            csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture);
+        }
+
+        public void GetConnection(string address, string openMode)
+        {
+            if (openMode.Equals("w"))
+            {
+                FileStream fs = new FileStream(Constants.CSV_PATH, FileMode.Append, FileAccess.Write);
+                StreamWriter writer = new StreamWriter(fs);
+                csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture);
+            }
+            else if (openMode.Equals("r"))
+            {
+                using var reader = new StreamReader(address);
+                csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
+            }
         }
 
         public void CloseConnection()
         {
-            csvReader.Dispose();
-            csvWriter.Dispose();
+            if (csvReader != null)
+            {
+                csvReader.Dispose();
+            }
+            else if (csvWriter != null)
+            {
+                csvWriter.Dispose();
+            }
         }
     }
 }
