@@ -131,24 +131,21 @@
     <Compile Include="Interface\ICategoryDB.cs" />
     <Compile Include="Interface\IFoodDB.cs" />
     <Compile Include="Interface\IMemberDB.cs" />
+    <Compile Include="Interface\IDB.cs" />
+    <Compile Include="Interface\IOrderDB.cs" />
     <Compile Include="Model\DAO\CategoryDAO.cs" />
     <Compile Include="Model\DAO\CsvOrderDAO.cs" />
     <Compile Include="Model\DAO\OrderDAO.cs" />
     <Compile Include="Model\DAO\MemberDAO.cs" />
-    <Compile Include="Network\MsgPacket.cs" />
-    <Compile Include="Util\Constants.cs" />
     <Compile Include="Model\DAO\FoodDAO.cs" />
     <Compile Include="Model\OrderModel.cs" />
-    <Compile Include="Util\DBConnection.cs" />
-    <Compile Include="Network\TcpCommunication.cs" />
-    <Compile Include="Interface\IDB.cs" />
-    <Compile Include="Interface\IOrderDB.cs" />
-    <Compile Include="Interface\IFoodDB.cs" />
-    <Compile Include="Interface\IMemberDB.cs" />
-    <Compile Include="Interface\ICategoryDB.cs" />
-    <Compile Include="ViewModel\MessageViewModel.cs" />
     <Compile Include="Model\SeatModel.cs" />
+    <Compile Include="Network\MsgPacket.cs" />
+    <Compile Include="Util\Constants.cs" />
+    <Compile Include="Util\DBConnection.cs" />
     <Compile Include="Util\CsvCommunication.cs" />
+    <Compile Include="Network\TcpCommunication.cs" />
+    <Compile Include="ViewModel\MessageViewModel.cs" />
     <Compile Include="View\HomePage\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>

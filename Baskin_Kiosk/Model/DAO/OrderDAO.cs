@@ -62,7 +62,7 @@ namespace Baskin_Kiosk.Model.DAO
         public string GetTotalPrice()
         {
             int totalPrice = 0;
-            connection.GetConnection();
+            connection.GetConnection(Constants.DB_HOST);
             string sql = "select total_price, sale_price from kiosk.order WHERE date(order_time) <= date(now())";
 
             connection.SetCommand(sql);
@@ -79,7 +79,7 @@ namespace Baskin_Kiosk.Model.DAO
         public string GetSalePrice()
         {
             int salePrice = 0;
-            connection.GetConnection();
+            connection.GetConnection(Constants.DB_HOST);
             string sql = "select sale_price from kiosk.order";
 
             connection.SetCommand(sql);
@@ -96,7 +96,7 @@ namespace Baskin_Kiosk.Model.DAO
         public string GetPurePrice()
         {
             int salePrice = 0;
-            connection.GetConnection();
+            connection.GetConnection(Constants.DB_HOST);
             string sql = "select total_price from kiosk.order";
 
             connection.SetCommand(sql);
@@ -113,7 +113,7 @@ namespace Baskin_Kiosk.Model.DAO
         public string GetTypePrice(int type) // 0 = 카드, 1 = 현금
         {
             int salePrice = 0;
-            connection.GetConnection();
+            connection.GetConnection(Constants.DB_HOST);
             string sql = "select total_price from kiosk.order where order_type = " + type;
 
             connection.SetCommand(sql);

@@ -53,7 +53,7 @@
             </ListBox>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button Width="150" Height="30" Content="이전" Margin="0 100 600 0" Click="BackButton_Click"/>
-                <Button Width="150" Height="30" Content="다음" Margin="0 100 0 0" Click="NextButton_Click"/>
+                <Button Width="150" Height="30" Content="다음" Margin="0 100 0 0" Click="NextButton_Click" x:Name="NextButton"/>
             </StackPanel>
         </StackPanel>
     </Grid>

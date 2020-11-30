@@ -14,6 +14,7 @@ namespace Baskin_Kiosk.View.SelectPlace
         {
             InitializeComponent();
 
+            NextButton.IsEnabled = false;
             seatList.ItemsSource = App.lstSeat;
         }
 
@@ -39,6 +40,7 @@ namespace Baskin_Kiosk.View.SelectPlace
         private void SeatList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             App.selectedSeat = (SeatModel)seatList.SelectedItem;
+            NextButton.IsEnabled = true;
         }
     }
 }
