@@ -13,7 +13,7 @@ namespace Baskin_Kiosk.Model.DAO
         public List<Category> GetCategories()
         {
             List<Category> categoryList = new List<Category>();
-            connection.GetConnection();
+            connection.GetConnection(Constants.DB_HOST);
 
             string sql = "Select * from kiosk.category";
             connection.SetCommand(sql);

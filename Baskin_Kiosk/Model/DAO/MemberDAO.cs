@@ -10,7 +10,7 @@ namespace Baskin_Kiosk.Model.DAO
         {
             MemberModel member = new MemberModel();
             DBConnection connection = new DBConnection();
-            connection.GetConnection();
+            connection.GetConnection(Constants.DB_HOST);
 
             string sql = "select * from kiosk.user where " + (type == 0 ? "qrcode = \"" + code + "\"": "barcode = \"" + code + "\"");
             connection.SetCommand(sql);

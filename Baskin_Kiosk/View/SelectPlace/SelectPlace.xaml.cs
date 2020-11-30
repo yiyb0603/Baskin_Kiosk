@@ -9,7 +9,7 @@ namespace Baskin_Kiosk.View.SelectPlace
 {
     public partial class SelectPlace : Page
     {
-        private OrderViewModel viewModel = App.orderViewModel;
+        private readonly OrderViewModel viewModel = App.orderViewModel;
 
         public SelectPlace()
         {

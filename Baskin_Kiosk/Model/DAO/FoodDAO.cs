@@ -13,7 +13,7 @@ namespace Baskin_Kiosk.Model.DAO
             DBConnection connection = new DBConnection();
 
             ObservableCollection<Food> foodList = new ObservableCollection<Food>();
-            connection.GetConnection();
+            connection.GetConnection(Constants.DB_HOST);
 
             string sql = "Select * from kiosk.menu";
             connection.SetCommand(sql);
