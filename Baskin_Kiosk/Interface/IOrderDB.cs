@@ -7,5 +7,10 @@ namespace Baskin_Kiosk.Util
     {
         void InsertOrderDB();
         List<OrderModel> ReadOrderDB();
+        string GetTotalPrice();
+        string GetSalePrice();
+        string GetPurePrice();
+
+        string GetTypePrice(int type);
     }
 }

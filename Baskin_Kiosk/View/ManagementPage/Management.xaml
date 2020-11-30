@@ -18,12 +18,19 @@
         <Label Name="uptime_sec" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70 100 0 0"></Label>
 
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10 200 0 0">할인금액</Label>
-        <Label Name="saler_price" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10 230 0 0"></Label>
+        <TextBlock x:Name="SalePrice" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10 230 0 0" FontSize="20px" />
+
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10 300 0 0">순수매출액</Label>
-        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10 400 0 0">총금액</Label>
+        <TextBlock x:Name="PureTotal" Margin="20 330 0 0" FontSize="20px" />
+        
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10 500 0 0">총매출액</Label>
+        <TextBlock x:Name="TotalPrice" Margin="20 530 0 0" FontSize="20px" />
+
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10 800 0 0">카드 매출액</Label>
+        <TextBlock x:Name="CardPrice" Margin="20 830 0 0" FontSize="20px" />
+        
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="130 800 0 0">현금 매출액</Label>
+        <TextBlock x:Name="CashPrice" Margin="130 830 0 0" FontSize="20px" />
 
         <Button x:Name="menu" Width="100" Height="50" VerticalAlignment="Top" Margin="0 20 1300 0">메뉴</Button>
         <Button x:Name="category" Width="100" Height="50" VerticalAlignment="Top" Margin="0 20 1050 0">카테고리</Button>
