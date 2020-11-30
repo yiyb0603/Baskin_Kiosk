@@ -8,7 +8,7 @@ namespace Baskin_Kiosk.View.Payment
 {
     public partial class Card : Page
     {
-        private OrderViewModel orderViewModel = App.orderViewModel;
+        private readonly OrderViewModel orderViewModel = App.orderViewModel;
 
         public Card()
         {

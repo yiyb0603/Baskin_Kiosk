@@ -1,5 +1,6 @@
 ﻿using Baskin_Kiosk.Util;
 using Baskin_Kiosk.ViewModel;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Baskin_Kiosk.Model.DAO
@@ -25,7 +26,7 @@ namespace Baskin_Kiosk.Model.DAO
             connection.CloseConnection();
         }
 
-        public IEnumerable<OrderModel> ReadOrderDB()
+        public List<OrderModel> ReadOrderDB()
         {
             CsvCommunication connection = new CsvCommunication();
             connection.GetConnection(Constants.CSV_PATH);
@@ -33,7 +34,7 @@ namespace Baskin_Kiosk.Model.DAO
             connection.csvReader.Configuration.Delimiter = ", ";
             connection.csvReader.Configuration.HasHeaderRecord = true;
 
-            IEnumerable<OrderModel> orderModel = connection.csvReader.GetRecords<OrderModel>();
+            List<OrderModel> orderModel = connection.csvReader.GetRecords<OrderModel>().ToList();
 
             connection.CloseConnection();
 

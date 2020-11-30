@@ -11,7 +11,8 @@ namespace Baskin_Kiosk.Util
 
         public void GetConnection(string address)
         {
-            using var reader = new StreamReader(address);
+            FileStream fs = new FileStream(address, FileMode.Open, FileAccess.Read);
+            StreamReader reader = new StreamReader(fs);
             csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
         }
 
@@ -19,13 +20,14 @@ namespace Baskin_Kiosk.Util
         {
             if (openMode.Equals("w"))
             {
-                FileStream fs = new FileStream(Constants.CSV_PATH, FileMode.Append, FileAccess.Write);
+                FileStream fs = new FileStream(address, FileMode.Append, FileAccess.Write);
                 StreamWriter writer = new StreamWriter(fs);
                 csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture);
             }
             else if (openMode.Equals("r"))
             {
-                using var reader = new StreamReader(address);
+                FileStream fs = new FileStream(address, FileMode.Open, FileAccess.Read);
+                StreamReader reader = new StreamReader(fs);
                 csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
             }
         }

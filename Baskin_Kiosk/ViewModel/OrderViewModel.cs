@@ -28,7 +28,8 @@ namespace Baskin_Kiosk.ViewModel
         }
 
         private int _totalAmountPrice = 0;
-        public int totalAmountPrice {
+        public int totalAmountPrice
+        {
             get => _totalAmountPrice;
             set => SetProperty(ref _totalAmountPrice, value);
         }
