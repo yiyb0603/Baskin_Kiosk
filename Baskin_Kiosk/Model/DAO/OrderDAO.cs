@@ -10,11 +10,11 @@ namespace Baskin_Kiosk.Model.DAO
     public class OrderDAO : IOrderDB
     {
         private readonly OrderViewModel viewModel = App.orderViewModel;
-        private readonly IDB connection = new DBConnection();
+        private readonly DBConnection connection = new DBConnection();
 
         public void InsertOrderDB()
         {
-            connection.GetConnection();
+            connection.GetConnection(Constants.DB_HOST);
 
             foreach (OrderModel order in viewModel.orderMenuList)
             {
@@ -35,6 +35,8 @@ namespace Baskin_Kiosk.Model.DAO
 
             List<OrderModel> orderModel = new List<OrderModel>();
 
+            connection.GetConnection(Constants.DB_HOST);
+            
             connection.SetCommand(sql);
             MySqlDataReader reader = connection.ExecuteReader();
 

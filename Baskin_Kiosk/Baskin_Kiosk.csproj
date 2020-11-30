@@ -45,6 +45,9 @@
     <Reference Include="ConfigParser, Version=0.3.2.8, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Salaros.ConfigParser.0.3.2\lib\net45\ConfigParser.dll</HintPath>
     </Reference>
+    <Reference Include="CsvHelper, Version=17.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.17.0.0\lib\net47\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Protobuf, Version=3.11.4.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.11.4\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
@@ -115,6 +118,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif" />
     <Reference Include="Zstandard.Net, Version=1.1.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.22\lib\net452\Zstandard.Net.dll</HintPath>
     </Reference>
@@ -128,6 +132,7 @@
     <Compile Include="Interface\IFoodDB.cs" />
     <Compile Include="Interface\IMemberDB.cs" />
     <Compile Include="Model\DAO\CategoryDAO.cs" />
+    <Compile Include="Model\DAO\CsvOrderDAO.cs" />
     <Compile Include="Model\DAO\OrderDAO.cs" />
     <Compile Include="Model\DAO\MemberDAO.cs" />
     <Compile Include="Network\MsgPacket.cs" />
@@ -138,8 +143,12 @@
     <Compile Include="Network\TcpCommunication.cs" />
     <Compile Include="Interface\IDB.cs" />
     <Compile Include="Interface\IOrderDB.cs" />
+    <Compile Include="Interface\IFoodDB.cs" />
+    <Compile Include="Interface\IMemberDB.cs" />
+    <Compile Include="Interface\ICategoryDB.cs" />
     <Compile Include="ViewModel\MessageViewModel.cs" />
     <Compile Include="Model\SeatModel.cs" />
+    <Compile Include="Util\CsvCommunication.cs" />
     <Compile Include="View\HomePage\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -260,6 +269,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Assets\Order.csv" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -277,6 +287,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Resource Include="Assets\giphy.gif" />
     <Resource Include="Assets\Baskin-Robbins_logo.svg.png" />
     <Content Include="Assets\baskinCf.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -17,7 +17,7 @@ namespace Baskin_Kiosk.View.PaymentPage
     public partial class PayComplete : Page
     {
         private readonly MemberDAO memberDAO = new MemberDAO();
-        private readonly OrderDAO orderDAO = new OrderDAO();
+        private readonly CsvOrderDAO orderDAO = new CsvOrderDAO();
         private readonly OrderViewModel orderViewModel = App.orderViewModel;
         private readonly TcpCommunication serverConnection = new TcpCommunication();
         private static bool isConnected = TcpCommunication.isConnected;
@@ -36,7 +36,6 @@ namespace Baskin_Kiosk.View.PaymentPage
             totalPrice.Content = "총 금액: " + orderViewModel.totalAmountPrice;
             orderNum.Content = "주문번호: " + lastNum;
             
-
             foreach (Food food in orderViewModel.selectMenuList)
             {
                 foreach (OrderModel order in orderViewModel.orderMenuList)
@@ -72,8 +71,8 @@ namespace Baskin_Kiosk.View.PaymentPage
 
         public int GetLastNum()
         {
-            IDB connection = new DBConnection();
-            connection.GetConnection();
+            DBConnection connection = new DBConnection();
+            connection.GetConnection(Constants.DB_HOST);
 
             int lastNum = 0;
 

@@ -4,12 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Baskin_Kiosk.View.HomePage"
+      xmlns:gif="http://wpfanimatedgif.codeplex.com"
       mc:Ignorable="d" 
       d:DesignHeight="1040" d:DesignWidth="1920"
       Title="Home">
 
     <Grid>
-        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40px">Loading...</TextBlock>
+        <Image gif:ImageBehavior.RepeatBehavior="Forever" Width="256" Height="256" gif:ImageBehavior.AnimatedSource="/Assets/giphy.gif" />
         <MediaElement VerticalAlignment="Top" x:Name="BaskinCf" Stretch="Fill" MediaEnded="RepeatMedia" LoadedBehavior="Manual" Height="800">
             <MediaElement.Triggers>
                 <EventTrigger RoutedEvent="MediaElement.Loaded">
@@ -25,6 +26,6 @@
         </MediaElement>
         
         <Label Content="주문하기 버튼을 눌러주세요" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 750 0 0" FontSize="15" />
-        <Button Click="nextPage" Content="주문하기" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50" Margin="0 830 0 0"/>
+        <Button Click="NextPage" Content="주문하기" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="50" Margin="0 830 0 0"/>
     </Grid>
 </Page>

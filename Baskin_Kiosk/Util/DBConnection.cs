@@ -22,9 +22,9 @@ namespace Baskin_Kiosk.Util
             return command.ExecuteReader();
         }
 
-        public void GetConnection()
+        public void GetConnection(string address)
         {
-            connection = new MySqlConnection(Constants.DB_HOST);
+            connection = new MySqlConnection(address);
 
             connection.Open();
         }
