@@ -1,0 +1,24 @@
+﻿<Page x:Class="Baskin_Kiosk.View.SelectPlace.SelectPlace"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Baskin_Kiosk.View.SelectPlace"
+      mc:Ignorable="d" 
+      d:DesignHeight="1040" d:DesignWidth="1920"
+      Title="SelectPlace">
+
+    <Grid>
+        <StackPanel>
+            <Label Margin="0 50 0 0">식사 장소를 선택하세요</Label>
+            <StackPanel  HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <Button Width="180" Height="200" Margin="0 0 200 0" Content="매장 식사" Click="SeatButton_Click"/>
+                    <Button Width="180" Height="200" Margin="0 0 0 0" Content="포장 주문" Click="TakeOutButton_Click"/>
+                </StackPanel>
+
+                <Button Width="180" Height="50" Margin="0 150 0 0" Content="이전" Click="BackButton_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

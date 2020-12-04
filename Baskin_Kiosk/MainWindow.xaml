@@ -5,8 +5,79 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Baskin_Kiosk"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        WindowState="Maximized"
+        KeyDown="Window_Keydown"
+        Title="MainWindow" Height="1040" Width="1920">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60px"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="2.5, 0" StartPoint="0, 0">
+                    <GradientStop Color="#DE5B9E" Offset="0"/>
+                    <GradientStop Color="#005EA6" Offset="0.5"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <StackPanel Orientation="Horizontal" Margin="20px 0 0 0" VerticalAlignment="Center">
+                <Image Source="Assets/Baskin-Robbins_logo.svg.png" HorizontalAlignment="Left" Margin="5px" />
+                <StackPanel x:Name="serverConnectedDot" Width="15" Height="16" Margin="0 0 3px 0" VerticalAlignment="Center" />
+                    <TextBlock
+                        x:Name="serverConnected"
+                        FontSize="16px"
+                        Foreground="White"
+                        VerticalAlignment="Center"
+                     />
+
+                    <Button
+                        x:Name="connectionBtn"
+                        Margin="10px 0 0 0"
+                        Background="Blue"
+                        Padding="5px 2px"
+                        Cursor="Hand"
+                        Foreground="White"
+                        BorderThickness="0"
+                        FontSize="16px"
+                        VerticalContentAlignment="Center"
+                        VerticalAlignment="Center"
+                        Click="TryConnection"
+                    >연결</Button>
+
+                    <TextBlock x:Name="connectedTime" Margin="10px 0 0 0" FontSize="14px" VerticalAlignment="Center" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button FontSize="30" Width="50" Height="50" Margin="0 0 20px 0" Click="Home_Click" Cursor="Hand"
+                        Content="🏤" Foreground="white" BorderThickness="5, 5, 5, 5">
+                    <Button.Background>
+                        <SolidColorBrush Opacity="0" Color="White" />
+                    </Button.Background>
+                </Button>
+                <Button FontSize="30" Width="50" Height="50" Click="Message_Click" Cursor="Hand"
+                        Content="💬" Foreground="White" BorderThickness="5, 5, 5, 5">
+                    <Button.Background>
+                        <SolidColorBrush Opacity="0" Color="White" />
+                    </Button.Background>
+                </Button>
+            </StackPanel>
+
+            <TextBlock
+                x:Name="CurrentTime"
+				Foreground ="white"
+				HorizontalAlignment ="Right"
+                VerticalAlignment="Center"
+                Margin="0 0 10px 0"
+                FontSize="14px"
+			 />
+        </Grid>
+
+        <Frame
+               x:Name="frame"
+               Grid.Row="1"
+               NavigationUIVisibility="Hidden"
+               Source="/View/HomePage/Home.xaml"
+         />
     </Grid>
 </Window>

@@ -1,0 +1,22 @@
+﻿<Page x:Class="Baskin_Kiosk.View.PaymentPage.PayComplete"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Baskin_Kiosk.View.PaymentPage"
+      mc:Ignorable="d" 
+      d:DesignHeight="990" d:DesignWidth="1920"
+      Title="PayComplete">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center">
+            <Label>결제되었습니다.</Label>
+            <Label x:Name="userName">주문자:</Label>
+            <Label x:Name="cardNum">카드번호:</Label>
+            <Label x:Name="totalPrice">총 금액: </Label>
+            <Label x:Name="orderNum">주문번호: </Label>
+
+            <Button Content="처음으로" Margin="0 100 0 0" Click="Button_Click"></Button>
+        </StackPanel>
+    </Grid>
+</Page>
